@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>義大利之旅 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--lemon:#F5C842;--brick:#C1440E;--espresso:#2C1A0E;--parchment:#FAF6EE;--cream:#E8DCC8;--brick-lt:#F2E5DC;--white:#FFFFFF;--nav-h:68px;--radius:14px;--green:#3a7d44;--green-lt:#e6f4ea;--amber:#b45309;--amber-lt:#fef3c7;--blue:#1d4ed8;--blue-lt:#eff6ff}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--parchment);color:var(--espresso);font-family:'Lato',sans-serif;overflow:hidden}
+#app{display:flex;flex-direction:column;height:100dvh;max-width:430px;margin:0 auto;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(44,26,14,.15)}
+#pages{flex:1;overflow:hidden;position:relative}
+.page{position:absolute;inset:0;overflow-y:auto;padding:16px 16px calc(var(--nav-h)+12px);opacity:0;pointer-events:none;-webkit-overflow-scrolling:touch}
+.page.active{opacity:1;pointer-events:auto}
+#page-detail{background:var(--parchment);z-index:30}
+.eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--brick);margin-bottom:4px}
+.page-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;line-height:1.2;margin-bottom:16px}
+
+/* WEATHER */
+.weather-widget{background:linear-gradient(135deg,#1a3a5c 0%,#2d6a9f 100%);border-radius:var(--radius);padding:12px 14px;margin-bottom:16px;color:#fff;display:flex;align-items:center;gap:12px}
+.weather-icon{font-size:2.2rem;flex-shrink:0}
+.wcity{font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:1px}
+.wtemp{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;line-height:1}
+.wdesc{font-size:.72rem;color:rgba(255,255,255,.8);margin-top:2px}
+.weather-extras{margin-left:auto;text-align:right;flex-shrink:0}
+.we-row{font-size:.7rem;color:rgba(255,255,255,.75);margin-bottom:1px}
+.city-tabs{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap}
+.city-tab{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;color:rgba(255,255,255,.8);font-size:.65rem;font-weight:700;padding:3px 10px;cursor:pointer;transition:background .15s}
+.city-tab.active{background:rgba(255,255,255,.3);color:#fff;border-color:rgba(255,255,255,.5)}
+
+/* DAY SWITCHER */
+.day-switcher{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;scrollbar-width:none}
+.day-switcher::-webkit-scrollbar{display:none}
+.day-btn{flex-shrink:0;background:var(--cream);border:none;border-radius:20px;padding:6px 14px;font-family:'Lato',sans-serif;font-size:.78rem;font-weight:700;color:var(--espresso);cursor:pointer;transition:background .15s,color .15s}
+.day-btn.active{background:var(--espresso);color:var(--lemon)}
+
+/* STAMINA */
+.stamina-banner{border-radius:10px;padding:9px 13px;margin-bottom:14px;display:flex;align-items:flex-start;gap:9px;font-size:.78rem;font-weight:700;line-height:1.5}
+.stamina-banner.high{background:var(--amber-lt);color:var(--amber);border-left:4px solid #f59e0b}
+.stamina-banner.medium{background:var(--green-lt);color:var(--green);border-left:4px solid #4ade80}
+.stamina-banner.low{background:var(--blue-lt);color:var(--blue);border-left:4px solid #60a5fa}
+.stamina-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--cream)}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-dot{position:absolute;left:-26px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--lemon);border:2px solid var(--espresso)}
+.tl-dot.hi{background:var(--brick)}
+.tl-time{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:var(--brick);text-transform:uppercase;margin-bottom:2px}
+.tl-card{background:var(--white);border-radius:12px;padding:12px 14px;border-left:3px solid var(--cream);box-shadow:0 2px 8px rgba(44,26,14,.06)}
+.tl-card.hi{border-left-color:var(--brick)}
+.tl-card h3{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;margin-bottom:3px}
+.tl-card p{font-size:.8rem;line-height:1.6;color:#5a4030}
+.tl-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.tag{display:inline-block;background:var(--brick-lt);color:var(--brick);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:8px}
+.tag.walk{background:var(--amber-lt);color:var(--amber)}
+.tag.link{background:var(--espresso);color:var(--lemon);cursor:pointer}
+
+/* SUB TABS (places page) */
+.sub-tabs{display:flex;gap:8px;margin-bottom:16px}
+.sub-tab{flex:1;background:var(--cream);border:none;border-radius:20px;padding:8px 0;font-family:'Lato',sans-serif;font-size:.8rem;font-weight:700;color:var(--espresso);cursor:pointer;text-align:center;transition:background .15s,color .15s}
+.sub-tab.active{background:var(--espresso);color:var(--lemon)}
+.sub-panel{display:none}
+.sub-panel.active{display:block}
+
+/* MAPS BUTTONS */
+.maps-list-section{margin-bottom:16px}
+.maps-list-title{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--brick);margin-bottom:8px}
+.maps-btns{display:flex;gap:7px;flex-wrap:wrap}
+.maps-btn{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1.5px solid var(--cream);border-radius:20px;padding:6px 12px;font-family:'Lato',sans-serif;font-size:.75rem;font-weight:700;color:var(--espresso);text-decoration:none;box-shadow:0 1px 4px rgba(44,26,14,.06)}
+.maps-btn.disabled{opacity:.4;pointer-events:none;background:var(--cream)}
+
+/* ACCORDION */
+.accordion{margin-bottom:10px;border-radius:12px;overflow:hidden;box-shadow:0 1px 6px rgba(44,26,14,.06)}
+.accordion-header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--white);cursor:pointer;border:none;width:100%;text-align:left;font-family:'Lato',sans-serif}
+.accordion-header:active{background:var(--parchment)}
+.accordion-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--espresso);display:flex;align-items:center;gap:8px}
+.accordion-lbl{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brick)}
+.accordion-arrow{font-size:.85rem;color:var(--cream);transition:transform .2s;flex-shrink:0}
+.accordion-header.open .accordion-arrow{transform:rotate(90deg)}
+.accordion-body{display:none;background:var(--parchment);padding:8px 8px 4px}
+.accordion-body.open{display:block}
+
+/* PLACE ROW */
+.place-row{display:flex;align-items:center;gap:11px;background:var(--white);border-radius:11px;padding:11px 13px;margin-bottom:7px;box-shadow:0 1px 5px rgba(44,26,14,.06);cursor:pointer;transition:box-shadow .15s}
+.place-row:hover{box-shadow:0 3px 12px rgba(44,26,14,.1)}
+.place-emoji{font-size:1.7rem;flex-shrink:0;width:38px;text-align:center}
+.place-info{flex:1}
+.place-info h4{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;margin-bottom:1px}
+.place-info p{font-size:.72rem;color:#8a7060}
+.place-arrow{color:var(--cream);font-size:1rem;flex-shrink:0}
+
+/* DETAIL PAGE */
+.detail-back{display:flex;align-items:center;gap:7px;background:none;border:none;color:var(--brick);font-family:'Lato',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;margin-bottom:16px;padding:0}
+.detail-back svg{width:15px;height:15px;stroke:var(--brick);stroke-width:2.5}
+.detail-banner{height:120px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:3.2rem;background:linear-gradient(135deg,var(--brick-lt) 0%,var(--cream) 100%);margin-bottom:14px}
+.detail-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:5px;line-height:1.3}
+.detail-pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.detail-pill{background:var(--brick-lt);color:var(--brick);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:8px}
+.detail-desc{font-size:.82rem;line-height:1.75;color:#5a4030;margin-bottom:14px;white-space:pre-line}
+.detail-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.meta-item{background:var(--white);border-radius:10px;padding:9px 11px}
+.meta-item .mk{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7060;margin-bottom:2px}
+.meta-item .mv{font-size:.8rem;font-weight:700;color:var(--espresso);line-height:1.4}
+.map-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:var(--espresso);color:var(--lemon);border:none;border-radius:var(--radius);padding:13px;font-family:'Lato',sans-serif;font-size:.83rem;font-weight:700;letter-spacing:.07em;cursor:pointer;text-decoration:none}
+.map-btn svg{width:17px;height:17px;stroke:var(--lemon);stroke-width:2;flex-shrink:0}
+
+/* WINE */
+.wine-card{background:var(--white);border-radius:var(--radius);padding:14px;box-shadow:0 2px 8px rgba(44,26,14,.06);display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.wine-icon{font-size:2rem;flex-shrink:0;margin-top:2px}
+.wine-region{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brick);margin-bottom:3px}
+.wine-card h3{font-family:'Playfair Display',serif;font-size:.95rem;margin-bottom:3px}
+.wine-card p{font-size:.8rem;line-height:1.5;color:#5a4030}
+.wine-pairing{font-size:.75rem;color:var(--espresso);font-weight:700;margin-top:5px}
+
+/* TICKETS */
+.ticket-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(44,26,14,.07);border:1px dashed var(--cream);margin-bottom:14px}
+.ticket-header{background:var(--espresso);color:var(--lemon);padding:11px 15px;display:flex;justify-content:space-between;align-items:center}
+.ticket-venue{font-family:'Playfair Display',serif;font-size:.92rem;font-style:italic}
+.ticket-date{font-size:.62rem;font-weight:700;letter-spacing:.1em;color:var(--cream)}
+.ticket-body{padding:12px 15px}
+.ticket-info{font-size:.78rem;color:#5a4030;margin-bottom:10px}
+.qr-zone{background:var(--parchment);border:2px dashed var(--cream);border-radius:10px;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;padding:14px;transition:border-color .2s}
+.qr-zone:hover{border-color:var(--brick)}
+.qr-ph{font-size:2.6rem;opacity:.35}
+.qr-lbl{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a7060}
+.ticket-foot{padding:8px 15px;font-size:.68rem;color:#8a7060;border-top:2px dashed var(--cream)}
+
+/* INFO */
+.info-card{background:var(--white);border-radius:var(--radius);padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(44,26,14,.06)}
+.info-card h3{font-family:'Playfair Display',serif;font-size:.95rem;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.info-row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--parchment);font-size:.8rem;gap:12px}
+.info-row:last-child{border-bottom:none}
+.info-row .lbl{color:#8a7060;flex-shrink:0}
+.info-row .val{font-weight:700;color:var(--espresso);text-align:right;line-height:1.4}
+.call-btn{display:inline-flex;align-items:center;gap:4px;background:var(--green-lt);color:var(--green);font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:8px;text-decoration:none;margin-left:6px}
+
+/* CURRENCY */
+.currency-widget{background:var(--white);border-radius:var(--radius);padding:14px;box-shadow:0 2px 8px rgba(44,26,14,.06);margin-bottom:12px}
+.currency-widget h3{font-family:'Playfair Display',serif;font-size:.95rem;margin-bottom:11px;display:flex;align-items:center;gap:7px}
+.curr-input-row{display:flex;gap:7px;align-items:center;margin-bottom:9px}
+.curr-input-row input{flex:1;background:var(--parchment);border:1.5px solid var(--cream);border-radius:9px;padding:9px 12px;font-family:'Lato',sans-serif;font-size:1rem;font-weight:700;color:var(--espresso);outline:none}
+.curr-input-row input:focus{border-color:var(--brick)}
+.curr-eur{font-size:.73rem;font-weight:700;color:#8a7060;flex-shrink:0}
+.curr-toggle{display:flex;gap:6px;margin-bottom:10px}
+.curr-btn{flex:1;background:var(--cream);border:none;border-radius:20px;padding:6px 0;font-family:'Lato',sans-serif;font-size:.76rem;font-weight:700;color:var(--espresso);cursor:pointer;transition:background .15s}
+.curr-btn.active{background:var(--espresso);color:var(--lemon)}
+.curr-result{background:var(--parchment);border-radius:9px;padding:11px 13px;text-align:center}
+.curr-result .rnum{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--espresso)}
+.curr-result .rlbl{font-size:.7rem;color:#8a7060;margin-top:1px}
+.rate-note{font-size:.66rem;color:#b0988a;text-align:right;margin-top:5px}
+
+/* NAV */
+#bottom-nav{position:absolute;bottom:0;left:0;right:0;height:var(--nav-h);background:var(--white);border-top:1px solid var(--cream);display:flex;align-items:stretch;z-index:20;box-shadow:0 -4px 18px rgba(44,26,14,.08)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:transparent;cursor:pointer;position:relative}
+.nav-btn::before{content:'';position:absolute;top:0;left:12%;right:12%;height:3px;background:var(--lemon);border-radius:0 0 3px 3px;transform:scaleX(0);transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.nav-btn.active::before{transform:scaleX(1)}
+.nav-btn svg{width:21px;height:21px;stroke-width:1.8}
+.nav-btn span{font-size:.58rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#b0988a;transition:color .15s}
+.nav-btn.active svg{stroke:var(--espresso)}
+.nav-btn.active span{color:var(--espresso)}
+.nav-btn:not(.active) svg{stroke:#c0a898}
+
+/* QR MODAL */
+#qr-modal{display:none;position:absolute;inset:0;background:rgba(255,255,255,.97);z-index:100;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:28px}
+#qr-modal.open{display:flex}
+.modal-venue{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--espresso);text-align:center}
+.modal-img{background:var(--parchment);border:2px dashed var(--cream);border-radius:14px;width:210px;height:210px;display:flex;align-items:center;justify-content:center;font-size:4.5rem}
+.modal-date{font-size:.7rem;color:#8a7060;text-align:center}
+.modal-hint{font-size:.72rem;color:#8a7060;text-align:center;max-width:210px;line-height:1.5}
+.modal-close{background:var(--espresso);color:var(--lemon);border:none;border-radius:28px;padding:11px 34px;font-family:'Lato',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="app">
+<main id="pages">
+
+<!-- ===== 行程 ===== -->
+<section class="page active" id="page-itinerary">
+  <div class="eyebrow">每日行程</div>
+  <div class="page-title">Italia · Settembre 2026</div>
+  <div class="weather-widget">
+    <div id="w-icon" class="weather-icon">⛅</div>
+    <div class="weather-info" style="flex:1">
+      <div class="wcity" id="w-city">佛羅倫斯</div>
+      <div class="wtemp" id="w-temp"><span style="font-size:.8rem;opacity:.6">載入中…</span></div>
+      <div class="wdesc" id="w-desc"></div>
+      <div class="city-tabs">
+        <button class="city-tab active" data-lat="43.7696" data-lon="11.2558" data-name="佛羅倫斯">佛羅倫斯</button>
+        <button class="city-tab" data-lat="43.3183" data-lon="11.3317" data-name="錫耶納">錫耶納</button>
+        <button class="city-tab" data-lat="42.6195" data-lon="12.1044" data-name="奧爾維耶托">奧爾維耶托</button>
+        <button class="city-tab" data-lat="41.9028" data-lon="12.4964" data-name="羅馬">羅馬</button>
+      </div>
+    </div>
+    <div class="weather-extras" id="w-extras"></div>
+  </div>
+  <div class="day-switcher">
+    <button class="day-btn active" data-day="1">Day 1</button>
+    <button class="day-btn" data-day="2">Day 2</button>
+    <button class="day-btn" data-day="3">Day 3</button>
+    <button class="day-btn" data-day="4">Day 4</button>
+    <button class="day-btn" data-day="5">Day 5</button>
+    <button class="day-btn" data-day="6">Day 6</button>
+    <button class="day-btn" data-day="7">Day 7</button>
+    <button class="day-btn" data-day="8">Day 8</button>
+    <button class="day-btn" data-day="9">Day 9</button>
+  </div>
+  <div id="day-content"></div>
+</section>
+
+<!-- ===== 景點餐廳 ===== -->
+<section class="page" id="page-places">
+  <div class="eyebrow">景點與餐廳</div>
+  <div class="page-title">探索義大利</div>
+  <div class="sub-tabs">
+    <button class="sub-tab active" data-sub="attractions">🏛 景點住宿</button>
+    <button class="sub-tab" data-sub="restaurants">🍝 餐廳美食</button>
+  </div>
+
+  <!-- 景點子頁 -->
+  <div class="sub-panel active" id="sub-attractions">
+    <div id="attractions-content"></div>
+  </div>
+
+  <!-- 餐廳子頁 -->
+  <div class="sub-panel" id="sub-restaurants">
+    <div class="maps-list-section">
+      <div class="maps-list-title">🗺 我的 Google Maps 收藏清單</div>
+      <div class="maps-btns">
+        <a class="maps-btn" href="https://maps.app.goo.gl/hBEXxVLXh6xgnsBV9" target="_blank">🥩 牛排</a>
+        <a class="maps-btn" href="https://maps.app.goo.gl/h8mARX5Q9hKLzABq9" target="_blank">🍦 Gelato</a>
+        <a class="maps-btn" href="https://maps.app.goo.gl/CHn4iTzVNtSpJL2M6" target="_blank">🥪 Sandwich</a>
+        <a class="maps-btn" href="https://maps.app.goo.gl/ZDTGxUApyNF7gn9VA" target="_blank">🍝 Pasta</a>
+        <a class="maps-btn" href="https://maps.app.goo.gl/hLZXJhEHABRyahw8A" target="_blank">☕ Coffee</a>
+        <span class="maps-btn disabled">🍕 Pizza（待新增）</span>
+      </div>
+    </div>
+    <div id="restaurants-content"></div>
+  </div>
+</section>
+
+<!-- ===== 葡萄酒 ===== -->
+<section class="page" id="page-wine">
+  <div class="eyebrow">義大利酒指南</div>
+  <div class="page-title">Vino d'Italia</div>
+  <div id="wine-content"></div>
+  <div style="background:var(--brick-lt);border-radius:var(--radius);padding:13px 15px;margin-top:4px">
+    <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brick);margin-bottom:5px">點酒小技巧</div>
+    <p style="font-size:.8rem;line-height:1.6;color:var(--espresso)">問服務生「Vino della casa」（招牌酒）通常物美價廉。吃托斯卡尼大牛排一定要配在地帶有優雅酸度與單寧的紅酒，才能完美中和牛肉油脂。看酒單時認準黑公雞標誌（Gallo Nero）。</p>
+  </div>
+</section>
+
+<!-- ===== 票券 ===== -->
+<section class="page" id="page-tickets">
+  <div class="eyebrow">我的票券夾</div>
+  <div class="page-title">Biglietti & Voli</div>
+  <div id="ticket-content"></div>
+</section>
+
+<!-- ===== 實用資訊 ===== -->
+<section class="page" id="page-info">
+  <div class="eyebrow">實用資訊</div>
+  <div class="page-title">Info Pratiche</div>
+  <div class="currency-widget">
+    <h3>💱 幣值換算</h3>
+    <div class="curr-input-row">
+      <input type="number" id="eur-input" placeholder="0" value="1" min="0" oninput="convertCurrency()">
+      <span class="curr-eur">EUR €</span>
+    </div>
+    <div class="curr-toggle">
+      <button class="curr-btn active" data-currency="TWD" onclick="switchCurrency(this)">🇹🇼 台幣 TWD</button>
+      <button class="curr-btn" data-currency="CAD" onclick="switchCurrency(this)">🇨🇦 加幣 CAD</button>
+    </div>
+    <div class="curr-result">
+      <div class="rnum" id="curr-result-num">—</div>
+      <div class="rlbl" id="curr-result-lbl">請輸入金額</div>
+    </div>
+    <div class="rate-note" id="rate-note">匯率載入中…</div>
+  </div>
+  <div class="info-card">
+    <h3>🆘 緊急電話</h3>
+    <div class="info-row"><span class="lbl">義大利緊急救援</span><span class="val">112 <a class="call-btn" href="tel:112">📞 撥打</a></span></div>
+    <div class="info-row"><span class="lbl">台灣駐義代表處</span><span class="val">+39 338 141 5446 <a class="call-btn" href="tel:+393381415446">📞</a></span></div>
+    <div class="info-row"><span class="lbl">加拿大駐義大使館</span><span class="val">+39 06 85444 1 <a class="call-btn" href="tel:+39068544441">📞</a></span></div>
+  </div>
+  <div class="info-card">
+    <h3>🏨 住宿資訊</h3>
+    <div id="hotel-content"></div>
+  </div>
+  <div class="info-card">
+    <h3>🔌 電力與網路</h3>
+    <div class="info-row"><span class="lbl">電壓</span><span class="val">220V / 50Hz</span></div>
+    <div class="info-row"><span class="lbl">插座規格</span><span class="val">義式三圓孔或歐式雙圓頭</span></div>
+    <div class="info-row"><span class="lbl">SIM 建議</span><span class="val">Iliad / TIM 義大利卡</span></div>
+  </div>
+  <div class="info-card">
+    <h3>🤌 義大利禮儀小抄</h3>
+    <div class="info-row"><span class="lbl">教堂著裝</span><span class="val">嚴禁露肩露膝，備薄外套</span></div>
+    <div class="info-row"><span class="lbl">西班牙階梯</span><span class="val">禁止坐下或飲食，罰€250–400</span></div>
+    <div class="info-row"><span class="lbl">許願池傳說</span><span class="val">背對噴泉，右手越左肩拋硬幣</span></div>
+    <div class="info-row"><span class="lbl">萬神殿冷知識</span><span class="val">圓頂會漏水，22個排水孔不積水</span></div>
+    <div class="info-row"><span class="lbl">座位費 Coperto</span><span class="val">€2–4，正常收費</span></div>
+    <div class="info-row"><span class="lbl">小費文化</span><span class="val">非強制，留零錢即可</span></div>
+  </div>
+</section>
+
+<!-- ===== 詳細介紹 ===== -->
+<section class="page" id="page-detail">
+  <button class="detail-back" onclick="closeDetail()">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>返回
+  </button>
+  <div class="detail-banner" id="d-banner">🏛️</div>
+  <div class="detail-name" id="d-name"></div>
+  <div class="detail-pills" id="d-pills"></div>
+  <p class="detail-desc" id="d-desc"></p>
+  <div class="detail-meta-grid" id="d-meta"></div>
+  <a id="d-map-btn" class="map-btn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    在 Google Maps 開啟
+  </a>
+</section>
+</main>
+
+<nav id="bottom-nav">
+  <button class="nav-btn active" data-page="itinerary">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><span>行程</span>
+  </button>
+  <button class="nav-btn" data-page="places">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><span>景點</span>
+  </button>
+  <button class="nav-btn" data-page="wine">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M8 3h8l1 7a5 5 0 0 1-10 0L8 3z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15v6M9 21h6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><span>葡萄酒</span>
+  </button>
+  <button class="nav-btn" data-page="tickets">
+    <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 5v14M2 9h4M2 15h4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><span>票券</span>
+  </button>
+  <button class="nav-btn" data-page="info">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor"/><path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><span>資訊</span>
+  </button>
+</nav>
+
+<div id="qr-modal">
+  <div class="modal-venue" id="m-venue"></div>
+  <div class="modal-img">▦</div>
+  <div class="modal-date" id="m-date"></div>
+  <div class="modal-hint">實際使用時 QR Code 圖片將顯示於此。<br>白色背景確保掃描器順利讀取。</div>
+  <button class="modal-close" onclick="closeQR()">關閉</button>
+</div>
+</div>
+
+<script>
+// ═══════════════ DATA ═══════════════
+
+const DAYS = [
+  {day:1,date:'9/22 (二)',city:'蒙特婁 → 羅馬',stamina:'low',staminaIcon:'✈️',
+   staminaText:'我們的首趟家族旅行，帶著雙方爸媽一起體驗義大利的魅力。從佛羅倫斯的經典建築，到托斯卡納的葡萄園，再到羅馬的歷史遺跡，九天八夜的旅程輕鬆豐富，是笑聲與回憶的完美融合。',
+   items:[
+    {time:'19:25',title:'蒙特婁去機場搭飛機～',desc:'9/22 AC892 19:25 Montreal (YUL) ⇒ 9:15(+1) Rome (FCO)',tags:['交通'],hi:true}
+  ]},
+  {day:2,date:'9/23 (三)',city:'羅馬 FCO → 佛羅倫斯',stamina:'medium',staminaIcon:'🚗',
+   staminaText:'抵達羅馬後，前往佛羅倫斯，沿途觀光路上小鎮，晚上入住佛羅倫斯。',
+   items:[
+    {time:'09:15',title:'歡迎蒞臨義大利！',desc:'班機抵達羅馬機場 (AC892)，專車接機北上。',tags:['交通'],hi:true},
+    {time:'12:30–14:30',title:'托斯卡尼秘境午餐 → 沿途風光',desc:'車窗美景：走托斯卡尼最美景觀公路，在車上優雅欣賞秋季的金黃丘陵與絲柏樹大道。\n山城歇腳：中途於順路小鎮下車，呼吸新鮮空氣、拍拍照，享用道地的托斯卡尼歡迎午餐。',tags:['餐廳']},
+    {time:'16:30',title:'飯店 Check-in → 舒活補眠時間',desc:'抵達佛羅倫斯飯店：Palazzo Montebello。\n貼心安排：下午進房洗熱水澡、躺大床舒服補眠，輕鬆調整時差，幫明天的精彩行程充飽電！',tags:['住宿','已預約'],hi:true,detailId:'palazzo-montebello'},
+    {time:'19:00',title:'晚餐',desc:'飯店附近散步，享用溫暖清淡的義式晚餐。',tags:['餐廳']}
+  ]},
+  {day:3,date:'9/24 (四)',city:'佛羅倫斯',stamina:'high',staminaIcon:'👟',
+   staminaText:'⚠️ 聖母百花大教堂、美術館、慢步老橋後，傍晚攻頂看夕陽，晚上 07:30 I\'Tuscani 晚餐。',
+   items:[
+    {time:'08:00',title:'專車接送 → 晨光序曲',desc:'司機於飯店門口準時接大家，直接「空投」至大教堂步行區旁。',tags:['交通']},
+    {time:'08:15–09:15',title:'聖母百花大教堂（清晨包場拍照）',desc:'清晨限定：避開萬頭鑽動的觀光團！在微涼的晨光中獨享靜謐的大教堂廣場，拍下最乾淨、最美的全家福。',tags:['景點'],detailId:'duomo'},
+    {time:'09:30–12:00',title:'烏菲茲美術館 (Uffizi Gallery)',desc:'藝術圓夢：預約 09:30 最早批次門票。館內人最少、最舒服，看《維納斯的誕生》與達文西真跡。\n頂樓歇腳：11:00 於頂樓景觀咖啡廳坐著喝杯卡布奇諾、遠眺舊宮。',tags:['已預約','景點'],hi:true,walk:true,walkText:'步行15分鐘可從大教堂廣場抵達',detailId:'uffizi'},
+    {time:'12:15–13:45',title:'午餐 在地文藝復興美味',desc:'享用著名的松露義大利麵、軟嫩牛肚包（長輩超愛）或托斯卡尼燉肉。',tags:['餐廳']},
+    {time:'14:00–15:30',title:'經典地標漫步（全平坦行人區）',desc:'吃飽散步：欣賞【領主廣場】露天雕刻 → 漫步【老橋】阿諾河畔珠寶窗景。',tags:['景點'],walk:true,walkText:'全程平坦行人區'},
+    {time:'15:30',title:'包車神助攻 回房充電回血',desc:'司機在老橋旁接大家。戰利品、外套全部丟車上，兩手空空直接載回飯店放鬆、洗臉、睡個舒服的午覺，徹底充飽電！',tags:['交通']},
+    {time:'17:30',title:'專車攻頂 → 米開朗基羅廣場夕陽',desc:'睡醒體力滿格！免爬山、免擠公車，專車直達山頂觀景台，俯瞰整座紅磚古城與阿諾河畔的魔幻日落。',tags:['景點'],hi:true,detailId:'piazzale-michelangelo'},
+    {time:'19:30',title:'晚餐｜I\'Tuscani 佛羅倫斯百年傳奇牛排館',desc:'厲害在哪：在地人狂推的肉食天堂！最大特色是桌邊展示多款頂級肉品，包含傳統白牛 Chianina 與極稀有的野生角牛 Maremmana，可依口感與熟成天數自由挑選。\n必吃推薦：佛羅倫斯經典丁骨大牛排（炭烤香氣十足、肉質極致鮮嫩多汁）、私房紅酒。',tags:['餐廳','已預約'],hi:true,detailId:'ituscani'}
+  ]},
+  {day:4,date:'9/25 (五)',city:'佛羅倫斯 → 聖吉米雅諾 → 托斯卡尼莊園',stamina:'medium',staminaIcon:'🚗',
+   staminaText:'這天我們將告別城市，正式進入托斯卡尼的浪漫田野，中途開箱經典山城與酒莊，傍晚直接入住頂級莊園度假飯店放鬆。',
+   items:[
+    {time:'09:00',title:'專車出發 → 告別佛羅倫斯，奔向托斯卡尼',desc:'在飯店享用完早餐後辦理 Check-out。\n車窗美景：開往經典山城的路上，窗外景色將漸漸轉為明信片般的托斯卡尼丘陵與絲柏樹。',tags:['交通']},
+    {time:'10:15–12:15',title:'中世紀千塔之城 → 聖吉米雅諾 (San Gimignano)',desc:'趕在中午大批觀光團湧入前抵達。這座被聯合國教科文組織列為世界遺產的古城，以高聳的石塔聞名，充滿濃烈的中世紀穿越感。\n漫步亮點：沿著平緩的石板路散步至【水井廣場】，沿途有各式販售皮件、松露醬與托斯卡尼山豬肉香腸的特色小店。\n必吃推薦：世界冠軍冰淇淋 Gelateria Dondoli：位於水井廣場旁，曾榮獲多次世界冰淇淋大賽冠軍！推薦嘗試外面吃不到的獨家口味：「經典番紅花松子」或「粉紅葡萄柚香檳」，手拿著冰淇淋在廣場曬太陽，是最道地的義式享受。',tags:['景點'],walk:true,walkText:'石板路，穿舒適的鞋',detailId:'san-gimignano'},
+    {time:'12:30–15:00',title:'陽光微醺 → 托斯卡尼經典酒莊午餐宴',desc:'專車駛入隱密私人的葡萄園小徑，前往精選的托斯卡尼基安蒂（Chianti）產區景觀酒莊。在充滿陽光與綠意的大自然餐桌上，一邊欣賞無邊際的葡萄園，一邊享用由莊主特製的家庭式托斯卡尼私房料理（手工義大利麵、精緻冷盤、在地起司）。',tags:['餐廳']},
+    {time:'15:30',title:'開箱頂級莊園 → Borgo Scopeto 沉浸式度假放鬆',desc:'抵達今晚入住的 Borgo Scopeto Wine & Country Relais。\n莊園放鬆時光：下午 Check-in 後，不再安排奔波行程。您可以：\n○ 換上泳衣，在面向托斯卡尼山谷的露天泳池畔躺著曬太陽、喝杯小酒。\n○ 在莊園古老的石磚建築與絲柏樹大道間散步拍美照。',tags:['住宿','已預約'],hi:true,detailId:'borgo-scopeto'},
+    {time:'19:00',title:'晚餐｜莊園景觀餐廳 La Tinaia',desc:'晚餐直接安排在莊園內備受好評的 La Tinaia 餐廳享用。\n必吃推薦：餐廳由古老酒窖改建，主打精緻創新的托斯卡尼料理。推薦品嚐當季的松露料理、慢燉牛頰肉，並搭配飯店自產的 Borgo Scopeto 頂級紅酒，在微醺與浪漫的莊園夜色中入眠。',tags:['餐廳','已預約']}
+  ]},
+  {day:5,date:'9/26 (六)',city:'皮恩扎 & 蒙特普齊亞諾（奧爾恰谷）',stamina:'medium',staminaIcon:'🌄',
+   staminaText:'09:30 出發駛入世界遺產奧爾恰谷（Val d\'Orcia），沿途欣賞金黃丘陵與絲柏樹大道。專車空投山頂大廣場，免去辛苦爬坡。',
+   items:[
+    {time:'09:30',title:'駛入明信片風景',desc:'出發駛入世界遺產奧爾恰谷（Val d\'Orcia），沿途欣賞金黃丘陵與絲柏樹大道。',tags:['交通']},
+    {time:'10:45–12:45',title:'文藝復興理想城 皮恩扎 Pienza',desc:'漫步浪漫的「戀愛巷」與「接吻巷」，於古城牆遠眺無邊際山谷，品嚐在地著名的佩克里諾羊乳乾酪。',tags:['景點'],detailId:'pienza'},
+    {time:'13:15–14:45',title:'全景午餐 → 蒙特普齊亞諾 Montepulciano',desc:'專車空投山頂大廣場免爬坡！於景觀餐廳一邊俯瞰托斯卡尼大自然，一邊享用手工粗麵（Pici）佐慢燉山豬肉醬。',tags:['餐廳']},
+    {time:'14:45–17:00',title:'暮光古堡 → 地下貴族酒窖探險',desc:'深入如地底大教堂般宏偉的古老酒窖，看數層樓高的巨型橡木桶，品飲歷史名酒「Vino Nobile 貴族紅酒」。',tags:['景點'],walk:true,walkText:'地下酒窖步行，注意高度',detailId:'montepulciano'},
+    {time:'17:00–18:30',title:'落日巡航 捕捉金黃絲柏樹',desc:'踏上歸途。回程正值黃金夕陽，於車窗內優雅欣賞被染成蜜糖色的丘陵風光，輕鬆回血。',tags:['交通']},
+    {time:'18:30–20:30',title:'在地溫馨晚宴 莊園旁古老小鎮',desc:'專車送達 Vagliagli 小鎮。品嚐阿嬤手作的家常野菇燉飯與慢燉牛肚，享受最道地的義式溫暖。',tags:['餐廳']},
+    {time:'20:30',title:'莊園舒服補眠',desc:'餐後搭乘莊園預約接駁車或計程車，回到飯店。',tags:['交通']}
+  ]},
+  {day:6,date:'9/27 (日)',city:'奧爾維耶托 & 天空之城 → 羅馬',stamina:'high',staminaIcon:'🥾',
+   staminaText:'⚠️ 09:00 Borgo Scopeto 莊園 Check-out。行李上車，優雅駛向火山岩壁之城。今日跨越溫布利亞大區，下午探訪天空之城，高空天橋漫步極具震撼力，注意長輩步伐。',
+   items:[
+    {time:'09:00',title:'專車退房出發 → 南下溫布利亞大區',desc:'Borgo Scopeto 莊園 Check-out。行李上車，優雅駛向火山岩壁之城。',tags:['交通']},
+    {time:'10:45–12:00',title:'凝灰岩上的奇蹟 → 奧爾維耶托 Orvieto',desc:'專車直達山頂老城。朝聖義大利最美哥德式大教堂（Duomo），欣賞陽光下閃耀的金箔馬賽克。',tags:['景點'],detailId:'orvieto'},
+    {time:'12:00–13:30',title:'岩洞午宴 → 享用白葡萄酒之鄉',desc:'品嚐在地手工粗麵（Umbrichelli），搭配風靡全球的 Orvieto Classico 經典白葡萄酒，口感清爽。',tags:['餐廳']},
+    {time:'14:00–16:15',title:'宮崎駿的靈感 → 天空之城 Civita di Bagnoregio',desc:'於高處觀景台捕捉整座古城懸浮山谷的震撼全景。漫步高空天橋進城，在鮮花石巷間喝咖啡、吃冰淇淋。',tags:['景點'],hi:true,walk:true,walkText:'⚠️ 300公尺高空天橋，注意長輩步伐',detailId:'civita'},
+    {time:'16:15–18:30',title:'巡航永恆之城 → 車上補眠回血',desc:'啟程奔向羅馬。長輩可在寬敞專車內舒服補眠回血。',tags:['交通']},
+    {time:'18:30',title:'羅馬 Marriott Check-in → 包車圓滿結束',desc:'抵達 Courtyard by Marriott Rome Central Park。',tags:['住宿','已預約'],hi:true,detailId:'marriott-rome'},
+    {time:'19:15',title:'羅馬初夜 → 景觀晚餐放鬆',desc:'飯店 Check-in、洗熱水澡。附近在地小館享用溫暖的羅馬第一餐。',tags:['餐廳']}
+  ]},
+  {day:7,date:'9/28 (一)',city:'羅馬市中心',stamina:'medium',staminaIcon:'🏛️',
+   staminaText:'09:30 專車出發繞行羅馬古城外環。飯店門口優雅上車，行駛非禁行區合法幹道直奔古羅馬景區。善用包車與地鐵電梯省力，Spagna 站內電梯直升，長輩免爬山。',
+   items:[
+    {time:'10:00–11:00',title:'帝國奇蹟 → 羅馬競技場 & 馬克西穆斯競技場',desc:'專車停靠寬敞平坦的綠蔭步道（非 ZTL 區），輕鬆合影【羅馬競技場】與【君士坦丁凱旋門】，車窗內欣賞古羅馬賽馬場遺址。',tags:['景點'],walk:true,walkText:'平坦綠蔭步道，長輩友善',detailId:'colosseum'},
+    {time:'11:15–14:15',title:'核心巴洛克漫步 台伯河畔 + 慢活午餐',desc:'河岸下車：專車於 ZTL 邊緣的翁貝托一世橋放客。\n平坦散步：步行 5 分鐘抵達浪漫的【納沃納廣場】，再走 5 分鐘開箱兩千年奇蹟【萬神殿】。\n饗宴補血：歷史老店享用正宗羅馬培根蛋麵與牛肉捲（放鬆 2 小時），朝聖【金杯咖啡】招牌冰沙。',tags:['景點','餐廳'],detailId:'pantheon'},
+    {time:'14:30–16:45',title:'赫本經典重現 → 聰明順向坡與地下秘道',desc:'下車點：專車送達非 ZTL 的巴貝里尼廣場。\n順向漫步：順著下坡平路走 6 分鐘抵達【許願池】拋硬幣，再平走 8 分鐘到【西班牙階梯】與精品街。\n免爬山密技：16:30 利用 Spagna 站內公共電梯直升階梯頂端，走進「博爾蓋塞地下冷氣自動步道」直達公園出口。',tags:['景點'],detailId:'trevi'},
+    {time:'16:45',title:'公園邊緣迎接 → 17:30 輕鬆回巢',desc:'專車於公園出口（非 ZTL 區）迎接，戰利品放車上，17:30 順暢回到飯店休息。',tags:['交通']},
+    {time:'晚間',title:'晚餐附近找東西吃吃',desc:'晚餐附近找東西吃吃。',tags:['餐廳']}
+  ]},
+  {day:8,date:'9/29 (二)',city:'梵蒂岡 → 羅馬高級區',stamina:'high',staminaIcon:'🎨',
+   staminaText:'⚠️ 08:45 專車出發，本日路線完全避開羅馬市中心 ZTL 禁行區，沿台伯河西岸流暢前往。梵蒂岡博物館步行較多，中午「神救援接駁車」在出口等候，下午聖天使橋夕陽完美謝幕。',
+   items:[
+    {time:'09:00–11:40',title:'世紀藝術殿堂 → 梵蒂岡博物館 & 西斯汀禮拜堂',desc:'專車至博物館正門口下車，省去排隊與外圍步行。入館後沿平坦廊道朝聖地圖室與織錦畫。高潮抵達【西斯汀禮拜堂】，可坐在長椅上高仰米開朗基羅震世神作《創世紀》與《最後的審判》。',tags:['景點','已預約'],hi:true,walk:true,walkText:'⚠️ 步行時間長，可隨時坐椅子休息',detailId:'vatican'},
+    {time:'11:45',title:'神救援接駁專車門口迎接',desc:'參觀完博物館長輩雙腿最疲勞之際，專車已在博物館出口街角（吹好冷氣）等待大家，直接載往午餐餐館。',tags:['交通']},
+    {time:'12:00–14:00',title:'普拉蒂高級區午餐 → 在地老饕海鮮小館',desc:'深入非 ZTL 的高級白領住宅區普拉蒂（Prati），完美避開觀光地雷。大啖清爽鮮甜的「羅馬風情海鮮義大利麵」與「酥炸綜合海鮮拼盤」，配上冰鎮白葡萄酒。',tags:['餐廳']},
+    {time:'14:15–16:30',title:'上帝的建築 聖彼得大教堂 & 聖彼得廣場',desc:'下車步行達磅礴的聖彼得廣場，與 284 根環形巨石列柱合影。大教堂內部空間極大且地面百分之百完全平坦，免辛苦爬坡，親眼欣賞米開朗基羅《聖母慟子像》與貝尼尼七層樓高的《青銅聖體傘》。',tags:['景點'],hi:true,detailId:'st-peters'},
+    {time:'16:30–17:15',title:'加碼著名景點 聖天使堡 & 聖天使橋夕陽紅',desc:'離開大教堂後專車接駁 2 分鐘直達緊鄰的台伯河畔。全家下車在平坦的河岸與橋頭漫步 10 分鐘，近距離欣賞貝尼尼大師雕刻的 10 尊護衛天使石雕，完美捕捉梵蒂岡大圓頂在落日餘暉下的蜜糖色剪影。',tags:['景點'],detailId:'castel-sant-angelo'},
+    {time:'17:15',title:'滿載而歸 → 專車送回飯店，輕鬆打包',desc:'專車於河岸迎接，一路順暢送回 Courtyard Marriott。約 17:45 前抵達。回房洗熱水澡，悠閒打包大行李箱。',tags:['交通']},
+    {time:'19:30',title:'完美終章 → 義大利假期慶功晚宴',desc:'安排晚餐，在羅馬的金黃夜色與滿滿珍貴的回憶中，為這趟家庭度假劃下最幸福的句點。',tags:['餐廳','已預約'],hi:true}
+  ]},
+  {day:9,date:'9/30 (三)',city:'羅馬 FCO → 蒙特婁 YUL',stamina:'low',staminaIcon:'✈️',
+   staminaText:'羅馬出境，家庭假期劃下最幸福的句點。帶著滿滿回憶與伴手禮平安返加！',
+   items:[
+    {time:'11:30',title:'羅馬出境返家 ✈️',desc:'11:30 Rome (FCO) ⇒ 14:30 Montreal (YUL) 班機返回，家庭假期劃下最幸福的句點。',tags:['交通'],hi:true}
+  ]}
+];
+
+const PLACES_DB = {
+  'palazzo-montebello':{emoji:'🏨',name:'Palazzo Montebello',day:'Day 2–4',anchor:'佛羅倫斯飯店',tags:['住宿','佛羅倫斯','4星精品'],
+    desc:'抵達佛羅倫斯飯店：Palazzo Montebello。\n\n貼心安排：下午進房洗熱水澡、躺大床舒服補眠，輕鬆調整時差，幫明天的精彩行程充飽電！\n\n18世紀古宅完整修復的精品四星飯店，位於佛羅倫斯歷史中心。擁有寧靜庭院花園與桑拿，步行 15 分鐘可達 Ponte Vecchio、烏菲茲與聖母百花大教堂，距離火車站步行約 10 分鐘。',
+    meta:[['📍 地址','Via Giuseppe Garibaldi 14, Firenze'],['⏱ Check-in','15:00 / Check-out 12:00'],['🏊 設施','健身房・桑拿・庭院花園・餐廳'],['🚗 機場','距Peretola機場約6km，15分鐘']],
+    map:'https://maps.app.goo.gl/CdHbrdaJAWatvXM77'},
+  'borgo-scopeto':{emoji:'🏰',name:'Borgo Scopeto Wine & Country Relais',day:'Day 4–6',anchor:'基安蒂莊園',tags:['住宿','奇揚地','莊園'],
+    desc:'【莊園亮點】由 14 世紀中世紀古村落改建的奢華度假村，完美融合古樸石磚底蘊與現代奢華。莊園坐擁基安蒂核心丘陵的無邊際葡萄園，能遠眺西恩納美景，並擁有罕見的 18 世紀歷史迷宮花園。\n\n【莊園限定活動體驗】提供以自家葡萄、橄欖油特製的「大自然原萃 Spa」與主廚帶領的「在地烹飪課」。旅客也能深入地下酒窖品酒，或租借單車、復古老爺車浪漫穿梭於絲柏樹大道。\n\n【莊園自產靈魂好酒】Borgo Scopeto 是基安蒂 Classico 產區名聲響亮的獨立永續認證酒莊，位於最南端的 Castelnuovo Berardenga，日照比北邊更充足，產出的 Sangiovese 葡萄最為成熟飽滿，以「成熟的櫻桃香氣、溫暖多汁與優雅單寧」聞名。\n\n▸ Chianti Classico DOCG：混合 90% Sangiovese，帶有鮮櫻桃、紅莓與黑莓香氣，伴隨托斯卡尼野百里香，口感圓潤。\n▸ Gran Selezione：產區最高等級，僅在最完美年份挑選老藤釀造，帶有深邃黑色漿果、肉桂與皮革的複雜層次。\n▸ Borgonero IGT（超級托斯卡尼）：Sangiovese 與 Cabernet Sauvignon、Merlot 混釀，充滿成熟黑李、巧克力風味。\n▸ Vin Santo（聖酒）：葡萄自然風乾數月後多年陳釀，帶有乾果、核桃與蜂蜜香氣，配義式杏仁脆餅（Cantucci）是托斯卡尼最完美的傳統結尾。',
+    meta:[['📍 地址','Castelnuovo Berardenga, Siena'],['⏱ Check-in','15:30 / Check-out 11:00'],['🏊 設施','露天泳池・酒窖・Spa・花園'],['🍷 特色','自產黑公雞 Chianti Classico']],
+    map:'https://maps.app.goo.gl/MtRSUd2pnxNsG48n9'},
+  'marriott-rome':{emoji:'🏨',name:'Courtyard by Marriott Rome Central Park',day:'Day 6–9',anchor:'羅馬飯店',tags:['住宿','羅馬','4星'],
+    desc:'位於 Trionfale 區的現代四星飯店，梵蒂岡與西斯汀禮拜堂車程約 10 分鐘。步行 5 分鐘可達 Gemelli 火車站，直通梵蒂岡與羅馬各主要車站。部分房間有陽台可見聖彼得大教堂圓頂，旁邊就是 Parco del Pineto 城市公園，早晨散步很舒服。',
+    meta:[['📍 地址','Via Giuseppe Moscati 7, Roma'],['⏱ Check-in','16:00 / Check-out 11:00'],['🚇 交通','步行5分鐘 Gemelli 火車站'],['⛪ 距梵蒂岡','搭車約10分鐘']],
+    map:'https://maps.app.goo.gl/zEtMPvW2dA4V2VMN9'},
+  'duomo':{emoji:'🕌',name:'聖母百花大教堂',day:'Day 3',anchor:'佛羅倫斯大教堂廣場',tags:['景點','佛羅倫斯','免費'],
+    desc:'清晨限定：避開萬頭鑽動的觀光團！在微涼的晨光中獨享靜謐的大教堂廣場，拍下最乾淨、最美的全家福。\n\n佛羅倫斯最著名的紅磚大圓頂奇蹟，由布魯內萊斯基設計，至今仍是世界最大的磚砌圓頂。廣場免費參觀，拍照無價。',
+    meta:[['📍 地址','Piazza del Duomo, Firenze'],['💶 票價','廣場免費 / 圓頂需購票'],['🕐 最佳時段','08:15 清晨人最少'],['⚠️ 注意','內部嚴禁露肩露膝']],
+    map:'https://www.google.com/maps/search/?api=1&query=Cattedrale+di+Santa+Maria+del+Fiore+Firenze'},
+  'uffizi':{emoji:'🎨',name:'烏菲茲美術館 (Uffizi Gallery)',day:'Day 3',anchor:'佛羅倫斯市中心',tags:['景點','佛羅倫斯','已預約'],
+    desc:'藝術圓夢：預約 09:30 最早批次門票。館內人最少、最舒服，看《維納斯的誕生》與達文西真跡。\n\n頂樓歇腳：11:00 於頂樓景觀咖啡廳坐著喝杯卡布奇諾、遠眺舊宮。\n\n文藝復興藝術最高殿堂，收藏波提切利、達文西、拉斐爾等大師真跡。步行 15 分鐘可從大教堂廣場抵達。',
+    meta:[['📍 地址','Piazzale degli Uffizi, Firenze'],['💶 票價','已預約 09:30 門票'],['🕐 時間','09:30 – 12:00'],['☕ 貼士','11:00 頂樓咖啡廳遠眺舊宮']],
+    map:'https://www.google.com/maps/search/?api=1&query=Galleria+degli+Uffizi+Firenze'},
+  'piazzale-michelangelo':{emoji:'🌅',name:'米開朗基羅廣場',day:'Day 3',anchor:'佛羅倫斯觀景台',tags:['景點','佛羅倫斯','免費'],
+    desc:'睡醒體力滿格！免爬山、免擠公車，專車直達山頂觀景台，俯瞰整座紅磚古城與阿諾河畔的魔幻日落。\n\n佛羅倫斯全城最佳俯瞰點，可將 Arno 河、百花聖母大教堂圓頂與整個舊城盡收眼底。日落前一小時是最美的時刻。',
+    meta:[['📍 地址','Piazzale Michelangelo, Firenze'],['💶 票價','免費'],['🕐 最佳時段','17:30 日落前'],['🚗 交通','專車直達山頂，免爬坡']],
+    map:'https://www.google.com/maps/search/?api=1&query=Piazzale+Michelangelo+Firenze'},
+  'ituscani':{emoji:'🥩',name:"I'Tuscani 佛羅倫斯百年傳奇牛排館",day:'Day 3',anchor:'佛羅倫斯新聖母大殿',tags:['餐廳','已預約','牛排'],
+    desc:"厲害在哪：在地人狂推的肉食天堂！最大特色是桌邊展示多款頂級肉品，可依口感與熟成天數自由挑選。\n\n【牛肉品種比較】\n▸ Chianina（奎安尼那牛）：世界上最古老、體型最大的白色巨牛，也是大丁骨牛排的最正宗經典首選。肉質極其細緻、油脂分布均勻。烤好後外酥內軟，軟嫩好咬且肉汁清甜，口感非常優雅。\n▸ Maremmana（馬雷馬牛）：生活在托斯卡尼南部灌木叢的灰色野性牛，成牛有著帥氣的巨大長角，長年自由放養。老饕重口味首選。肉質較為扎實有彈性，牛肉本身的風味極其濃郁、越嚼越香，帶有野性的炭烤香氣。\n\n【今晚推薦搭配哪種紅酒？】\n▸ Chianti Classico（黑公雞）：以 Sangiovese 釀造，帶有紅櫻桃與香料香氣，酸度漂亮，吃一口油亮牛排、喝一口黑公雞，解膩又爽口。\n▸ Brunello di Montalcino：托斯卡尼最頂級的紅酒。酒體極為濃郁厚實，最適合搭配熟成天數長或風味狂野的 Maremmana 牛肉。\n▸ Super Tuscan（超級托斯卡尼）：口感更圓潤、滑順，充滿濃郁果香，長輩平常怕澀感的選這個準沒錯！\n\n【今晚的品嚐小撇步】\n▸ 熟成（Dry-Aged）：可選一塊熟成 30 天以上的肉，肉質更軟嫩，帶有一點起司的迷人堅果香。\n▸ 三分熟（Medium Rare）：正宗佛羅倫斯牛排不做七分或全熟。外皮有一層焦香，裡面雖是粉紅色，但切開絕對不流血水，而是滿滿的肉汁，口感最完美！",
+    meta:[['📍 地址','Via de\' Federighi 5r, Firenze'],['💶 均消','依挑選牛肉與紅酒計價'],['🕐 時間','19:30 預約'],['🥩 建議','點三分熟 Medium Rare 最完美']],
+    map:'https://www.google.com/maps/search/?api=1&query=I+Tuscani+Via+Federighi+Firenze'},
+  'san-gimignano':{emoji:'🗼',name:'聖吉米雅諾 千塔之城',day:'Day 4',anchor:'托斯卡尼山城',tags:['景點','世界遺產','免費'],
+    desc:'趕在中午大批觀光團湧入前抵達。這座被聯合國教科文組織列為世界遺產的古城，以高聳的石塔聞名，充滿濃烈的中世紀穿越感。\n\n漫步亮點：沿著平緩的石板路散步至【水井廣場】，沿途有各式販售皮件、松露醬與托斯卡尼山豬肉香腸的特色小店。\n\n必吃推薦｜世界冠軍冰淇淋 Gelateria Dondoli：位於水井廣場旁，曾榮獲多次世界冰淇淋大賽冠軍！推薦嘗試外面吃不到的獨家口味：「經典番紅花松子」或「粉紅葡萄柚香檳」，手拿著冰淇淋在廣場曬太陽，是最道地的義式享受。',
+    meta:[['📍 地址','Piazza della Cisterna, San Gimignano'],['💶 票價','免費漫步'],['🕐 最佳時段','10:15 避開正午人潮'],['🍦 必吃','Gelateria Dondoli 世界冠軍冰淇淋']],
+    map:'https://www.google.com/maps/search/?api=1&query=San+Gimignano+Piazza+della+Cisterna'},
+  'pienza':{emoji:'🏡',name:'皮恩扎 Pienza 文藝復興理想城',day:'Day 5',anchor:'奧爾恰谷懸崖邊',tags:['景點','世界遺產','免費'],
+    desc:'奧爾恰谷懸崖邊的「理想城市」：15 世紀時，教宗庇護二世下令將自己的故鄉改造成人類歷史上第一座「文藝復興理想城市」，全城皆被列為世界文化遺產。小鎮全是平坦的行人步道，漫步毫不費力。\n\n沿著古老城牆邊的景觀步道前行，能一覽無遺整片世界級的奧爾恰山谷綿延丘陵。城內更藏有極具浪漫情調的「戀愛巷（Via dell\'Amore）」與「接吻巷（Via del Bacio）」。\n\n名產靈魂｜全義大利最棒的佩克里諾羊乳乾酪：這裡的綿羊放牧在奧爾恰山谷中，吃的是在地特有的野生草本植物，因此擠出來的羊乳釀成的起司完全沒有腥羶味，反而帶有獨特的溫潤乳香與微甜草本香。Corso Rossellino 主街上整條都是起司老店，非常壯觀。\n\n起司控必讀！街頭起司「熟成四階」品鑑：\n▸ Fresco（新鮮，熟成約20天）：質地軟嫩雪白，口感像豆腐般清爽，充滿濃郁奶香。\n▸ Semi-stagionato（半熟成，約45天）：外皮轉為淡黃，質地開始有彈性，風味溫和。\n▸ Stagionato（熟成，90天以上）：起司變得扎實，帶有迷人的堅果與果仁香氣，長輩接受度極高。\n▸ Riserva（特選珍藏）：埋入赤土陶罐、橄欖油或香草灰燼中熟成，層次深邃。\n\n道地街頭必吃：\n▸ 鐵板烤起司佐松露/蜂蜜（Pecorino alla Piastra）：將整塊 Pecorino 起司烤到金黃微焦、內裡融化，淋上在地野生蜂蜜或黑松露醬，鹹甜交織，極度療癒。\n▸ 大蒜番茄手工麵（Pici all\'Aglione）：搭配當地特產的巨型大蒜與純鮮番茄熬煮的醬汁，滋味濃郁香醇卻完全不辛辣，非常順口。',
+    meta:[['📍 地址','Pienza, Val d\'Orcia'],['💶 票價','免費參觀'],['🕐 時間','10:45 – 12:45'],['🧀 必嚐','鐵板烤羊乳起司淋蜂蜜/黑松露']],
+    map:'https://www.google.com/maps/search/?api=1&query=Pienza+Val+d+Orcia'},
+  'montepulciano':{emoji:'🍷',name:'蒙特普齊亞諾 地下貴族酒窖',day:'Day 5',anchor:'蒙特普齊亞諾山脊',tags:['景點','暮光之城','酒窖'],
+    desc:'走進暮光之城的「地下大教堂」：高聳在石灰岩山脊上的壯麗山城，完美保留了中世紀與文藝復興時期的教宗宮殿與宏偉廣場，也是電影《暮光之城：新月》的經典拍攝地。\n\n這座城市最神奇的秘密隱藏在地下——順著古老石階深入地底，會看到如同「地下大教堂」般宏偉的數百年酒窖，巨型石磚拱頂下整齊排列著數層樓高的巨型橡木桶，充滿神祕又尊貴的歷史感。\n\n靈魂好酒｜貴族紅酒（Vino Nobile）：蒙特普齊亞諾的驕傲，歷史上教宗與王公貴族專享的頂級佳釀。由於此處日照極為充足，釀出的 Sangiovese 紅酒酒體深邃紮實、單寧優雅，開瓶便帶有成熟黑櫻桃、紫羅蘭以及淡淡的煙燻木質香氣。\n\n道地主食｜手工粗麵（Pici）與古老基安納白牛：\n▸ 托斯卡尼手工粗麵（Pici）：純手工揉製，形似粗烏龍麵，口感極富嚼勁。最經典的吃法是搭配「慢燉山豬肉醬（Cinghiale）」。\n▸ 香脆麵包屑粗麵（Pici con le Briciole）：最道地的在地「貧窮料理」，將傳統托斯卡尼無鹽麵包碎用橄欖油炒到金黃酥脆，拌入 Pici 粗麵中，成分極簡卻香氣四溢。\n\n街頭甜點：義式杏仁脆餅佐聖酒（Cantucci with Vin Santo）：完美的餐後結尾，拿著硬香的杏仁脆餅浸入琥珀色甜點酒中稍微軟化後送進嘴裡，微醺又香甜。',
+    meta:[['📍 地址','Montepulciano 山頂老城內'],['💶 票價','免費/依品酒收費'],['🕐 時間','14:45 – 17:00'],['🚗 貼心','專車空投山頂，長輩免爬坡']],
+    map:'https://www.google.com/maps/search/?api=1&query=Montepulciano+wine+cellar+Tuscany'},
+  'orvieto':{emoji:'⛪',name:'奧爾維耶托 Orvieto 哥德式大教堂',day:'Day 6',anchor:'奧爾維耶托火山巨石台地',tags:['景點','哥德式','溫布利亞'],
+    desc:'文化與氛圍｜建在天空巨岩上的黃金古城：奧爾維耶托聳立在一塊數百公尺高、垂直陡峭的火山凝灰岩巨石台地上，從遠處望去就像一座巨大的空中防禦城堡。\n\n大教堂（Duomo）是哥德式建築的極致巔峰，教堂正面拼貼了極為繁複的金色馬賽克與精細浮雕，在上午的陽光照耀下就如同一面閃閃發光的黃金城牆，美到令人屏息。城內街道充滿了古老優雅的石磚香氣，地下更隱藏著上千個古羅馬與伊特拉斯坎時期挖掘的神秘岩洞。\n\n靈魂美酒｜風靡千年的皇家教宗玉液 → Orvieto Classico：奧爾維耶托的火山灰土壤富含礦物質，釀造出的 Orvieto Classico 在歷史上深受羅馬教宗與王室喜愛。帶有清爽的金黃色澤，開瓶便能聞到青蘋果、白桃與野花的細緻香氣，入口帶有獨特的微酸礦物感，口感純淨乾爽。\n\n道地主食｜手工火山麵（Umbrichelli）：當地最具代表性的手工麵條，純手工揉製不加雞蛋，口感比托斯卡尼的 Pici 更有韌性與嚼勁。最道地的吃法是用手工粗麵拌入現刨的黑松露，或搭配慢燉數小時的野豬肉醬。\n\n街頭必吃｜義式脆皮烤豬包（Porchetta）：將整隻豬去骨、填入大量迷迭香、大蒜、茴香與黑胡椒，捲起後慢火炭烤至外皮金黃酥脆。現點現切幾片夾進酥脆麵包裡，大口咬下，肉汁與香草香氣在嘴裡炸開，搭配一杯冰鎮白葡萄酒，就是最在地的平民午餐！',
+    meta:[['📍 地址','Piazza del Duomo, Orvieto'],['💶 票價','老城免費漫步'],['🕐 最佳時段','10:45 – 12:00 上午陽光最美'],['🥪 必吃','Porchetta 義式脆皮烤豬包']],
+    map:'https://www.google.com/maps/search/?api=1&query=Duomo+di+Orvieto'},
+  'civita':{emoji:'🏰',name:'天空之城 Civita di Bagnoregio',day:'Day 6',anchor:'拉齊奧與溫布利亞交界',tags:['景點','地理奇蹟','宮崎駿'],
+    desc:'文化與氛圍｜懸浮於白堊谷中的「瀕死之城」：天空之城建立於 2,500 年前伊特拉斯坎時期，坐落在一個由火山凝灰岩組成的巨大孤島山頭上。由於四周的地質不斷受到風雨侵蝕與土石崩塌，導致古城邊緣持續崩落，僅靠一條 300 公尺長的高空行人天橋與世界相連，因此被感傷地稱為「瀕死之城（La città che muore）」。\n\n這裡也是日本動畫大師宮崎駿經典電影《天空之城》的靈感發源地，每當清晨山谷起霧時，整座石造古城就如同懸浮在雲海中的虛幻孤島，充滿了魔幻與不真實的童話色彩。\n\n地理奇蹟｜震撼視覺的白堊惡地山谷（Calanchi）：站在高空天橋或古城邊緣往下看，四周是令人震懾的「Calanchi」惡地景觀——白色與灰色深邃峽谷，光禿禿的岩脊與古城內盛開的鮮花形成強烈對比。\n\n在地風味：\n▸ 岩洞熟成佩克里諾起司：當地人將綿羊起司放進火山岩洞中熟成，風味比一般起司更加深邃扎實。\n▸ 野菇烤麵包片（Crostini ai Funghi Porcini）：烤得焦香的麵包片抹上大蒜、淋上橄欖油，再鋪滿炒得香氣四溢的在地野生牛肝菌菇。\n▸ 傳統托切蒂脆餅（Tozzetti）：在小廣場旁的咖啡廳坐下，點一杯義式濃縮咖啡，搭配揉入榛果與巧克力豆的當地脆餅，一邊咬著脆餅，一邊看著古城牆外的壯麗山谷。',
+    meta:[['📍 地址','Civita di Bagnoregio'],['💶 票價','進城過橋門票'],['🕐 時間','14:00 – 16:15'],['⚠️ 注意','300公尺高空天橋，注意長輩步伐']],
+    map:'https://www.google.com/maps/search/?api=1&query=Civita+di+Bagnoregio'},
+  'colosseum':{emoji:'🏟️',name:'羅馬競技場 & 君士坦丁凱旋門',day:'Day 7',anchor:'古羅馬景區',tags:['景點','羅馬','帝國遺跡'],
+    desc:'帝國的殘酷溫床與工程奇蹟：建立於西元 80 年，是古羅馬帝國最偉大的地標。這座龐大的圓形劇場當初可容納五萬名觀眾，地底下隱藏著極為複雜的機關、獸欄與水道，是當年上演人獸搏鬥與海戰的殘酷舞台。它是古羅馬混凝土建築的巔峰，歷經兩千年的地震與戰火依然傲然屹立。\n\n君士坦丁凱旋門：緊鄰競技場旁，建立於西元 315 年。它是全羅馬現存三座凱旋門中最大、保存最完整的一座，是為了慶祝君士坦丁大帝統一帝國、並將基督教合法化而建。\n\n冷知識｜歷史上的大採石場：中世紀到文藝復興時期，羅馬競技場曾被當成「免費的採石場」！原本外牆鋪滿了高貴的白色大理石，後來都被拆去建造教宗的宮殿與梵蒂岡的聖彼得大教堂，才變成今天我們看到粗獷外露的磚石模樣。\n\n車輛停靠寬敞平坦的綠蔭步道（非 ZTL 區），長輩免辛苦奔波，輕鬆合影留念。',
+    meta:[['📍 地址','Piazza del Colosseo, Roma'],['💶 票價','外圍步道免費合影'],['🕐 時間','10:00 – 11:00'],['🚗 貼心','停靠平坦綠蔭步道，長輩友善']],
+    map:'https://www.google.com/maps/search/?api=1&query=Colosseum+Rome'},
+  'pantheon':{emoji:'⛩️',name:'萬神殿 & 納沃納廣場',day:'Day 7',anchor:'台伯河畔巴洛克區',tags:['景點','羅馬','兩千年建築'],
+    desc:'納沃納廣場（Piazza Navona）｜戰車競技場演變而來的巴洛克客廳：這裡是羅馬最美麗、也最熱鬧的巴洛克廣場。它的形狀呈獨特的長橢圓形，因為它的前身是古羅馬時期的「圖密善戰車競技場」。廣場中央是貝尼尼設計的【四河噴泉】，分別代表多瑙河、尼羅河、恆河與拉普拉塔河。\n\n冷知識｜大師們的靈魂互嗆：傳說貝尼尼故意將噴泉中代表尼羅河的神像用布蒙住眼睛，暗示他「不屑看到對手波洛米尼設計的奇醜教堂」，這段大師間的明爭暗鬥至今仍是旅人津津樂道的趣聞。\n\n萬神殿（Pantheon）｜兩千年間從未倒塌的奇蹟神殿：由羅馬皇帝哈德良於西元 126 年重建，是古羅馬保存最完美的建築。最震撼之處在於它的無鋼筋混凝土大圓頂，直徑高達 43.3 公尺，兩千年來一直是世界之最。圓頂正中央有一個 9 公尺寬的圓形穹眼（Oculus），是整座神殿唯一的光源，象徵與天神對話的眼睛。\n\n文藝復興大師「拉斐爾」長眠之處。\n\n冷知識｜下雨天萬神殿會漏水嗎？答案是：會！但地上設計了 22 個隱蔽的排水孔，加上室內熱氣上升產生的氣流，會將毛毛細雨吹散，因此裡面從不積水。\n\n名店品嚐｜金杯咖啡（Tazza d\'Oro）：萬神殿旁的傳奇咖啡館，據說是全羅馬生意最好的店。必吃：咖啡冰沙佐鮮奶油（Granita di Caffè），碎冰中帶有濃郁的義式濃縮咖啡香，搭配現打極致綿密的冰涼鮮奶油，苦甜交織，消暑回血的最高傑作！',
+    meta:[['📍 地址','Piazza della Rotonda, Roma'],['💶 票價','免費 / 名店品嚐自理'],['☕ 必去','金杯咖啡 Tazza d\'Oro 咖啡冰沙'],['🌧️ 冷知識','22個排水孔，下雨不積水']],
+    map:'https://www.google.com/maps/search/?api=1&query=Pantheon+Rome'},
+  'trevi':{emoji:'⛲',name:'許願池 & 西班牙階梯',day:'Day 7',anchor:'羅馬市中心',tags:['景點','羅馬','巴洛克'],
+    desc:'特萊維噴泉（Trevi Fountain）｜全球最美的巴洛克許願聖地：羅馬最大也最著名的巴洛克式噴泉。設計師沙爾維以波利宮為背景，雕刻出海神尼普頓乘著海馬戰車出巡、馴服桀驁不馴海水的壯麗場景。\n\n浪漫的拋硬幣儀式：傳說背對許願池，右手拿硬幣越過左肩拋入水中：\n▸ 丟一枚：這輩子一定會再度重返羅馬。\n▸ 丟兩枚：會與喜愛的人在羅馬相戀或開花結果。\n\n冷知識：許願池每天能撈出價值高達 3,000 至 4,000 歐元的硬幣！這些錢全數捐給天主教慈善機構（Caritas）幫助窮人。人潮擁擠，請照顧好長輩與隨身財物。\n\n西班牙階梯（Piazza di Spagna）｜奧黛麗·赫本的《羅馬假期》經典重現：這座共有 135 階的宏偉階梯，因為電影《羅馬假期》中奧黛麗·赫本坐在這裡吃著冰淇淋、邂逅男主角而名揚全球。階梯底部的【破船噴泉】是貝尼尼父親的傑作。\n\n康多堤大道（Via dei Condotti）精品朝聖：西班牙階梯正對面，是全羅馬最奢華的頂級精品街。著名的百年老店【古希臘咖啡館（Caffè Greco）】也坐落於此，歌德、拜倫都曾是座上賓。\n\n⚠️ 免爬山密技：16:30 利用 Spagna 站內公共電梯直升階梯頂端，走進「博爾蓋塞地下冷氣自動步道」直達公園出口，長輩完全免辛苦爬坡！\n\n★ 嚴格禁止在西班牙階梯上「坐下休息」或「飲食」，違者警察吹哨罰 250 至 400 歐元！',
+    meta:[['📍 地址','Piazza di Trevi & Piazza di Spagna, Roma'],['💶 票價','免費許願 / 精品街消費自理'],['🪙 傳說','背對噴泉右手越左肩拋硬幣'],['⚠️ 重要','西班牙階梯嚴禁坐下或飲食！']],
+    map:'https://www.google.com/maps/search/?api=1&query=Trevi+Fountain+Rome'},
+  'vatican':{emoji:'🖼️',name:'梵蒂岡博物館 & 西斯汀禮拜堂',day:'Day 8',anchor:'梵蒂岡核心',tags:['景點','梵蒂岡','已預約'],
+    desc:'教宗世紀累積的瘋狂藝術帝國：名列世界三大博物館之一，這裡收藏了羅馬天主教會幾個世紀以來收集的無價之寶。走在裡面就像穿越一條長達數公里的「藝術時光隧道」，從古埃及木乃伊、古希臘雕刻，到文藝復興大師的壁畫，精美程度令人目不暇給。\n\n最著名的【地圖室】兩側畫滿了 16 世紀義大利各地的地圖，天花板全是由純金裝飾的巴洛克浮雕，在燈光下金碧輝煌，氣勢驚人。\n\n梵蒂岡秘密冷知識｜教宗是怎麼選出來的？當現任教宗逝世或退位，全世界的樞機主教就會被關在【西斯汀禮拜堂】內進行秘密投票（Conclave），這期間與外界完全斷絕聯絡。\n▸ 冒出黑煙：代表投票未過半，要繼續投。\n▸ 冒出白煙：代表新教宗已經順利選出！全場鐘聲大作。\n\n鎮館神作｜西斯汀禮拜堂的「天頂奇蹟」：\n▸ 天頂畫《創世紀》：米開朗基羅當年拒絕教宗提供的助手，獨自一人仰著頭、吊在十幾公尺高的鷹架上，長達四年不分晝夜地創作。其中最著名的「上帝與亞當指尖相觸」那一幕，象徵上帝賦予人類靈魂的瞬間，線條充滿力量。\n▸ 祭壇畫《最後的審判》：描繪世界末日之時耶穌下凡審判世人善惡的壯烈場景。米開朗基羅甚至把當時投訴他畫太多全裸神像的教宗禮儀官，畫成地獄裡長著驢耳朵、被毒蛇纏身的判官，用藝術展現了大師的幽默與任性。\n\n⚠️ 西斯汀禮拜堂全場嚴格禁止交談與拍照，請肅靜仰望。',
+    meta:[['📍 地址','Vatican Museums, Città del Vaticano'],['💶 票價','已預約 09:00 最早門票'],['🕐 時間','09:00 – 11:40'],['🤫 注意','西斯汀禮拜堂嚴禁交談拍照']],
+    map:'https://www.google.com/maps/search/?api=1&query=Vatican+Museums+Rome'},
+  'st-peters':{emoji:'⛪',name:'聖彼得大教堂 & 聖彼得廣場',day:'Day 8',anchor:'世界第一大教堂',tags:['景點','梵蒂岡','免費'],
+    desc:'上帝的至高聖殿與台伯河的天使羽翼：這裡是全球天主教的信仰核心，也是世界第一大教堂。當您站在【聖彼得廣場】上，兩側由巴洛克大師貝尼尼設計的 284 根巨大石柱排成環形長廊，就像上帝張開雙臂溫柔擁抱世人。\n\n大教堂內部空間巨大無比、地面百分之百完全平坦無障礙，長輩走起來輕鬆悠閒。\n\n必看三大傳奇藝術大作：\n▸ 米開朗基羅《聖母慟子像》（Pietà）：大師 24 歲時的成名神作。聖母懷抱著受難後的耶穌，用堅硬的大理石雕刻出聖母衣服如絲綢般流暢的衣褶，以及聖母臉上那種超脫、平靜的悲傷。這是米開朗基羅一生中唯一留下親筆簽名的雕刻作品。\n▸ 貝尼尼《青銅聖體傘》（Baldacchino）：位於大教堂的正中央祭壇下方，高達 29 公尺（約七層樓高）。由四根巨大的螺旋狀青銅柱支撐，氣勢磅礴，大教堂的金色大圓頂就在其正上方。\n▸ 聖彼得寶座：位於教堂最深處，同樣由貝尼尼設計，椅背上方一扇金黃色、由天然雲母片製成的「聖靈鴿子」彩色玻璃窗，在陽光穿透下散發出天堂般的金色光芒。',
+    meta:[['📍 地址','Piazza San Pietro, Città del Vaticano'],['💶 票價','教堂免費參觀'],['♿ 無障礙','內部100%平坦，長輩友善'],['🕐 時間','14:15 – 16:30']],
+    map:'https://www.google.com/maps/search/?api=1&query=St+Peters+Basilica+Vatican'},
+  'castel-sant-angelo':{emoji:'🏰',name:'聖天使堡 & 聖天使橋',day:'Day 8',anchor:'台伯河畔',tags:['景點','羅馬','羅馬假期'],
+    desc:'羅馬皇帝的陵墓與教宗避難所：緊鄰梵蒂岡不遠、聳立在台伯河畔的巨大圓形古堡。它最初由羅馬皇帝哈德良於西元 139 年建造，作為自己的皇家陵墓。到了中世紀，因為防禦功能極佳，被改建為教宗的軍事城堡。\n\n古堡與梵蒂岡之間甚至隱藏著一條高牆內的秘密通道——「博爾戈密道（Passetto di Borgo）」，歷史上當羅馬遭到外敵入侵時，教宗們就是順著這條密道一路狂奔逃進聖天使堡避難。\n\n羅馬最美的日落橋梁｜聖天使橋與十尊天使：這座橫跨台伯河、正對著城堡的拱橋，被譽為羅馬歷史上最美的一座橋梁。橋兩側佇立著 10 尊姿態各異、栩栩如生的守護天使石雕，每尊天使手裡都拿著一項耶穌受難時的刑具，全部由貝尼尼大師與他的徒弟親手雕刻。\n\n落日餘暉下的完美謝幕：傍晚時分，專車貼心地停在河岸，大家不需要辛苦爬城堡。在平坦的河岸與橋頭散步，吹著台伯河的微風，看著夕陽將天空染成蜜糖色，遠處梵蒂岡的聖彼得大圓頂在晚霞中留下一道金黃色的剪影。\n\n🎬 這裡也是電影《羅馬假期》中最精彩的場景！奧黛麗·赫本飾演的安妮公主，當晚就是偷偷跑到聖天使橋下的河畔船上參加平民舞會，最後為了躲避便衣特務的追捕，與男主角一起勇敢跳進台伯河中游泳逃走。',
+    meta:[['📍 地址','Lungotevere Castello, Roma'],['💶 票價','河岸與橋頭漫步免費'],['🕐 時間','16:30 – 17:15 絕美日落'],['🎬 電影','《羅馬假期》安妮公主跳河處']],
+    map:'https://www.google.com/maps/search/?api=1&query=Castel+Sant+Angelo+Rome'}
+};
+
+const RESTAURANTS_DB = [
+  {anchor:'聖十字聖殿周邊',emoji:'⛪',items:[
+    {id:'ristorante-del-fagioli',name:'Ristorante del Fagioli',sub:'牛排・傳統托斯卡尼・米其林推薦',emoji:'🥩',tags:['牛排'],desc:'極具傳統風味的佛羅倫斯餐館，深受在地老饕喜愛。丁骨大牛排火候完美，肉質外焦內嫩，呈現托斯卡納傳統烹調精髓。米其林指南推薦，必須提早預約且只收現金。',meta:[['📍','Corso dei Tintori 47-r, Firenze'],['💶','€20–40'],['🕐','12:30–14:30 / 19:30–22:30 (週六日公休)'],['⚠️','必須提早預約且只收現金']],map:'https://www.google.com/maps/search/?api=1&query=Ristorante+del+Fagioli+Firenze'},
+    {id:'sergio-pollini',name:'Sergio Pollini Lampredotto',sub:'三明治・牛肚包・在地街頭小吃',emoji:'🥪',tags:['Sandwich'],desc:'在地人排隊的牛肚包攤販，Lampredotto（牛第四胃）是佛羅倫斯最道地的街頭小吃，軟嫩多汁配上辣醬青醬，幾歐元就能嚐到真正的佛羅倫斯味道。',meta:[['📍','Via dei Macci, Firenze'],['💶','€3–5'],['🕐','午間限定，售完即止'],['⚠️','現金，站著吃']],map:'https://www.google.com/maps/search/?api=1&query=Sergio+Pollini+Lampredotto+Firenze'},
+    {id:'pinos-sandwiches',name:"Pino's Sandwiches - Salumeria Verdi",sub:'三明治・熟食老店',emoji:'🥪',tags:['Sandwich'],desc:'隱藏版老字號熟食三明治店，現切帕瑪火腿、新鮮莫扎瑞拉與脆皮麵包，簡單卻完美。在地上班族的午餐首選，性價比極高。',meta:[['📍','Via Giuseppe Verdi 36r, Firenze'],['💶','€5–10'],['🕐','週一至週五午間'],['⚠️','週末可能公休']],map:'https://www.google.com/maps/search/?api=1&query=Pino+Sandwiches+Salumeria+Verdi+Firenze'}
+  ]},
+  {anchor:'新聖母大殿周邊',emoji:'🏛️',items:[
+    {id:'il-latini',name:'Il Latini',sub:'牛排・傳奇熱鬧餐廳',emoji:'🥩',tags:['牛排'],desc:'佛羅倫斯最傳奇且最具活力的傳統餐廳之一。天花板掛滿火腿，以極其豪邁正宗的佛羅倫斯大牛排和燉野豬肉聞名，店內高朋滿座，充滿熱鬧歡樂的義式用餐氛圍。一定要先訂位！',meta:[['📍','Via dei Palchetti 6r, Firenze'],['💶','€30–80'],['🕐','19:30–22:30 (週一公休)'],['⚠️','一定要先訂位']],map:'https://www.google.com/maps/search/?api=1&query=Il+Latini+Firenze'},
+    {id:'il-santa-maria',name:'Il Santa Maria Ristorante Steakhouse',sub:'牛排・新聖母廣場景觀',emoji:'🥩',tags:['牛排'],desc:'坐落於新聖母廣場上的優質牛排館，提供高品質的托斯卡納經典丁骨牛排與各式碳烤肉品，環境優雅舒適，是兼具美景與美味的用餐選擇。',meta:[['📍','P.za di Santa Maria Novella 33R, Firenze'],['💶','€20–80'],['🕐','12:00–23:00'],['📸','新聖母廣場正上，邊用餐邊賞景']],map:'https://www.google.com/maps/search/?api=1&query=Il+Santa+Maria+Ristorante+Steakhouse+Florence'},
+    {id:'trattoria-13-gobbi',name:'Trattoria 13 Gobbi',sub:'牛排・熱融起司番茄麵',emoji:'🍝',tags:['牛排','Pasta'],desc:'隱身在巷弄中、裝潢極具托斯卡納鄉村風格的超人氣餐館。著名的佛羅倫斯丁骨牛排切片肉質軟嫩，而裝在玻璃碗裡的熱融起司番茄麵更是每桌必點的招牌。',meta:[['📍','Via del Porcellana 9r, Firenze'],['💶','€30–70'],['🕐','12:30–15:00 / 19:00–23:00'],['⚠️','招牌除了牛排，熱融起司番茄麵超有名']],map:'https://www.google.com/maps/search/?api=1&query=Trattoria+13+Gobbi+Firenze'},
+    {id:'buca-lapi',name:'Buca Lapi',sub:'牛排・1880年地窖餐廳',emoji:'🥩',tags:['牛排'],desc:'1880 年開業，隱藏在地下室的歷史地窖餐廳，牆上貼滿了世界各地的舊旅行海報。以正宗佛羅倫斯大牛排和托斯卡納傳統料理聞名，是在地人心中的經典老館子。',meta:[['📍','Via del Trebbio 1r, Firenze'],['💶','€30–70'],['🕐','19:30起 (週日公休)'],['💡','地下室餐廳，氣氛獨特']],map:'https://www.google.com/maps/search/?api=1&query=Buca+Lapi+Firenze'}
+  ]},
+  {anchor:'烏菲茲美術館周邊',emoji:'🎨',items:[
+    {id:'gelateria-dei-neri',name:'Gelateria dei Neri',sub:'Gelato・老字號',emoji:'🍦',tags:['Gelato'],desc:'聖十字區附近最推薦的 Gelato 老店。Pistacchio 開心果口味是本店招牌，顏色帶灰——太綠的通常是色素。每球只要幾歐元，是下午逛完烏菲茲後的最佳甜點。',meta:[['📍','Via dei Neri 9r, Firenze'],['💶','€3–5'],['🕐','10:00–24:00'],['⚠️','帶灰色的開心果才是真的']],map:'https://www.google.com/maps/search/?api=1&query=Gelateria+dei+Neri+Firenze'},
+    {id:'panetteria-de-neri',name:'Panetteria e Stuzzicheria De Neri',sub:'麵包・三明治・早餐',emoji:'🥐',tags:['Sandwich'],desc:'與 Gelateria dei Neri 相鄰的傳統烘焙坊，早晨現烤的佛卡夏麵包與各式三明治是附近上班族的最愛。適合早上烏菲茲前來此享用輕食早餐。',meta:[['📍','Via dei Neri 54r, Firenze'],['💶','€3–8'],['🕐','07:00–20:00'],['⚠️','早餐最新鮮']],map:'https://www.google.com/maps/search/?api=1&query=Panetteria+Stuzzicheria+De+Neri+Firenze'},
+    {id:'all-antico-vinaio',name:"All'Antico Vinaio",sub:'三明治・全球最佳',emoji:'🥪',tags:['Sandwich'],desc:'佛羅倫斯最知名的三明治店，曾被 Food & Wine 評選為全球最佳三明治。必點 Favolosa（帕瑪火腿+松露醬+奶油起司），每天都有長長排隊人龍。建議提前用 App 點餐取貨。',meta:[['📍','Via dei Neri 65r, Firenze'],['💶','€5–8'],['🕐','10:00–21:00'],['⚠️','建議App預訂，避免排隊']],map:'https://www.google.com/maps/search/?api=1&query=All+Antico+Vinaio+Firenze'},
+    {id:'osteria-dei-leoni',name:'Osteria dei Leoni Firenze',sub:'Pasta・阿諾河景觀',emoji:'🍝',tags:['Pasta'],desc:'緊鄰阿諾河畔，擁有老橋與河景的優雅景觀餐廳。提供正宗托斯卡尼手工義大利麵和燉肉，環境舒適，適合長輩在步行烏菲茲後輕鬆坐下用餐休息。',meta:[['📍','Piazza de\' Giudici 1, Firenze'],['💶','€20–40'],['🕐','12:00–22:00'],['📸','緊鄰阿諾河，有河景']],map:'https://www.google.com/maps/search/?api=1&query=Osteria+dei+Leoni+Firenze'},
+    {id:'osteria-vecchio-vicolo',name:'Osteria Vecchio Vicolo',sub:'Pasta・老橋附近小巷',emoji:'🍝',tags:['Pasta'],desc:'隱身在老橋附近小巷中的傳統義式餐廳，提供正宗的托斯卡尼燉肉與手工義大利麵。氣氛溫馨家常，是烏菲茲參觀後享用午餐的好選擇。',meta:[['📍','Via Lambertesca 16R, Firenze'],['💶','€15–35'],['🕐','12:00–22:00'],['⚠️','小巷中，注意尋找']],map:'https://www.google.com/maps/search/?api=1&query=Osteria+Vecchio+Vicolo+Firenze'}
+  ]},
+  {anchor:'領主廣場周邊',emoji:'🏛️',items:[
+    {id:'girone-de-ghiotti',name:"I' Girone De' Ghiotti",sub:'Pasta・在地老饕秘境',emoji:'🍝',tags:['Pasta'],desc:'藏在領主廣場附近小巷的在地老饕秘境，菜單每日更換，完全依照當日市場新鮮食材決定。特別推薦當季松露義大利麵和托斯卡尼燉野豬肉。不接受線上評論，全靠口耳相傳。',meta:[['📍','Via dei Cimatori 23r, Firenze'],['💶','€20–40'],['🕐','12:30–14:30 / 19:30–22:00'],['⚠️','菜單每日更換，問服務生今日推薦']],map:'https://www.google.com/maps/search/?api=1&query=I+Girone+De+Ghiotti+Firenze'}
+  ]},
+  {anchor:'麥地奇禮拜堂周邊',emoji:'💐',items:[
+    {id:'trattoria-za-za',name:'Trattoria Zà Zà',sub:'Pasta・中央市場旁',emoji:'🍝',tags:['Pasta'],desc:'緊鄰中央市場的活力傳統餐廳，是購物後補充體力的最佳選擇。招牌是豐盛的托斯卡尼燉肉和各式手工義大利麵，份量豪邁，價格親切。',meta:[['📍','Piazza del Mercato Centrale 26r, Firenze'],['💶','€15–35'],['🕐','11:30–23:00'],['💡','中央市場逛完可直接來']],map:'https://www.google.com/maps/search/?api=1&query=Trattoria+Za+Za+Firenze'},
+    {id:'trattoria-sergio-gozzi',name:'Trattoria Sergio Gozzi',sub:'Pasta・1915年開業・午餐限定',emoji:'🍝',tags:['Pasta'],desc:'聖羅倫佐市場旁的老字號家庭餐廳，1915 年開業至今，是佛羅倫斯歷史最悠久的傳統餐廳之一。份量大、價格公道，是在地上班族和藝術家的聚集地。',meta:[['📍','Piazza San Lorenzo 8r, Firenze'],['💶','€12–25'],['🕐','12:00–15:00 (午餐限定)'],['⚠️','午餐限定，早點去']],map:'https://www.google.com/maps/search/?api=1&query=Trattoria+Sergio+Gozzi+Firenze'}
+  ]},
+  {anchor:'老橋周邊',emoji:'🌉',items:[
+    {id:'osteria-cinghiale-bianco',name:'Osteria del Cinghiale Bianco',sub:'野豬肉・Oltrarno河南岸',emoji:'🍖',tags:['Pasta'],desc:'以野豬肉料理聞名的傳統餐廳，位於老橋南岸 Oltrarno 區。招牌是野豬肉醬寬麵和燉野豬頰肉，搭配一杯 Chianti 是最道地的托斯卡尼體驗。',meta:[['📍','Borgo S. Jacopo 43r, Firenze'],['💶','€25–50'],['🕐','12:00–14:30 / 19:00–22:30'],['🐗','野豬肉醬是招牌，必點']],map:'https://www.google.com/maps/search/?api=1&query=Osteria+del+Cinghiale+Bianco+Firenze'}
+  ]},
+  {anchor:'皮蒂宮周邊',emoji:'👑',items:[
+    {id:'trattoria-dell-orto',name:"Trattoria Dell'Orto",sub:'Pasta・Oltrarno在地小館',emoji:'🍝',tags:['Pasta'],desc:'隱藏在阿諾河南岸 Oltrarno 區的在地小館，遠離觀光區，價格實惠、食物道地。特別推薦季節性蔬菜燉飯和手工寬麵，是皮蒂宮參觀後享用輕鬆午餐的好選擇。',meta:[['📍','Via dell\'Orto 33r, Firenze'],['💶','€12–28'],['🕐','12:30–14:30 / 19:30–22:00 (週二公休)'],['💡','遠離觀光區，價格實惠']],map:"https://www.google.com/maps/search/?api=1&query=Trattoria+Dell+Orto+Firenze"}
+  ]},
+  {anchor:'學院美術館周邊',emoji:'🗿',items:[
+    {id:'antica-trattoria-tito',name:'Antica Trattoria da Tito dal 1913',sub:'Pasta・1913年百年傳統',emoji:'🍝',tags:['Pasta'],desc:'1913 年開業的百年傳統餐廳，位於大衛像學院美術館附近。以道地的托斯卡尼家常菜聞名，包括手工義大利麵、燉肉和季節性菜餚。份量豐盛，氣氛家常溫馨。',meta:[['📍','Via San Gallo 112r, Firenze'],['💶','€15–35'],['🕐','12:00–14:30 / 19:30–22:00'],['⚠️','百年老店，建議訂位']],map:'https://www.google.com/maps/search/?api=1&query=Antica+Trattoria+da+Tito+Firenze'}
+  ]},
+  {anchor:'共和廣場周邊',emoji:'☕',items:[
+    {id:'caffe-gilli',name:'Caffè Gilli',sub:'Coffee・1733年開業・百年咖啡館',emoji:'☕',tags:['Coffee'],desc:'1733 年開業，是佛羅倫斯歷史最悠久的咖啡館之一，坐落在美麗的共和廣場上。以精緻的義式甜點和咖啡聞名，內部裝潢保留了 19 世紀的古典風格，是絕佳的下午茶歇腳地點。',meta:[['📍','Via Roma 1r, Firenze'],['💶','€3–15'],['🕐','07:30–22:00'],['☕','1733年開業，佛羅倫斯最老咖啡館之一']],map:'https://www.google.com/maps/search/?api=1&query=Caffe+Gilli+Firenze'}
+  ]},
+  {anchor:'聖母百花大教堂周邊',emoji:'🕌',items:[
+    {id:'panini-toscani',name:'Panini Toscani',sub:'三明治・大教堂廣場旁',emoji:'🥪',tags:['Sandwich'],desc:'緊鄰大教堂廣場的傳統三明治小店，提供各種新鮮現做的托斯卡尼三明治。清晨參觀大教堂前後，來這裡享用一個夾滿義式火腿與起司的脆皮三明治，是最完美的搭配。',meta:[['📍','Piazza del Duomo, Firenze'],['💶','€4–8'],['🕐','08:00–19:00'],['📍','大教堂廣場正旁，位置絕佳']],map:'https://www.google.com/maps/search/?api=1&query=Panini+Toscani+Firenze'}
+  ]}
+];
+
+const WINES=[
+  {icon:'🍷',region:'Toscana · 古典奇安地 DOCG',name:'Chianti Classico',type:'紅酒',desc:'以義大利國寶葡萄 Sangiovese 釀造，帶有豐富的紅櫻桃、紅莓與香料野百里香香氣。酸度漂亮、口感圓潤、油脂解膩。怎麼認：瓶頸上有一隻「黑公雞」標誌。',pairing:'🥩 大丁骨牛排、烤肉、松露義大利麵'},
+  {icon:'🍷',region:'Toscana · Montalcino',name:'Brunello di Montalcino',type:'紅酒（酒中之王）',desc:'托斯卡尼最頂級的紅酒。酒體極為濃郁、厚實，帶有深色漿果、皮革和菸草的成熟香氣，氣場極強。',pairing:'🥩 熟成天數長或風味狂野的 Maremmana 牛肉'},
+  {icon:'🍷',region:'Toscana · 超級托斯卡尼 IGT',name:'Super Tuscan / Borgonero IGT',type:'紅酒（現代創新）',desc:'打破傳統法規限制的創意傑作，將本土 Sangiovese 與國際品種 Cabernet Sauvignon、Merlot 進行混釀。口感更圓潤、滑順，充滿濃郁果香，長輩平常怕紅酒澀感的選這個準沒錯！',pairing:'🍖 義式烤肉、莊園精緻慢燉料理'},
+  {icon:'🍷',region:'Castelnuovo Berardenga · 老藤精選',name:'Chianti Classico Gran Selezione',type:'紅酒（特選頂級，最高等級）',desc:'該產區法定分級中的最高等級。僅在最完美的年份，挑選酒莊內最精華的單一葡萄園老藤進行釀造。經過長時間橡木桶與瓶中陳釀，帶有深邃的黑色漿果、肉桂、烘焙香料與皮革的複雜層次，結構宏大。',pairing:'🥩 高級燉肉、單品純飲'},
+  {icon:'🥂',region:'Toscana Chianti · 餐後甜酒',name:'Vin Santo del Chianti Classico',type:'餐後甜酒（傳奇聖酒）',desc:'義大利托斯卡尼最傳奇的甜點酒。酒莊將採收後的葡萄掛在通風的屋頂下「自然風乾數個月」，讓糖分與風味高度濃縮後才進行發酵與多年陳釀。喝起來醇厚微甜，帶有琥珀色澤、乾果、核桃與蜂蜜的香氣。',pairing:'🍪 拿著義式杏仁脆餅（Cantucci）沾著聖酒一起吃，是托斯卡尼最完美的傳統結尾'},
+  {icon:'🍷',region:'Montepulciano · 貴族紅酒',name:'Vino Nobile',type:'紅酒（教宗與貴族專享）',desc:'蒙特普齊亞諾的驕傲，歷史上教宗與王公貴族專享的頂級佳釀，因而得名「貴族酒」。由於此處日照極為充足，釀出的 Sangiovese 酒體深邃紮實、單寧優雅，開瓶便帶有成熟黑櫻桃、紫羅蘭以及淡淡的煙燻木質香氣，是不可錯過的品酒體驗。',pairing:'🍝 手工粗麵（Pici）佐慢燉山豬肉醬'},
+  {icon:'🥂',region:'Orvieto · 千年白酒',name:'Orvieto Classico',type:'白酒（皇家教宗玉液）',desc:'風靡千年的皇家教宗玉液，奧爾維耶托的火山灰土壤富含礦物質。帶有清爽的金黃色澤，開瓶便能聞到青蘋果、白桃與野花的細緻香氣，入口帶有獨特的微酸礦物感，口感純淨乾爽，是托斯卡尼與溫布利亞炎夏裡最棒的消暑聖品。',pairing:'🍝 手工火山麵（Umbrichelli）、義式脆皮烤豬包（Porchetta）'}
+];
+
+const TICKETS=[
+  {venue:'去程航班 AC892',date:'2026/09/22',time:'19:25',info:'全家族同行 · 蒙特婁 YUL → 羅馬 FCO',note:'請提前 2–3 小時抵達機場辦理出境',foot:'Air Canada · YUL → FCO · 直飛',isFlight:true},
+  {venue:'烏菲茲美術館',date:'2026/09/24',time:'09:30',info:'全家族同行 · 最早批次入場',note:'看維納斯的誕生與達文西真跡',foot:'Galleria degli Uffizi · Firenze'},
+  {venue:'梵蒂岡博物館',date:'2026/09/29',time:'09:00',info:'全家族同行 · 含西斯汀禮拜堂',note:'避開外圍步行，直接由正門入館參觀',foot:'Musei Vaticani · Città del Vaticano'},
+  {venue:'回程航班 AC893',date:'2026/09/30',time:'11:30',info:'全家族同行 · 羅馬 FCO → 蒙特婁 YUL',note:'請提早至機場辦理出境手續',foot:'Air Canada · FCO → YUL · 直飛',isFlight:true}
+];
+
+// ═══════════════ RENDER ═══════════════
+
+function renderDays(){
+  document.getElementById('day-content').innerHTML=DAYS.map((d,i)=>{
+    const items=d.items.map(it=>{
+      const hiC=it.hi?' hi':'', dotH=it.hi?' hi':'';
+      const walkTag=it.walk?`<span class="tag walk">🚶 ${it.walkText||'步行路段'}</span>`:'';
+      const detailTag=it.detailId?`<span class="tag link" onclick="openDetail('${it.detailId}')">查看介紹 →</span>`:'';
+      const mainTags=(it.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+      return `<div class="tl-item"><div class="tl-dot${dotH}"></div><div class="tl-time">${it.time}</div><div class="tl-card${hiC}"><h3>${it.title}</h3><p>${it.desc.replace(/\n/g,'<br>')}</p><div class="tl-tags">${mainTags}${walkTag}${detailTag}</div></div></div>`;
+    }).join('');
+    return `<div class="day-panel" data-day="${d.day}" style="display:${i===0?'block':'none'}">
+      <div style="font-size:.72rem;font-weight:700;color:#8a7060;margin-bottom:10px;letter-spacing:.05em">${d.date} · ${d.city}</div>
+      <div class="stamina-banner ${d.stamina}"><div class="stamina-icon">${d.staminaIcon}</div><div>${d.staminaText}</div></div>
+      <div class="timeline">${items}</div></div>`;
+  }).join('');
+}
+
+function renderAttractions(){
+  const items=Object.entries(PLACES_DB).map(([id,p])=>`
+    <div class="place-row" onclick="openDetail('${id}')">
+      <div class="place-emoji">${p.emoji}</div>
+      <div class="place-info"><h4>${p.name}</h4><p>${p.day} · ${p.anchor}</p></div>
+      <div class="place-arrow">›</div>
+    </div>`).join('');
+  document.getElementById('attractions-content').innerHTML=`<div style="margin-bottom:6px">${items}</div>`;
+}
+
+function renderRestaurants(){
+  document.getElementById('restaurants-content').innerHTML=RESTAURANTS_DB.map((s,i)=>`
+    <div class="accordion">
+      <button class="accordion-header${i===0?' open':''}" onclick="toggleAccordion(this)">
+        <div class="accordion-title"><span>${s.emoji}</span><span>${s.anchor}</span><span class="accordion-lbl">${s.items.length}間</span></div>
+        <span class="accordion-arrow">›</span>
+      </button>
+      <div class="accordion-body${i===0?' open':''}">
+        ${s.items.map(r=>`<div class="place-row" onclick="openRestDetail('${r.id}')">
+          <div class="place-emoji">${r.emoji}</div>
+          <div class="place-info"><h4>${r.name}</h4><p>${r.sub}</p></div>
+          <div class="place-arrow">›</div>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function toggleAccordion(header){
+  const body=header.nextElementSibling;
+  const isOpen=header.classList.contains('open');
+  header.classList.toggle('open',!isOpen);
+  body.classList.toggle('open',!isOpen);
+}
+
+function renderWine(){
+  document.getElementById('wine-content').innerHTML=WINES.map(w=>`
+    <div class="wine-card"><div class="wine-icon">${w.icon}</div>
+    <div><div class="wine-region">${w.region}</div><h3>${w.name}</h3>
+    <p>${w.desc}</p><div class="wine-pairing">${w.pairing}</div></div></div>`).join('');
+}
+
+function renderTickets(){
+  document.getElementById('ticket-content').innerHTML=TICKETS.map(t=>`
+    <div class="ticket-card">
+      <div class="ticket-header"><div class="ticket-venue">${t.isFlight?'✈️ ':''}${t.venue}</div><div class="ticket-date">${t.date} ${t.time}</div></div>
+      <div class="ticket-body">
+        <p class="ticket-info">${t.info}${t.note?' · '+t.note:''}</p>
+        ${t.isFlight?`<div style="background:var(--parchment);border-radius:10px;padding:14px;text-align:center;font-size:.8rem;color:#8a7060">✈️ 航班票券請於航空公司 App 出示</div>`:
+        `<div class="qr-zone" onclick="openQR('${t.venue}','${t.date} ${t.time}')"><div class="qr-ph">▦</div><div class="qr-lbl">點擊放大 QR Code</div></div>`}
+      </div>
+      <div class="ticket-foot">${t.foot}</div>
+    </div>`).join('');
+}
+
+function renderHotels(){
+  const hotels=[
+    {name:'Palazzo Montebello',nights:'Day 2–4 · 9/23–25',desc:'18世紀古宅改建精品飯店，位於佛羅倫斯歷史中心。步行可達烏菲茲、老橋與大教堂。',meta:[['📍','Via G. Garibaldi 14, Firenze'],['⏱','Check-in 15:00 / Out 12:00']],map:'https://maps.app.goo.gl/CdHbrdaJAWatvXM77'},
+    {name:'Borgo Scopeto Wine & Country Relais',nights:'Day 4–6 · 9/25–27',desc:'14世紀中世紀古村落改建的頂級奢華度假村，自產黑公雞 Chianti，擁有露天泳池與 Spa。',meta:[['📍','Castelnuovo Berardenga, Siena'],['⏱','Check-in 15:30 / Out 11:00']],map:'https://maps.app.goo.gl/MtRSUd2pnxNsG48n9'},
+    {name:'Courtyard by Marriott Rome Central Park',nights:'Day 6–9 · 9/27–30',desc:'位於 Trionfale 區，梵蒂岡車程10分鐘，步行5分鐘達 Gemelli 火車站，部分房間有聖彼得圓頂景觀。',meta:[['📍','Via G. Moscati 7, Roma'],['⏱','Check-in 16:00 / Out 11:00']],map:'https://maps.app.goo.gl/zEtMPvW2dA4V2VMN9'}
+  ];
+  document.getElementById('hotel-content').innerHTML=hotels.map((h,i)=>`
+    <div style="${i<hotels.length-1?'margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--parchment)':''}">
+      <div style="font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;margin-bottom:2px">${h.name}</div>
+      <div style="font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brick);margin-bottom:5px">${h.nights}</div>
+      <p style="font-size:.78rem;line-height:1.5;color:#5a4030;margin-bottom:7px">${h.desc}</p>
+      ${h.meta.map(([k,v])=>`<div class="info-row"><span class="lbl">${k}</span><span class="val">${v}</span></div>`).join('')}
+      <a href="${h.map}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;margin-top:8px;background:var(--espresso);color:var(--lemon);font-size:.72rem;font-weight:700;padding:6px 12px;border-radius:8px;text-decoration:none">📍 Google Maps</a>
+    </div>`).join('');
+}
+
+// ═══════════════ DETAIL ═══════════════
+let prevPage='itinerary';
+const REST_LOOKUP={};
+RESTAURANTS_DB.forEach(s=>s.items.forEach(r=>{REST_LOOKUP[r.id]={...r,anchor:s.anchor};}));
+
+function openDetail(id){
+  const d=PLACES_DB[id]; if(!d) return;
+  prevPage=document.querySelector('.nav-btn.active')?.dataset.page||'places';
+  document.getElementById('d-banner').textContent=d.emoji;
+  document.getElementById('d-name').textContent=d.name;
+  document.getElementById('d-pills').innerHTML=d.tags.map(t=>`<span class="detail-pill">${t}</span>`).join('');
+  document.getElementById('d-desc').textContent=d.desc;
+  document.getElementById('d-meta').innerHTML=d.meta.map(([k,v])=>`<div class="meta-item"><div class="mk">${k}</div><div class="mv">${v}</div></div>`).join('');
+  document.getElementById('d-map-btn').href=d.map;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-detail').classList.add('active');
+}
+
+function openRestDetail(id){
+  const r=REST_LOOKUP[id]; if(!r) return;
+  prevPage=document.querySelector('.nav-btn.active')?.dataset.page||'places';
+  document.getElementById('d-banner').textContent=r.emoji;
+  document.getElementById('d-name').textContent=r.name;
+  document.getElementById('d-pills').innerHTML=r.tags.map(t=>`<span class="detail-pill">${t}</span>`).join('')+`<span class="detail-pill">${r.anchor}</span>`;
+  document.getElementById('d-desc').textContent=r.desc;
+  document.getElementById('d-meta').innerHTML=r.meta.map(([k,v])=>`<div class="meta-item"><div class="mk">${k}</div><div class="mv">${v}</div></div>`).join('');
+  document.getElementById('d-map-btn').href=r.map;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-detail').classList.add('active');
+}
+
+function closeDetail(){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+prevPage).classList.add('active');
+}
+
+// ═══════════════ NAV ═══════════════
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const t=btn.dataset.page; prevPage=t;
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('page-'+t).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.sub-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.sub-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('sub-'+tab.dataset.sub).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.day-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.day-panel').forEach(p=>p.style.display='none');
+    btn.classList.add('active');
+    const panel=document.querySelector(`.day-panel[data-day="${btn.dataset.day}"]`);
+    if(panel) panel.style.display='block';
+  });
+});
+
+// ═══════════════ WEATHER ═══════════════
+const WX_ICONS={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',51:'🌦️',61:'🌧️',63:'🌧️',65:'🌧️',80:'🌦️',95:'⛈️'};
+const WX_DESC={0:'晴天',1:'大致晴朗',2:'部分多雲',3:'陰天',45:'有霧',51:'毛毛雨',61:'小雨',63:'中雨',65:'大雨',80:'陣雨',95:'雷陣雨'};
+async function fetchWeather(lat,lon,name){
+  document.getElementById('w-city').textContent=name;
+  document.getElementById('w-temp').innerHTML='<span style="font-size:.8rem;opacity:.6">載入中…</span>';
+  document.getElementById('w-desc').textContent='';
+  document.getElementById('w-extras').innerHTML='';
+  try{
+    const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weathercode&temperature_unit=celsius&wind_speed_unit=kmh&timezone=Europe%2FRome`);
+    const d=await r.json(); const c=d.current;
+    document.getElementById('w-icon').textContent=WX_ICONS[c.weathercode]||'🌡️';
+    document.getElementById('w-temp').textContent=Math.round(c.temperature_2m)+'°C';
+    document.getElementById('w-desc').textContent=WX_DESC[c.weathercode]||'—';
+    document.getElementById('w-extras').innerHTML=`<div class="we-row">💧 ${c.relative_humidity_2m}%</div><div class="we-row">💨 ${Math.round(c.wind_speed_10m)} km/h</div>`;
+  }catch(e){
+    document.getElementById('w-temp').textContent='無法載入';
+    document.getElementById('w-desc').textContent='請確認網路連線';
+  }
+}
+document.querySelectorAll('.city-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.city-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    fetchWeather(tab.dataset.lat,tab.dataset.lon,tab.dataset.name);
+  });
+});
+fetchWeather(43.7696,11.2558,'佛羅倫斯');
+
+// ═══════════════ CURRENCY ═══════════════
+let rates={TWD:35.5,CAD:1.48},activeCurr='TWD';
+async function fetchRates(){
+  try{
+    const r=await fetch('https://api.frankfurter.app/latest?from=EUR&to=TWD,CAD');
+    const d=await r.json(); rates.TWD=d.rates.TWD; rates.CAD=d.rates.CAD;
+    document.getElementById('rate-note').textContent=`即時匯率 · TWD ${rates.TWD.toFixed(1)} · CAD ${rates.CAD.toFixed(3)}`;
+    convertCurrency();
+  }catch(e){ document.getElementById('rate-note').textContent='使用預估匯率（離線模式）'; convertCurrency(); }
+}
+function switchCurrency(btn){
+  document.querySelectorAll('.curr-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); activeCurr=btn.dataset.currency; convertCurrency();
+}
+function convertCurrency(){
+  const eur=parseFloat(document.getElementById('eur-input').value);
+  const rn=document.getElementById('curr-result-num'),rl=document.getElementById('curr-result-lbl');
+  if(isNaN(eur)||eur===0){rn.textContent='—';rl.textContent='請輸入金額';return;}
+  const result=eur*rates[activeCurr];
+  if(activeCurr==='TWD'){rn.textContent='NT$ '+result.toLocaleString('zh-TW',{maximumFractionDigits:0});rl.textContent=`€${eur} 歐元 ＝ 台幣`;}
+  else{rn.textContent='CA$ '+result.toFixed(2);rl.textContent=`€${eur} 歐元 ＝ 加幣`;}
+}
+
+// ═══════════════ QR MODAL ═══════════════
+function openQR(venue,date){
+  document.getElementById('m-venue').textContent=venue;
+  document.getElementById('m-date').textContent=date;
+  document.getElementById('qr-modal').classList.add('open');
+}
+function closeQR(){document.getElementById('qr-modal').classList.remove('open');}
+document.getElementById('qr-modal').addEventListener('click',function(e){if(e.target===this)closeQR();});
+
+// ═══════════════ INIT ═══════════════
+renderDays(); renderAttractions(); renderRestaurants();
+renderWine(); renderTickets(); renderHotels();
+fetchRates(); convertCurrency();
+</script>
+</body>
+</html>

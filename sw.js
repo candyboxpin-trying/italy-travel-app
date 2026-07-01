@@ -22,10 +22,20 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
+// 網路優先策略：有網路就抓最新版，沒網路才用快取
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      return cached || fetch(event.request).catch(() => caches.match('/italy-travel-app/index.html'));
-    })
+    fetch(event.request)
+      .then(response => {
+        // 抓到新版本，順便存進快取
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseClone));
+        return response;
+      })
+      .catch(() => {
+        // 沒網路，用快取
+        return caches.match(event.request)
+          .then(cached => cached || caches.match('/italy-travel-app/index.html'));
+      })
   );
 });

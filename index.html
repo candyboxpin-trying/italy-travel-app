@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>義大利之旅 2026</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2C1A0E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="義大利之旅">
@@ -799,13 +798,13 @@ document.getElementById('qr-modal').addEventListener('click',function(e){if(e.ta
 renderDays(); renderAttractions(); renderRestaurants();
 renderWine(); renderTickets(); renderHotels();
 fetchRates(); convertCurrency();
-</script>
-<script>
-if("serviceWorker" in navigator){
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/italia-2026/sw.js")
-      .then(r => console.log("SW registered"))
-      .catch(e => console.log("SW error", e));
+
+// SERVICE WORKER
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/italy-travel-app/sw.js')
+      .then(reg => console.log('SW registered'))
+      .catch(err => console.log('SW failed:', err));
   });
 }
 </script>

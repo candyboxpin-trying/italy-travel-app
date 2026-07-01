@@ -1,14 +1,12 @@
 {
   "name": "義大利之旅 2026",
   "short_name": "義大利之旅",
-  "description": "家族義大利旅遊手冊 · Settembre 2026",
-  "start_url": "/italia-2026/",
-  "scope": "/italia-2026/",
+  "description": "我們的家族義大利旅遊手冊",
+  "start_url": "/italy-travel-app/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#2C1A0E",
+  "background_color": "#FAF6EE",
   "theme_color": "#2C1A0E",
-  "lang": "zh-Hant",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icon-192.png",

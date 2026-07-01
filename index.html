@@ -18,7 +18,7 @@
 html,body{height:100%;background:var(--parchment);color:var(--espresso);font-family:'Lato',sans-serif;overflow:hidden}
 #app{display:flex;flex-direction:column;height:100dvh;max-width:430px;margin:0 auto;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(44,26,14,.15)}
 #pages{flex:1;overflow:hidden;position:relative}
-.page{position:absolute;inset:0;overflow-y:auto;padding:16px 16px calc(var(--nav-h)+32px);opacity:0;pointer-events:none;-webkit-overflow-scrolling:touch}
+.page{position:absolute;inset:0;overflow-y:auto;padding:16px 16px calc(var(--nav-h)+60px);opacity:0;pointer-events:none;-webkit-overflow-scrolling:touch}
 .page.active{opacity:1;pointer-events:auto}
 #page-detail{background:var(--parchment);z-index:30}
 .eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--brick);margin-bottom:4px}
@@ -449,7 +449,7 @@ const PLACES_DB = {
     desc:'抵達佛羅倫斯飯店：Palazzo Montebello。\n\n貼心安排：下午進房洗熱水澡、躺大床舒服補眠，輕鬆調整時差，幫明天的精彩行程充飽電！\n\n18世紀古宅完整修復的精品四星飯店，位於佛羅倫斯歷史中心。擁有寧靜庭院花園與桑拿，步行 15 分鐘可達 Ponte Vecchio、烏菲茲與聖母百花大教堂，距離火車站步行約 10 分鐘。',
     meta:[['📍 地址','Via Giuseppe Garibaldi 14, Firenze'],['⏱ Check-in','15:00 / Check-out 12:00'],['🏊 設施','健身房・桑拿・庭院花園・餐廳'],['🚗 機場','距Peretola機場約6km，15分鐘']],
     map:'https://maps.app.goo.gl/CdHbrdaJAWatvXM77'},
-  'borgo-scopeto':{emoji:'🏰',name:'Borgo Scopeto Wine & Country Relais',day:'Day 4–6',anchor:'基安蒂莊園',tags:['住宿','奇揚地','莊園'],
+  'borgo-scopeto':{emoji:'🏰', img:'test.jpg',name:'Borgo Scopeto Wine & Country Relais',day:'Day 4–6',anchor:'基安蒂莊園',tags:['住宿','奇揚地','莊園'],
     desc:'【莊園亮點】由 14 世紀中世紀古村落改建的奢華度假村，完美融合古樸石磚底蘊與現代奢華。莊園坐擁基安蒂核心丘陵的無邊際葡萄園，能遠眺西恩納美景，並擁有罕見的 18 世紀歷史迷宮花園。\n\n【莊園限定活動體驗】提供以自家葡萄、橄欖油特製的「大自然原萃 Spa」與主廚帶領的「在地烹飪課」。旅客也能深入地下酒窖品酒，或租借單車、復古老爺車浪漫穿梭於絲柏樹大道。\n\n【莊園自產靈魂好酒】Borgo Scopeto 是基安蒂 Classico 產區名聲響亮的獨立永續認證酒莊，位於最南端的 Castelnuovo Berardenga，日照比北邊更充足，產出的 Sangiovese 葡萄最為成熟飽滿，以「成熟的櫻桃香氣、溫暖多汁與優雅單寧」聞名。\n\n▸ Chianti Classico DOCG：混合 90% Sangiovese，帶有鮮櫻桃、紅莓與黑莓香氣，伴隨托斯卡尼野百里香，口感圓潤。\n▸ Gran Selezione：產區最高等級，僅在最完美年份挑選老藤釀造，帶有深邃黑色漿果、肉桂與皮革的複雜層次。\n▸ Borgonero IGT（超級托斯卡尼）：Sangiovese 與 Cabernet Sauvignon、Merlot 混釀，充滿成熟黑李、巧克力風味。\n▸ Vin Santo（聖酒）：葡萄自然風乾數月後多年陳釀，帶有乾果、核桃與蜂蜜香氣，配義式杏仁脆餅（Cantucci）是托斯卡尼最完美的傳統結尾。',
     meta:[['📍 地址','Castelnuovo Berardenga, Siena'],['⏱ Check-in','15:30 / Check-out 11:00'],['🏊 設施','露天泳池・酒窖・Spa・花園'],['🍷 特色','自產黑公雞 Chianti Classico']],
     map:'https://maps.app.goo.gl/MtRSUd2pnxNsG48n9'},
@@ -675,8 +675,9 @@ RESTAURANTS_DB.forEach(s=>s.items.forEach(r=>{REST_LOOKUP[r.id]={...r,anchor:s.a
 function openDetail(id){
   const d=PLACES_DB[id]; if(!d) return;
   prevPage=document.querySelector('.nav-btn.active')?.dataset.page||'places';
-  document.getElementById('d-banner').textContent=d.emoji;
-  document.getElementById('d-name').textContent=d.name;
+  document.getElementById('d-banner').innerHTML = d.img 
+  ? `<img src="${d.img}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)">` 
+  : d.emoji;  document.getElementById('d-name').textContent=d.name;
   document.getElementById('d-pills').innerHTML=d.tags.map(t=>`<span class="detail-pill">${t}</span>`).join('');
   document.getElementById('d-desc').textContent=d.desc;
   document.getElementById('d-meta').innerHTML=d.meta.map(([k,v])=>`<div class="meta-item"><div class="mk">${k}</div><div class="mv">${v}</div></div>`).join('');

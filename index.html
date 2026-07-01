@@ -17,8 +17,8 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--parchment);color:var(--espresso);font-family:'Lato',sans-serif;overflow:hidden}
 #app{display:flex;flex-direction:column;height:100dvh;max-width:430px;margin:0 auto;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(44,26,14,.15)}
-#pages{flex:1;overflow:hidden;position:relative}
-.page{position:absolute;top:0;left:0;right:0;bottom:var(--nav-h);overflow-y:auto;padding:16px 16px;padding-bottom:calc(24px + env(safe-area-inset-bottom));opacity:0;pointer-events:none;-webkit-overflow-scrolling:touch}
+#pages{flex:1;overflow:hidden;position:relative;padding-bottom:var(--nav-h)}
+.page{position:absolute;inset:0;overflow-y:auto;padding:16px 16px;padding-bottom:calc(40px + env(safe-area-inset-bottom));opacity:0;pointer-events:none;-webkit-overflow-scrolling:touch}
 .page.active{opacity:1;pointer-events:auto}
 #page-detail{background:var(--parchment);z-index:30}
 .eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--brick);margin-bottom:4px}
@@ -241,10 +241,10 @@ html,body{height:100%;background:var(--parchment);color:var(--espresso);font-fam
         <a class="maps-btn" href="https://maps.app.goo.gl/CHn4iTzVNtSpJL2M6" target="_blank">🥪 Sandwich</a>
         <a class="maps-btn" href="https://maps.app.goo.gl/ZDTGxUApyNF7gn9VA" target="_blank">🍝 Pasta</a>
         <a class="maps-btn" href="https://maps.app.goo.gl/hLZXJhEHABRyahw8A" target="_blank">☕ Coffee</a>
-        <span class="maps-btn disabled">🍕 Pizza（待新增）</span>
+        <a class="maps-btn" href="https://maps.app.goo.gl/J8ad34PKC5ZmH3Ef7" target="_blank">🍕 Pizza</a>
       </div>
     </div>
-    <div id="restaurants-content"></div>
+    <div id="restaurants-content"><div style="text-align:center;padding:30px;color:#8a7060;font-size:.85rem">🍝 正在載入餐廳清單…</div></div>
   </div>
 </section>
 
@@ -449,7 +449,7 @@ const PLACES_DB = {
     desc:'抵達佛羅倫斯飯店：Palazzo Montebello。\n\n貼心安排：下午進房洗熱水澡、躺大床舒服補眠，輕鬆調整時差，幫明天的精彩行程充飽電！\n\n18世紀古宅完整修復的精品四星飯店，位於佛羅倫斯歷史中心。擁有寧靜庭院花園與桑拿，步行 15 分鐘可達 Ponte Vecchio、烏菲茲與聖母百花大教堂，距離火車站步行約 10 分鐘。',
     meta:[['📍 地址','Via Giuseppe Garibaldi 14, Firenze'],['⏱ Check-in','15:00 / Check-out 12:00'],['🏊 設施','健身房・桑拿・庭院花園・餐廳'],['🚗 機場','距Peretola機場約6km，15分鐘']],
     map:'https://maps.app.goo.gl/CdHbrdaJAWatvXM77'},
-  'borgo-scopeto':{emoji:'🏰', img:'test.jpg',name:'Borgo Scopeto Wine & Country Relais',day:'Day 4–6',anchor:'基安蒂莊園',tags:['住宿','奇揚地','莊園'],
+  'borgo-scopeto':{emoji:'🏰',img:'test.jpg',name:'Borgo Scopeto Wine & Country Relais',day:'Day 4–6',anchor:'基安蒂莊園',tags:['住宿','奇揚地','莊園'],
     desc:'【莊園亮點】由 14 世紀中世紀古村落改建的奢華度假村，完美融合古樸石磚底蘊與現代奢華。莊園坐擁基安蒂核心丘陵的無邊際葡萄園，能遠眺西恩納美景，並擁有罕見的 18 世紀歷史迷宮花園。\n\n【莊園限定活動體驗】提供以自家葡萄、橄欖油特製的「大自然原萃 Spa」與主廚帶領的「在地烹飪課」。旅客也能深入地下酒窖品酒，或租借單車、復古老爺車浪漫穿梭於絲柏樹大道。\n\n【莊園自產靈魂好酒】Borgo Scopeto 是基安蒂 Classico 產區名聲響亮的獨立永續認證酒莊，位於最南端的 Castelnuovo Berardenga，日照比北邊更充足，產出的 Sangiovese 葡萄最為成熟飽滿，以「成熟的櫻桃香氣、溫暖多汁與優雅單寧」聞名。\n\n▸ Chianti Classico DOCG：混合 90% Sangiovese，帶有鮮櫻桃、紅莓與黑莓香氣，伴隨托斯卡尼野百里香，口感圓潤。\n▸ Gran Selezione：產區最高等級，僅在最完美年份挑選老藤釀造，帶有深邃黑色漿果、肉桂與皮革的複雜層次。\n▸ Borgonero IGT（超級托斯卡尼）：Sangiovese 與 Cabernet Sauvignon、Merlot 混釀，充滿成熟黑李、巧克力風味。\n▸ Vin Santo（聖酒）：葡萄自然風乾數月後多年陳釀，帶有乾果、核桃與蜂蜜香氣，配義式杏仁脆餅（Cantucci）是托斯卡尼最完美的傳統結尾。',
     meta:[['📍 地址','Castelnuovo Berardenga, Siena'],['⏱ Check-in','15:30 / Check-out 11:00'],['🏊 設施','露天泳池・酒窖・Spa・花園'],['🍷 特色','自產黑公雞 Chianti Classico']],
     map:'https://maps.app.goo.gl/MtRSUd2pnxNsG48n9'},
@@ -519,48 +519,100 @@ const PLACES_DB = {
     map:'https://www.google.com/maps/search/?api=1&query=Castel+Sant+Angelo+Rome'}
 };
 
-const RESTAURANTS_DB = [
-  {anchor:'聖十字聖殿周邊',emoji:'⛪',items:[
-    {id:'ristorante-del-fagioli',name:'Ristorante del Fagioli',sub:'牛排・傳統托斯卡尼・米其林推薦',emoji:'🥩',tags:['牛排'],desc:'極具傳統風味的佛羅倫斯餐館，深受在地老饕喜愛。丁骨大牛排火候完美，肉質外焦內嫩，呈現托斯卡納傳統烹調精髓。米其林指南推薦，必須提早預約且只收現金。',meta:[['📍','Corso dei Tintori 47-r, Firenze'],['💶','€20–40'],['🕐','12:30–14:30 / 19:30–22:30 (週六日公休)'],['⚠️','必須提早預約且只收現金']],map:'https://www.google.com/maps/search/?api=1&query=Ristorante+del+Fagioli+Firenze'},
-    {id:'sergio-pollini',name:'Sergio Pollini Lampredotto',sub:'三明治・牛肚包・在地街頭小吃',emoji:'🥪',tags:['Sandwich'],desc:'在地人排隊的牛肚包攤販，Lampredotto（牛第四胃）是佛羅倫斯最道地的街頭小吃，軟嫩多汁配上辣醬青醬，幾歐元就能嚐到真正的佛羅倫斯味道。',meta:[['📍','Via dei Macci, Firenze'],['💶','€3–5'],['🕐','午間限定，售完即止'],['⚠️','現金，站著吃']],map:'https://www.google.com/maps/search/?api=1&query=Sergio+Pollini+Lampredotto+Firenze'},
-    {id:'pinos-sandwiches',name:"Pino's Sandwiches - Salumeria Verdi",sub:'三明治・熟食老店',emoji:'🥪',tags:['Sandwich'],desc:'隱藏版老字號熟食三明治店，現切帕瑪火腿、新鮮莫扎瑞拉與脆皮麵包，簡單卻完美。在地上班族的午餐首選，性價比極高。',meta:[['📍','Via Giuseppe Verdi 36r, Firenze'],['💶','€5–10'],['🕐','週一至週五午間'],['⚠️','週末可能公休']],map:'https://www.google.com/maps/search/?api=1&query=Pino+Sandwiches+Salumeria+Verdi+Firenze'}
-  ]},
-  {anchor:'新聖母大殿周邊',emoji:'🏛️',items:[
-    {id:'il-latini',name:'Il Latini',sub:'牛排・傳奇熱鬧餐廳',emoji:'🥩',tags:['牛排'],desc:'佛羅倫斯最傳奇且最具活力的傳統餐廳之一。天花板掛滿火腿，以極其豪邁正宗的佛羅倫斯大牛排和燉野豬肉聞名，店內高朋滿座，充滿熱鬧歡樂的義式用餐氛圍。一定要先訂位！',meta:[['📍','Via dei Palchetti 6r, Firenze'],['💶','€30–80'],['🕐','19:30–22:30 (週一公休)'],['⚠️','一定要先訂位']],map:'https://www.google.com/maps/search/?api=1&query=Il+Latini+Firenze'},
-    {id:'il-santa-maria',name:'Il Santa Maria Ristorante Steakhouse',sub:'牛排・新聖母廣場景觀',emoji:'🥩',tags:['牛排'],desc:'坐落於新聖母廣場上的優質牛排館，提供高品質的托斯卡納經典丁骨牛排與各式碳烤肉品，環境優雅舒適，是兼具美景與美味的用餐選擇。',meta:[['📍','P.za di Santa Maria Novella 33R, Firenze'],['💶','€20–80'],['🕐','12:00–23:00'],['📸','新聖母廣場正上，邊用餐邊賞景']],map:'https://www.google.com/maps/search/?api=1&query=Il+Santa+Maria+Ristorante+Steakhouse+Florence'},
-    {id:'trattoria-13-gobbi',name:'Trattoria 13 Gobbi',sub:'牛排・熱融起司番茄麵',emoji:'🍝',tags:['牛排','Pasta'],desc:'隱身在巷弄中、裝潢極具托斯卡納鄉村風格的超人氣餐館。著名的佛羅倫斯丁骨牛排切片肉質軟嫩，而裝在玻璃碗裡的熱融起司番茄麵更是每桌必點的招牌。',meta:[['📍','Via del Porcellana 9r, Firenze'],['💶','€30–70'],['🕐','12:30–15:00 / 19:00–23:00'],['⚠️','招牌除了牛排，熱融起司番茄麵超有名']],map:'https://www.google.com/maps/search/?api=1&query=Trattoria+13+Gobbi+Firenze'},
-    {id:'buca-lapi',name:'Buca Lapi',sub:'牛排・1880年地窖餐廳',emoji:'🥩',tags:['牛排'],desc:'1880 年開業，隱藏在地下室的歷史地窖餐廳，牆上貼滿了世界各地的舊旅行海報。以正宗佛羅倫斯大牛排和托斯卡納傳統料理聞名，是在地人心中的經典老館子。',meta:[['📍','Via del Trebbio 1r, Firenze'],['💶','€30–70'],['🕐','19:30起 (週日公休)'],['💡','地下室餐廳，氣氛獨特']],map:'https://www.google.com/maps/search/?api=1&query=Buca+Lapi+Firenze'}
-  ]},
-  {anchor:'烏菲茲美術館周邊',emoji:'🎨',items:[
-    {id:'gelateria-dei-neri',name:'Gelateria dei Neri',sub:'Gelato・老字號',emoji:'🍦',tags:['Gelato'],desc:'聖十字區附近最推薦的 Gelato 老店。Pistacchio 開心果口味是本店招牌，顏色帶灰——太綠的通常是色素。每球只要幾歐元，是下午逛完烏菲茲後的最佳甜點。',meta:[['📍','Via dei Neri 9r, Firenze'],['💶','€3–5'],['🕐','10:00–24:00'],['⚠️','帶灰色的開心果才是真的']],map:'https://www.google.com/maps/search/?api=1&query=Gelateria+dei+Neri+Firenze'},
-    {id:'panetteria-de-neri',name:'Panetteria e Stuzzicheria De Neri',sub:'麵包・三明治・早餐',emoji:'🥐',tags:['Sandwich'],desc:'與 Gelateria dei Neri 相鄰的傳統烘焙坊，早晨現烤的佛卡夏麵包與各式三明治是附近上班族的最愛。適合早上烏菲茲前來此享用輕食早餐。',meta:[['📍','Via dei Neri 54r, Firenze'],['💶','€3–8'],['🕐','07:00–20:00'],['⚠️','早餐最新鮮']],map:'https://www.google.com/maps/search/?api=1&query=Panetteria+Stuzzicheria+De+Neri+Firenze'},
-    {id:'all-antico-vinaio',name:"All'Antico Vinaio",sub:'三明治・全球最佳',emoji:'🥪',tags:['Sandwich'],desc:'佛羅倫斯最知名的三明治店，曾被 Food & Wine 評選為全球最佳三明治。必點 Favolosa（帕瑪火腿+松露醬+奶油起司），每天都有長長排隊人龍。建議提前用 App 點餐取貨。',meta:[['📍','Via dei Neri 65r, Firenze'],['💶','€5–8'],['🕐','10:00–21:00'],['⚠️','建議App預訂，避免排隊']],map:'https://www.google.com/maps/search/?api=1&query=All+Antico+Vinaio+Firenze'},
-    {id:'osteria-dei-leoni',name:'Osteria dei Leoni Firenze',sub:'Pasta・阿諾河景觀',emoji:'🍝',tags:['Pasta'],desc:'緊鄰阿諾河畔，擁有老橋與河景的優雅景觀餐廳。提供正宗托斯卡尼手工義大利麵和燉肉，環境舒適，適合長輩在步行烏菲茲後輕鬆坐下用餐休息。',meta:[['📍','Piazza de\' Giudici 1, Firenze'],['💶','€20–40'],['🕐','12:00–22:00'],['📸','緊鄰阿諾河，有河景']],map:'https://www.google.com/maps/search/?api=1&query=Osteria+dei+Leoni+Firenze'},
-    {id:'osteria-vecchio-vicolo',name:'Osteria Vecchio Vicolo',sub:'Pasta・老橋附近小巷',emoji:'🍝',tags:['Pasta'],desc:'隱身在老橋附近小巷中的傳統義式餐廳，提供正宗的托斯卡尼燉肉與手工義大利麵。氣氛溫馨家常，是烏菲茲參觀後享用午餐的好選擇。',meta:[['📍','Via Lambertesca 16R, Firenze'],['💶','€15–35'],['🕐','12:00–22:00'],['⚠️','小巷中，注意尋找']],map:'https://www.google.com/maps/search/?api=1&query=Osteria+Vecchio+Vicolo+Firenze'}
-  ]},
-  {anchor:'領主廣場周邊',emoji:'🏛️',items:[
-    {id:'girone-de-ghiotti',name:"I' Girone De' Ghiotti",sub:'Pasta・在地老饕秘境',emoji:'🍝',tags:['Pasta'],desc:'藏在領主廣場附近小巷的在地老饕秘境，菜單每日更換，完全依照當日市場新鮮食材決定。特別推薦當季松露義大利麵和托斯卡尼燉野豬肉。不接受線上評論，全靠口耳相傳。',meta:[['📍','Via dei Cimatori 23r, Firenze'],['💶','€20–40'],['🕐','12:30–14:30 / 19:30–22:00'],['⚠️','菜單每日更換，問服務生今日推薦']],map:'https://www.google.com/maps/search/?api=1&query=I+Girone+De+Ghiotti+Firenze'}
-  ]},
-  {anchor:'麥地奇禮拜堂周邊',emoji:'💐',items:[
-    {id:'trattoria-za-za',name:'Trattoria Zà Zà',sub:'Pasta・中央市場旁',emoji:'🍝',tags:['Pasta'],desc:'緊鄰中央市場的活力傳統餐廳，是購物後補充體力的最佳選擇。招牌是豐盛的托斯卡尼燉肉和各式手工義大利麵，份量豪邁，價格親切。',meta:[['📍','Piazza del Mercato Centrale 26r, Firenze'],['💶','€15–35'],['🕐','11:30–23:00'],['💡','中央市場逛完可直接來']],map:'https://www.google.com/maps/search/?api=1&query=Trattoria+Za+Za+Firenze'},
-    {id:'trattoria-sergio-gozzi',name:'Trattoria Sergio Gozzi',sub:'Pasta・1915年開業・午餐限定',emoji:'🍝',tags:['Pasta'],desc:'聖羅倫佐市場旁的老字號家庭餐廳，1915 年開業至今，是佛羅倫斯歷史最悠久的傳統餐廳之一。份量大、價格公道，是在地上班族和藝術家的聚集地。',meta:[['📍','Piazza San Lorenzo 8r, Firenze'],['💶','€12–25'],['🕐','12:00–15:00 (午餐限定)'],['⚠️','午餐限定，早點去']],map:'https://www.google.com/maps/search/?api=1&query=Trattoria+Sergio+Gozzi+Firenze'}
-  ]},
-  {anchor:'老橋周邊',emoji:'🌉',items:[
-    {id:'osteria-cinghiale-bianco',name:'Osteria del Cinghiale Bianco',sub:'野豬肉・Oltrarno河南岸',emoji:'🍖',tags:['Pasta'],desc:'以野豬肉料理聞名的傳統餐廳，位於老橋南岸 Oltrarno 區。招牌是野豬肉醬寬麵和燉野豬頰肉，搭配一杯 Chianti 是最道地的托斯卡尼體驗。',meta:[['📍','Borgo S. Jacopo 43r, Firenze'],['💶','€25–50'],['🕐','12:00–14:30 / 19:00–22:30'],['🐗','野豬肉醬是招牌，必點']],map:'https://www.google.com/maps/search/?api=1&query=Osteria+del+Cinghiale+Bianco+Firenze'}
-  ]},
-  {anchor:'皮蒂宮周邊',emoji:'👑',items:[
-    {id:'trattoria-dell-orto',name:"Trattoria Dell'Orto",sub:'Pasta・Oltrarno在地小館',emoji:'🍝',tags:['Pasta'],desc:'隱藏在阿諾河南岸 Oltrarno 區的在地小館，遠離觀光區，價格實惠、食物道地。特別推薦季節性蔬菜燉飯和手工寬麵，是皮蒂宮參觀後享用輕鬆午餐的好選擇。',meta:[['📍','Via dell\'Orto 33r, Firenze'],['💶','€12–28'],['🕐','12:30–14:30 / 19:30–22:00 (週二公休)'],['💡','遠離觀光區，價格實惠']],map:"https://www.google.com/maps/search/?api=1&query=Trattoria+Dell+Orto+Firenze"}
-  ]},
-  {anchor:'學院美術館周邊',emoji:'🗿',items:[
-    {id:'antica-trattoria-tito',name:'Antica Trattoria da Tito dal 1913',sub:'Pasta・1913年百年傳統',emoji:'🍝',tags:['Pasta'],desc:'1913 年開業的百年傳統餐廳，位於大衛像學院美術館附近。以道地的托斯卡尼家常菜聞名，包括手工義大利麵、燉肉和季節性菜餚。份量豐盛，氣氛家常溫馨。',meta:[['📍','Via San Gallo 112r, Firenze'],['💶','€15–35'],['🕐','12:00–14:30 / 19:30–22:00'],['⚠️','百年老店，建議訂位']],map:'https://www.google.com/maps/search/?api=1&query=Antica+Trattoria+da+Tito+Firenze'}
-  ]},
-  {anchor:'共和廣場周邊',emoji:'☕',items:[
-    {id:'caffe-gilli',name:'Caffè Gilli',sub:'Coffee・1733年開業・百年咖啡館',emoji:'☕',tags:['Coffee'],desc:'1733 年開業，是佛羅倫斯歷史最悠久的咖啡館之一，坐落在美麗的共和廣場上。以精緻的義式甜點和咖啡聞名，內部裝潢保留了 19 世紀的古典風格，是絕佳的下午茶歇腳地點。',meta:[['📍','Via Roma 1r, Firenze'],['💶','€3–15'],['🕐','07:30–22:00'],['☕','1733年開業，佛羅倫斯最老咖啡館之一']],map:'https://www.google.com/maps/search/?api=1&query=Caffe+Gilli+Firenze'}
-  ]},
-  {anchor:'聖母百花大教堂周邊',emoji:'🕌',items:[
-    {id:'panini-toscani',name:'Panini Toscani',sub:'三明治・大教堂廣場旁',emoji:'🥪',tags:['Sandwich'],desc:'緊鄰大教堂廣場的傳統三明治小店，提供各種新鮮現做的托斯卡尼三明治。清晨參觀大教堂前後，來這裡享用一個夾滿義式火腿與起司的脆皮三明治，是最完美的搭配。',meta:[['📍','Piazza del Duomo, Firenze'],['💶','€4–8'],['🕐','08:00–19:00'],['📍','大教堂廣場正旁，位置絕佳']],map:'https://www.google.com/maps/search/?api=1&query=Panini+Toscani+Firenze'}
-  ]}
-];
+// 餐廳資料改為從 Google Sheet 動態抓取
+// Sheet 欄位順序：id｜名稱｜類型｜錨點景點｜地址｜均消｜營業時間｜注意事項｜介紹｜Google Maps連結｜原始來源｜圖片網址
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQf05rxqQoA70Qzj_CyOEkkI4x4A9KC8OHj1e0EKtG2vwE9Da72NX5fZXBiTH-dQyeq4gRQH53HICXh/pub?gid=1879103860&single=true&output=csv';
+
+let RESTAURANTS_DB = [];   // 會由 loadRestaurants() 填入
+
+// 依「類型」自動對應 emoji
+function typeToEmoji(type){
+  const t=(type||'').trim();
+  if(t.includes('冰淇淋')||t.includes('Gelato')||t.includes('gelato')) return '🍦';
+  if(t.includes('咖啡')||t.includes('Coffee')||t.includes('coffee')) return '☕';
+  if(t.includes('酒莊')||t.includes('酒吧')) return '🍷';
+  if(t.includes('披薩')||t.includes('Pizza')||t.includes('pizza')) return '🍕';
+  return '🍴';  // 預設餐廳
+}
+
+// 簡單的 CSV 解析器（處理引號包住的逗號與換行）
+function parseCSV(text){
+  const rows=[]; let row=[]; let cur=''; let inQuotes=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i], next=text[i+1];
+    if(inQuotes){
+      if(c==='"'&&next==='"'){cur+='"';i++;}
+      else if(c==='"'){inQuotes=false;}
+      else{cur+=c;}
+    }else{
+      if(c==='"'){inQuotes=true;}
+      else if(c===','){row.push(cur);cur='';}
+      else if(c==='\r'){}
+      else if(c==='\n'){row.push(cur);rows.push(row);row=[];cur='';}
+      else{cur+=c;}
+    }
+  }
+  if(cur!==''||row.length){row.push(cur);rows.push(row);}
+  return rows;
+}
+
+async function loadRestaurants(){
+  try{
+    const res=await fetch(SHEET_CSV_URL);
+    const text=await res.text();
+    const rows=parseCSV(text);
+    if(rows.length<2) throw new Error('empty');
+
+    const dataRows=rows.slice(1);  // 跳過標題列
+    const grouped={};   // 錨點景點 → 餐廳陣列
+    const order=[];     // 記住錨點出現順序
+
+    dataRows.forEach(cols=>{
+      const id=(cols[0]||'').trim();
+      const name=(cols[1]||'').trim();
+      // 跳過分類標題列（例如 [牛排清單]）與空白列
+      if(!id||!name||id.startsWith('[')) return;
+
+      const type=(cols[2]||'').trim();
+      const anchor=(cols[3]||'').trim()||'其他';
+      const addr=(cols[4]||'').trim();
+      const price=(cols[5]||'').trim();
+      const hours=(cols[6]||'').trim();
+      const note=(cols[7]||'').trim();
+      const desc=(cols[8]||'').trim();
+      const img=(cols[11]||'').trim();
+
+      const emoji=typeToEmoji(type);
+      const meta=[];
+      if(addr) meta.push(['📍',addr]);
+      if(price) meta.push(['💶',price]);
+      if(hours) meta.push(['🕐',hours]);
+      if(note) meta.push(['⚠️',note]);
+
+      // 用名稱+地址自動生成 Google Maps 連結
+      const mapQuery=encodeURIComponent(`${name} ${addr}`);
+      const map=`https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
+      const item={id,name,sub:`${type||'餐廳'}・${anchor}`,emoji,tags:[type||'餐廳'],desc:desc||'（尚無介紹）',meta,map,img};
+
+      if(!grouped[anchor]){grouped[anchor]=[];order.push(anchor);}
+      grouped[anchor].push(item);
+    });
+
+    RESTAURANTS_DB=order.map(anchor=>({anchor,emoji:grouped[anchor][0].emoji,items:grouped[anchor]}));
+
+    // 存快取供離線使用
+    try{ localStorage.setItem('restaurants_cache',JSON.stringify(RESTAURANTS_DB)); }catch(e){}
+  }catch(e){
+    // 抓取失敗（離線），改用快取
+    try{
+      const cached=localStorage.getItem('restaurants_cache');
+      if(cached) RESTAURANTS_DB=JSON.parse(cached);
+    }catch(e2){}
+  }
+  rebuildRestLookup();
+  renderRestaurants();
+}
 
 const WINES=[
   {icon:'🍷',region:'Toscana · 古典奇安地 DOCG',name:'Chianti Classico',type:'紅酒',desc:'以義大利國寶葡萄 Sangiovese 釀造，帶有豐富的紅櫻桃、紅莓與香料野百里香香氣。酸度漂亮、口感圓潤、油脂解膩。怎麼認：瓶頸上有一隻「黑公雞」標誌。',pairing:'🥩 大丁骨牛排、烤肉、松露義大利麵'},
@@ -608,6 +660,10 @@ function renderAttractions(){
 }
 
 function renderRestaurants(){
+  if(!RESTAURANTS_DB.length){
+    document.getElementById('restaurants-content').innerHTML='<div style="text-align:center;padding:30px;color:#8a7060;font-size:.85rem">📡 目前無法載入餐廳清單<br><span style="font-size:.75rem">請連上網路後重新開啟</span></div>';
+    return;
+  }
   document.getElementById('restaurants-content').innerHTML=RESTAURANTS_DB.map((s,i)=>`
     <div class="accordion">
       <button class="accordion-header${i===0?' open':''}" onclick="toggleAccordion(this)">
@@ -669,15 +725,19 @@ function renderHotels(){
 
 // ═══════════════ DETAIL ═══════════════
 let prevPage='itinerary';
-const REST_LOOKUP={};
-RESTAURANTS_DB.forEach(s=>s.items.forEach(r=>{REST_LOOKUP[r.id]={...r,anchor:s.anchor};}));
+let REST_LOOKUP={};
+function rebuildRestLookup(){
+  REST_LOOKUP={};
+  RESTAURANTS_DB.forEach(s=>s.items.forEach(r=>{REST_LOOKUP[r.id]={...r,anchor:s.anchor};}));
+}
 
 function openDetail(id){
   const d=PLACES_DB[id]; if(!d) return;
   prevPage=document.querySelector('.nav-btn.active')?.dataset.page||'places';
-  document.getElementById('d-banner').innerHTML = d.img 
-  ? `<img src="${d.img}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)">` 
-  : d.emoji;  document.getElementById('d-name').textContent=d.name;
+  const banner=document.getElementById('d-banner');
+  if(d.img){ banner.innerHTML=`<img src="${d.img}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)">`; }
+  else{ banner.textContent=d.emoji; }
+  document.getElementById('d-name').textContent=d.name;
   document.getElementById('d-pills').innerHTML=d.tags.map(t=>`<span class="detail-pill">${t}</span>`).join('');
   document.getElementById('d-desc').textContent=d.desc;
   document.getElementById('d-meta').innerHTML=d.meta.map(([k,v])=>`<div class="meta-item"><div class="mk">${k}</div><div class="mv">${v}</div></div>`).join('');
@@ -689,7 +749,9 @@ function openDetail(id){
 function openRestDetail(id){
   const r=REST_LOOKUP[id]; if(!r) return;
   prevPage=document.querySelector('.nav-btn.active')?.dataset.page||'places';
-  document.getElementById('d-banner').textContent=r.emoji;
+  const banner=document.getElementById('d-banner');
+  if(r.img){ banner.innerHTML=`<img src="${r.img}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius)">`; }
+  else{ banner.textContent=r.emoji; }
   document.getElementById('d-name').textContent=r.name;
   document.getElementById('d-pills').innerHTML=r.tags.map(t=>`<span class="detail-pill">${t}</span>`).join('')+`<span class="detail-pill">${r.anchor}</span>`;
   document.getElementById('d-desc').textContent=r.desc;
@@ -796,7 +858,7 @@ function closeQR(){document.getElementById('qr-modal').classList.remove('open');
 document.getElementById('qr-modal').addEventListener('click',function(e){if(e.target===this)closeQR();});
 
 // ═══════════════ INIT ═══════════════
-renderDays(); renderAttractions(); renderRestaurants();
+renderDays(); renderAttractions(); loadRestaurants();
 renderWine(); renderTickets(); renderHotels();
 fetchRates(); convertCurrency();
 

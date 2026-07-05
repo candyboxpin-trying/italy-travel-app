@@ -366,27 +366,36 @@ const DAYS = [
    items:[
     {time:'19:25',title:'蒙特婁去機場搭飛機～',desc:'9/22 AC892 19:25 Montreal (YUL) ⇒ 9:15(+1) Rome (FCO)',tags:['交通'],hi:true}
   ]},
-  {day:2,date:'9/23 (三)',city:'羅馬 FCO → 佛羅倫斯',stamina:'medium',staminaIcon:'🚗',
-   staminaText:'抵達羅馬後，前往佛羅倫斯，沿途觀光路上小鎮，晚上入住佛羅倫斯。',
+{day:2,date:'9/23 (三)',city:'羅馬 FCO → 佛羅倫斯',stamina:'medium',staminaIcon:'🚗',
+   staminaText:'抵達羅馬後直接北上佛羅倫斯。下午先到飯店寄放行李、用洗手間，等 check-in 時間到再入住。傍晚攻頂看落日！',
    items:[
-    {time:'09:15',title:'歡迎蒞臨義大利！',desc:'班機抵達羅馬機場 (AC892)，專車接機北上。',tags:['交通'],hi:true},
-    {time:'12:30–14:30',title:'托斯卡尼秘境午餐 → 沿途風光',desc:'車窗美景：走托斯卡尼最美景觀公路，在車上優雅欣賞秋季的金黃丘陵與絲柏樹大道。\n山城歇腳：中途於順路小鎮下車，呼吸新鮮空氣、拍拍照，享用道地的托斯卡尼歡迎午餐。',tags:['餐廳']},
-    {time:'16:30',title:'飯店 Check-in → 舒活補眠時間',desc:'抵達佛羅倫斯飯店：Palazzo Montebello。\n貼心安排：下午進房洗熱水澡、躺大床舒服補眠，輕鬆調整時差，幫明天的精彩行程充飽電！',tags:['住宿','已預約'],hi:true,detailId:'palazzo-montebello'},
-    {time:'19:00',title:'晚餐',desc:'飯店附近散步，享用溫暖清淡的義式晚餐。',tags:['餐廳']}
+    {time:'09:15',title:'歡迎蒞臨義大利！',desc:'班機抵達羅馬機場 (AC892)，專車接機北上佛羅倫斯。',tags:['交通'],hi:true},
+    {time:'12:30',title:'高速公路休息站午餐 🛣️',desc:'途中停靠高速公路休息站，用洗手間、伸展一下、簡單用餐補充體力。',tags:['餐廳']},
+    {time:'14:00',title:'飯店寄放行李 🧳',desc:'抵達 Palazzo Montebello，因 check-in 時間未到無法入住，先寄放行李、使用洗手間整理儀容。',tags:['住宿'],detailId:'palazzo-montebello'},
+    {time:'14:45–15:30',title:'開箱文藝復興修道院藥局 🧴',desc:'專車載全家去 Santa Maria Novella 藥局。室內吹冷氣、聞香氛、買香皂，快速提神醒腦。',tags:['景點'],hi:true,detailId:'santa-maria-novella'},
+    {time:'15:45–16:30',title:'共和廣場百年咖啡廳 ☕',desc:'專車移防到廣場，全家在戶外座位坐著喝杯茶、吃點心，看著旋轉木馬，強制接受日光定錨作息。',tags:['餐廳']},
+    {time:'16:30–17:30',title:'米開朗基羅廣場落日 🌅',desc:'專車直接攻頂，在山頂大平台上站著吹風，捕捉整座古城點燈的魔幻時刻。',tags:['景點'],hi:true,detailId:'piazzale-michelangelo'},
+    {time:'17:45',title:'回飯店 Check-in 洗熱水澡 🛁',desc:'正式入住，舒服洗個熱水澡放鬆，稍作休息。',tags:['住宿','已預約'],detailId:'palazzo-montebello'},
+    {time:'19:00',title:'晚餐 🍽️',desc:'出門享用溫暖的義式晚餐。',tags:['餐廳']}
   ]},
-  {day:3,date:'9/24 (四)',city:'佛羅倫斯',stamina:'high',staminaIcon:'👟',
-   staminaText:'⚠️ 聖母百花大教堂、美術館、慢步老橋後，傍晚攻頂看夕陽，晚上 07:30 I\'Tuscani 晚餐。',
+{day:3,date:'9/24 (四)',city:'佛羅倫斯',stamina:'high',staminaIcon:'👟',
+   staminaText:'⚠️ 全日精華！清晨包場拍教堂、烏菲茲賞畫、中央市場採買松露、精品街血拼，善用專車接駁避開禁行區與長途步行。動線全程平坦，長輩友善。',
    items:[
-    {time:'08:00',title:'專車接送 → 晨光序曲',desc:'司機於飯店門口準時接大家，直接「空投」至大教堂步行區旁。',tags:['交通']},
-    {time:'08:15–09:15',title:'聖母百花大教堂（清晨包場拍照）',desc:'清晨限定：避開萬頭鑽動的觀光團！在微涼的晨光中獨享靜謐的大教堂廣場，拍下最乾淨、最美的全家福。',tags:['景點'],detailId:'duomo'},
-    {time:'09:30–12:00',title:'烏菲茲美術館 (Uffizi Gallery)',desc:'藝術圓夢：預約 09:30 最早批次門票。館內人最少、最舒服，看《維納斯的誕生》與達文西真跡。\n頂樓歇腳：11:00 於頂樓景觀咖啡廳坐著喝杯卡布奇諾、遠眺舊宮。',tags:['已預約','景點'],hi:true,walk:true,walkText:'步行15分鐘可從大教堂廣場抵達',detailId:'uffizi'},
-    {time:'12:15–13:45',title:'午餐 在地文藝復興美味',desc:'享用著名的松露義大利麵、軟嫩牛肚包（長輩超愛）或托斯卡尼燉肉。',tags:['餐廳']},
-    {time:'14:00–15:30',title:'經典地標漫步（全平坦行人區）',desc:'吃飽散步：欣賞【領主廣場】露天雕刻 → 漫步【老橋】阿諾河畔珠寶窗景。',tags:['景點'],walk:true,walkText:'全程平坦行人區'},
-    {time:'15:30',title:'包車神助攻 回房充電回血',desc:'司機在老橋旁接大家。戰利品、外套全部丟車上，兩手空空直接載回飯店放鬆、洗臉、睡個舒服的午覺，徹底充飽電！',tags:['交通']},
-    {time:'17:30',title:'專車攻頂 → 米開朗基羅廣場夕陽',desc:'睡醒體力滿格！免爬山、免擠公車，專車直達山頂觀景台，俯瞰整座紅磚古城與阿諾河畔的魔幻日落。',tags:['景點'],hi:true,detailId:'piazzale-michelangelo'},
-    {time:'19:30',title:'晚餐｜I\'Tuscani 佛羅倫斯百年傳奇牛排館',desc:'厲害在哪：在地人狂推的肉食天堂！最大特色是桌邊展示多款頂級肉品，包含傳統白牛 Chianina 與極稀有的野生角牛 Maremmana，可依口感與熟成天數自由挑選。\n必吃推薦：佛羅倫斯經典丁骨大牛排（炭烤香氣十足、肉質極致鮮嫩多汁）、私房紅酒。',tags:['餐廳','已預約'],hi:true,detailId:'ituscani'}
+    {time:'08:00',title:'專車出發 → 晨光序曲 🚗',desc:'司機在飯店 Palazzo Montebello 大門接大家，直接「空投」到大教堂禁行區（ZTL）步行邊緣（如 Via dei Pucci）。',tags:['交通']},
+    {time:'08:15–09:15',title:'聖母百花大教堂包場拍照 🕌',desc:'趁著觀光大軍尚未湧入，全家在清晨溫和的晨光中拍下最乾淨的大合照。\n\n📸 喬托鐘樓：緊貼大教堂右側、粉綠白三色大理石拼接的高塔，拍全景務必一起入鏡。\n📸 天堂之門：正對面八角形洗禮堂東側大門，刻滿聖經故事的純金浮雕，走過去合影只需 1 分鐘。',tags:['景點'],hi:true,detailId:'duomo'},
+    {time:'09:15–09:30',title:'順向平坦步行至領主廣場 🚶',desc:'全家順著寬敞、完全平坦的商店街（Via dei Calzaiuoli）慢活散步 5–7 分鐘前往領主廣場。',tags:['交通'],walk:true,walkText:'平坦商店街，輕鬆好走'},
+    {time:'09:25',title:'Caffè Rivoire 休息組可參考的咖啡廳',desc:'進美術館前，先帶休息組來到廣場核心、名列歷史遺產的百年咖啡廳，挑選視野最好的戶外遮陽傘座位（風大可坐室內沙發區）。',tags:['餐廳']},
+    {time:'09:30–11:45',title:'分流：烏菲茲美術館 vs 咖啡放空 🎨',desc:'美術館組：步行 1 分鐘進入烏菲茲，預約 09:30 快速通關，直奔波提切利與達文西三大巨星畫作，看完去頂樓景觀咖啡廳。\n\n 休息組：在 Caffè Rivoire 享用招牌熱巧克力與甜點，冷氣強、有洗手間與 Wi-Fi。\n📸 坐著就能看到舊宮（市政廳城堡）、海神噴泉、大衛像複製品，右手邊還有傭兵涼廊的露天雕刻真跡。',tags:['景點','已預約'],hi:true,detailId:'uffizi'},
+    {time:'11:45–12:00',title:'領主廣場家族大合照 📸',desc:'美術館組出館，正前方 50 公尺就是領主廣場。全家以舊宮、傭兵涼廊、大衛像為背景拍下最氣派的大合照，再平地散步 2 分鐘到河岸邊。',tags:['景點'],detailId:'piazza-signoria'},
+    {time:'12:00',title:'專車接送 → 中央市場 🚗',desc:'專車在河岸迎接，行駛外圍幹道繞過禁行區，僅需 10 分鐘直奔中央市場卸客點（Via Nazionale）。',tags:['交通']},
+    {time:'12:15–13:45',title:'中央市場：老饕午餐 + 松露採購 🍝',desc:'午餐（長輩最愛）：直奔一樓百年老店 Da Nerbone，大啖現切軟嫩的正宗牛肚包（Lampredotto）與松露義大利麵。\n\n伴手禮一站買齊：一樓土產攤採購乾燥牛肝菌菇、松露鹽、松露醬與松露橄欖油，店家多可刷卡並幫忙打包。',tags:['餐廳'],detailId:'mercato-centrale'},
+    {time:'13:45–14:00',title:'專車接駁 → 精品街頂端 🚗',desc:'提著戰利品回到下車點，司機接駁送達精品街北側的非禁行區廣場（Piazza Antinori）。',tags:['交通']},
+    {time:'14:00–15:20',title:'托爾納波尼精品街 血拼時光 🛍️',desc:'最省力動線：整條精品街一路往南的絕對大平路，集結 Gucci、Prada、Ferragamo 等全義最高檔旗艦店。',tags:['景點'],walk:true,walkText:'全程平坦，一路往南下坡'},
+    {time:'15:20–15:30',title:'順向步行至河岸 → 遠眺老橋 🌉',desc:'逛完順平路走到精品街南端出口——阿諾河畔（Lungarno Corsini，禁行區外）。\n\n📸 老橋明信片角度：往左一望就是遠眺老橋最經典的黃金角度！在平坦河岸悠閒散步 50 公尺，以整座老橋為背景幫爸媽拍下最優雅不擁擠的紀念照。',tags:['景點'],detailId:'ponte-vecchio'},
+    {time:'15:30',title:'包車神助攻 → 彈性回血 💤',desc:'專車在河岸迎接，戰利品全丟後車廂。夕陽行程昨天已看完，時間無比寬裕！視體力決定：直接載回飯店躺大床洗澡休息 2 小時，或請司機續載往其他非禁行區景點散心。',tags:['交通']},
+    {time:'19:30',title:"晚餐盛宴 → I'Tuscani 傳奇牛排館 🥩",desc:'專車大門送達。最在地的氛圍中，桌邊自由挑選最正宗的傳統白牛 Chianina 巨無霸丁骨大牛排（T-Bone）配私房紅酒。全家體力滿格、心情大好地大啖肉食盛宴，為佛羅倫斯之行寫下完美終章！',tags:['餐廳','已預約'],hi:true,detailId:'ituscani'}
   ]},
-  {day:4,date:'9/25 (五)',city:'佛羅倫斯 → 聖吉米雅諾 → 托斯卡尼莊園',stamina:'medium',staminaIcon:'🚗',
+{day:4,date:'9/25 (五)',city:'佛羅倫斯 → 聖吉米雅諾 → 托斯卡尼莊園',stamina:'medium',staminaIcon:'🚗',
    staminaText:'這天我們將告別城市，正式進入托斯卡尼的浪漫田野，中途開箱經典山城與酒莊，傍晚直接入住頂級莊園度假飯店放鬆。',
    items:[
     {time:'09:00',title:'專車出發 → 告別佛羅倫斯，奔向托斯卡尼',desc:'在飯店享用完早餐後辦理 Check-out。\n車窗美景：開往經典山城的路上，窗外景色將漸漸轉為明信片般的托斯卡尼丘陵與絲柏樹。',tags:['交通']},
@@ -430,7 +439,7 @@ const DAYS = [
    staminaText:'⚠️ 08:45 專車出發，本日路線完全避開羅馬市中心 ZTL 禁行區，沿台伯河西岸流暢前往。梵蒂岡博物館步行較多，中午「神救援接駁車」在出口等候，下午聖天使橋夕陽完美謝幕。',
    items:[
     {time:'09:00–11:40',title:'世紀藝術殿堂 → 梵蒂岡博物館 & 西斯汀禮拜堂',desc:'專車至博物館正門口下車，省去排隊與外圍步行。入館後沿平坦廊道朝聖地圖室與織錦畫。高潮抵達【西斯汀禮拜堂】，可坐在長椅上高仰米開朗基羅震世神作《創世紀》與《最後的審判》。',tags:['景點','已預約'],hi:true,walk:true,walkText:'⚠️ 步行時間長，可隨時坐椅子休息',detailId:'vatican'},
-    {time:'11:45',title:'神救援接駁專車門口迎接',desc:'參觀完博物館長輩雙腿最疲勞之際，專車已在博物館出口街角（吹好冷氣）等待大家，直接載往午餐餐館。',tags:['交通']},
+    {time:'11:45',title:'接駁專車門口迎接',desc:'參觀完博物館長輩雙腿最疲勞之際，專車在博物館出口街角等待大家，直接載往午餐餐館。',tags:['交通']},
     {time:'12:00–14:00',title:'普拉蒂高級區午餐 → 在地老饕海鮮小館',desc:'深入非 ZTL 的高級白領住宅區普拉蒂（Prati），完美避開觀光地雷。大啖清爽鮮甜的「羅馬風情海鮮義大利麵」與「酥炸綜合海鮮拼盤」，配上冰鎮白葡萄酒。',tags:['餐廳']},
     {time:'14:15–16:30',title:'上帝的建築 聖彼得大教堂 & 聖彼得廣場',desc:'下車步行達磅礴的聖彼得廣場，與 284 根環形巨石列柱合影。大教堂內部空間極大且地面百分之百完全平坦，免辛苦爬坡，親眼欣賞米開朗基羅《聖母慟子像》與貝尼尼七層樓高的《青銅聖體傘》。',tags:['景點'],hi:true,detailId:'st-peters'},
     {time:'16:30–17:15',title:'加碼著名景點 聖天使堡 & 聖天使橋夕陽紅',desc:'離開大教堂後專車接駁 2 分鐘直達緊鄰的台伯河畔。全家下車在平坦的河岸與橋頭漫步 10 分鐘，近距離欣賞貝尼尼大師雕刻的 10 尊護衛天使石雕，完美捕捉梵蒂岡大圓頂在落日餘暉下的蜜糖色剪影。',tags:['景點'],detailId:'castel-sant-angelo'},
@@ -445,7 +454,23 @@ const DAYS = [
 ];
 
 const PLACES_DB = {
-  'palazzo-montebello':{emoji:'🏨',name:'Palazzo Montebello',day:'Day 2–4',anchor:'佛羅倫斯飯店',tags:['住宿','佛羅倫斯','4星精品'],
+  'ponte-vecchio':{emoji:'🌉',img:'https://www.journeystoitaly.com/wp-content/uploads/2024/08/ponte-vecchio-florence.jpg',name:'老橋 Ponte Vecchio',day:'Day 3',anchor:'阿諾河畔',tags:['景點','佛羅倫斯','免費'],
+    desc:'橫跨阿諾河、佛羅倫斯最古老也最著名的橋梁，建於 1345 年，是全城唯一在二戰中未被炸毀的橋。最大特色是橋上兩側蓋滿了商鋪——中世紀原本是肉販與皮革商，1593 年麥地奇大公嫌氣味難聞，下令改為金銀珠寶店，這個傳統延續至今，橋上至今仍是閃亮的珠寶金飾櫥窗。\n\n橋中央有一段開口，可俯瞰阿諾河景，也是眺望遠處風光的好位置。橋上二樓那條封閉的走廊是「瓦薩利走廊（Corridoio Vasariano）」，當年麥地奇家族專用的私人通道，連接舊宮與碧提宮。\n\n📸 最佳拍攝角度：不是在橋上，而是從鄰近的河岸（如 Lungarno Corsini）遠眺，才能拍到整座橋層層疊疊房舍倒映水面的經典明信片畫面，清晨或黃昏光線最美。',
+    meta:[['📍 位置','Ponte Vecchio, Firenze'],['💶 票價','免費'],['🕐 最佳時段','清晨或黃昏光線最美'],['💎 特色','橋上金銀珠寶老店']],
+    map:'https://www.google.com/maps/search/?api=1&query=Ponte+Vecchio+Firenze'},
+  'piazza-signoria':{emoji:'🗿',img:'https://d1c96a4wcgziwl.cloudfront.net/b20bPiazzadellaSignoria_cover.jpg',name:'領主廣場 Piazza della Signoria',day:'Day 3',anchor:'佛羅倫斯市政中心',tags:['景點','佛羅倫斯','免費'],
+    desc:'佛羅倫斯的政治中心與露天雕刻博物館，自中世紀以來就是市民生活與權力的舞台，至今仍是全城最熱鬧的廣場之一。整座廣場本身就是一座免費的戶外美術館。\n\n必看地標：\n▸ 舊宮（Palazzo Vecchio）：帶著高聳塔樓、像中世紀城堡的宏偉市政廳，至今仍是市政府所在。\n▸ 大衛像複製品：舊宮門口矗立的大衛像，是米開朗基羅原作的原始擺放位置（真品現藏於學院美術館）。\n▸ 海神噴泉（Fontana di Nettuno）：廣場上的白色大理石海神噴泉，氣勢磅礴。\n▸ 傭兵涼廊（Loggia dei Lanzi）：舊宮右手邊的免費半開放拱廊，擺滿文藝復興大師的頂級大理石雕刻真跡，可近距離欣賞。',
+    meta:[['📍 位置','Piazza della Signoria, Firenze'],['💶 票價','廣場免費'],['🗿 必看','舊宮・大衛像・傭兵涼廊'],['⏱ 建議','散步 20–30 分鐘']],
+    map:'https://www.google.com/maps/search/?api=1&query=Piazza+della+Signoria+Firenze'},
+  'mercato-centrale':{emoji:'🍝',img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/13/d7/b0/caption.jpg',name:'中央市場 Mercato Centrale',day:'Day 3',anchor:'聖羅倫佐區',tags:['景點','佛羅倫斯','美食'],
+    desc:'佛羅倫斯的美食心臟，1874 年開業的鋼骨玻璃建築市場。一樓是傳統市場，販售新鮮肉品、起司、蔬果與各式托斯卡尼土產；二樓則是現代化的美食廣場，聚集各類小吃攤位。\n\n[img:https://images.squarespace-cdn.com/content/v1/5a028c7bbce1766d207a8a6f/1528547597301-ENLWIT4F65P5ZTUJZZON/da+nerbone+two+lines.jpg?format=2500w]\n\n必吃｜Da Nerbone：一樓的百年老店（1872 年開業），是在地人排隊朝聖的傳奇攤位。招牌是現切熱騰騰、極其軟嫩的正宗佛羅倫斯牛肚包（Lampredotto），以及水煮牛肉三明治（Bollito），淋上綠醬與辣醬，幾歐元就能吃到最道地的庶民美味。\n\n伴手禮一站買齊：一樓土產攤位可輕鬆買齊帶回國的乾燥牛肝菌菇、松露鹽、松露醬與松露橄欖油，多數店家可刷卡並幫忙真空打包，是採買伴手禮最有效率的地方。',
+    meta:[['📍 位置','Piazza del Mercato Centrale, Firenze'],['💶 均消','牛肚包約 €4–6'],['🕐 時間','一樓 07:00–15:00 / 二樓至深夜'],['🍽️ 必吃','Da Nerbone 牛肚包']],
+    map:'https://www.google.com/maps/search/?api=1&query=Mercato+Centrale+Firenze'},
+  'santa-maria-novella':{emoji:'🧴',img:'https://media.cntraveler.com/photos/5bf4730945e16c465f875656/16:9/w_1920,c_limit/Officina%20Profumo-Farmaceutica%20di%20Santa%20Maria%20Novella_Sala-Vendita-2.jpg',name:'Santa Maria Novella 修道院藥局',day:'Day 2',anchor:'新聖母大殿旁',tags:['景點','佛羅倫斯','必逛'],
+    desc:'創立於 1221 年，是全世界最古老的藥局之一，由道明會修士創立。距今 800 年歷史，最初修士們在此栽種草藥、調製藥水與香氛，供修道院使用。\n\n如今搖身一變成為華麗的香氛聖殿，挑高的濕壁畫天花板、古董木櫃與大理石地板，本身就像一座博物館。室內涼爽、香氣宜人，是午後提神醒腦的完美中繼站，也適合採買送禮。\n\n【大家都買什麼？必買清單】\n▸ 玫瑰水（Acqua di Rose）：鎮店之寶，天然玫瑰花萃取化妝水，鎮定舒緩。\n▸ 鳶尾根香皂（Iris Soap）：經典明星商品，包裝典雅，送禮首選。\n▸ 古龍水（Acqua di Colonia）：1533 年為凱薩琳・德・麥地奇調製的傳奇配方。\n▸ 石榴系列（Melograno）：香水與身體乳，濃郁femininen的招牌香。\n▸ 藥草糖與香氛蠟片：輕巧好攜帶，適合分送同事親友。',
+    meta:[['📍 地址','Via della Scala 16, Firenze'],['💶 消費','香皂約 €12 起'],['🕐 時間','09:30 – 20:00'],['🛍️ 必買','玫瑰水・鳶尾根香皂・古龍水']],
+    map:'https://maps.app.goo.gl/LBMhSVK2kE5sf1Y29'},
+  'palazzo-montebello':{emoji:'🏨',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8TXYyfwDJfNQtHgVxAqq5EFocKvkPu_sgVGg1R9RMr62vy1cqKHfaBno&s=10',name:'Palazzo Montebello',day:'Day 2–4',anchor:'佛羅倫斯飯店',tags:['住宿','佛羅倫斯','4星精品'],
     desc:'抵達佛羅倫斯飯店：Palazzo Montebello。\n\n貼心安排：下午進房洗熱水澡、躺大床舒服補眠，輕鬆調整時差，幫明天的精彩行程充飽電！\n\n18世紀古宅完整修復的精品四星飯店，位於佛羅倫斯歷史中心。擁有寧靜庭院花園與桑拿，步行 15 分鐘可達 Ponte Vecchio、烏菲茲與聖母百花大教堂，距離火車站步行約 10 分鐘。',
     meta:[['📍 地址','Via Giuseppe Garibaldi 14, Firenze'],['⏱ Check-in','15:00 / Check-out 12:00'],['🏊 設施','健身房・桑拿・庭院花園・餐廳'],['🚗 機場','距Peretola機場約6km，15分鐘']],
     map:'https://maps.app.goo.gl/CdHbrdaJAWatvXM77'},
@@ -457,20 +482,20 @@ const PLACES_DB = {
     desc:'位於 Trionfale 區的現代四星飯店，梵蒂岡與西斯汀禮拜堂車程約 10 分鐘。步行 5 分鐘可達 Gemelli 火車站，直通梵蒂岡與羅馬各主要車站。部分房間有陽台可見聖彼得大教堂圓頂，旁邊就是 Parco del Pineto 城市公園，早晨散步很舒服。',
     meta:[['📍 地址','Via Giuseppe Moscati 7, Roma'],['⏱ Check-in','16:00 / Check-out 11:00'],['🚇 交通','步行5分鐘 Gemelli 火車站'],['⛪ 距梵蒂岡','搭車約10分鐘']],
     map:'https://maps.app.goo.gl/zEtMPvW2dA4V2VMN9'},
-  'duomo':{emoji:'🕌',name:'聖母百花大教堂',day:'Day 3',anchor:'佛羅倫斯大教堂廣場',tags:['景點','佛羅倫斯','免費'],
-    desc:'清晨限定：避開萬頭鑽動的觀光團！在微涼的晨光中獨享靜謐的大教堂廣場，拍下最乾淨、最美的全家福。\n\n佛羅倫斯最著名的紅磚大圓頂奇蹟，由布魯內萊斯基設計，至今仍是世界最大的磚砌圓頂。廣場免費參觀，拍照無價。',
+  'duomo':{emoji:'🕌',img:'https://taste-of-milano.com/wp-content/uploads/2020/05/batch_3382-3img_0409.jpeg',name:'聖母百花大教堂 Cattedrale di Santa Maria del Fiore',day:'Day 3',anchor:'佛羅倫斯大教堂廣場',tags:['景點','佛羅倫斯','免費'],
+    desc:'翡冷翠的心臟：聖母百花大教堂、喬托鐘樓與天堂之門\n\n這裡不僅是佛羅倫斯的地理中心，更是翻轉人類文明歷史的「文藝復興起點」。走在主教座堂廣場上，眼前這組由粉紅、翠綠、純白大理石交織而成的宏偉建築群，完美展現了文藝復興時期「以人為本」的自信與美學。\n\n⛪ 聖母百花大教堂 (Cattedrale di Santa Maria del Fiore)\n\n建築亮點：耗時近 150 年才完工。其最偉大的靈魂在於由天才建築師布魯內萊斯基（Brunelleschi）設計的「紅色大圓頂」。在沒有現代起重機、甚至當時缺乏足夠木材搭建鷹架的技術限制下，大師運用極致的幾何學與「人字形磚砌法」，凌空造出這座結構穩固、跨越世紀的巨型穹頂。\n\n💡 為什麼重要？中世紀教堂多以陰暗高聳的哥德式尖塔讓人感到渺小與對神權的恐懼；百花大教堂卻以優雅比例、溫暖紅磚圓頂迎接陽光，證明人類能透過科學、數學與理性創造奇蹟，是文藝復興建築的第一聲春雷。這座由羊毛行會與麥地奇家族出資興建的教堂，圓頂的成功直接向世界宣告了佛羅倫斯在經濟、政治與文化上的絕對霸權。\n\n[img:https://media.cntraveler.com/photos/5e7503f4a32d290008f50909/16:9/w_1920,c_limit/GiottosBellTower-GettyImages-1173218936.jpg]\n\n🗼 喬托鐘樓 (Giotto\'s Bell Tower)\n\n建築亮點：緊貼大教堂旁、高達 85 公尺的哥德式方形鐘樓，由「文藝復興繪畫之父」喬托親自設計。外牆用幾何圖形拼貼出極致對稱的大理石立面，底座鑲嵌數十幅描繪人類文明發展的精美浮雕。\n\n💡 為什麼重要？喬托是第一位把透視法與真實情感帶進西方藝術的藝術家。鐘樓底部的浮雕罕見地不是全畫神，而是描繪造船、編織、農業、法律、哲學與藝術——代表在文藝復興初期的佛羅倫斯，人類的實業與智慧已獲得與神聖信仰同等崇高的地位。\n\n[img:https://www.artfiller.it/wp-content/uploads/lorenzo-ghiberti-porta-del-paradiso-300x400.jpg]\n\n🚪 天堂之門 (Gates of Paradise)\n\n藝術亮點：位於大教堂正對面、古老聖若望洗禮堂的東側大門。這扇青銅鍍金巨門由藝術家吉貝爾蒂傾盡 27 年雕刻而成，共十幅栩栩如生的舊約聖經故事浮雕，精細到連米開朗基羅都驚嘆：「足以作為天堂之門！」\n\n💡 為什麼重要？當年這扇門的設計權由 1401 年一場公開競賽決定，吸引全義頂尖天才（包含布魯內萊斯基）對決，史學家公認這場比賽正式拉開了文藝復興的序幕。吉貝爾蒂在僅幾公分厚的浮雕板上完美運用剛被發明的「線性透視法」，創造出如照片般深不見底的立體空間感。\n\n🎯 導遊帶路備忘：來到這個廣場，別只把它當拍照背景。站在大教堂前，想像六百年前的佛羅倫斯人如何在黑死病蹂躪歐洲後，帶著對生命的思想革命，在這片廣場上用大理石與黃金，親手為全人類敲開了通往現代文明的大門。',
     meta:[['📍 地址','Piazza del Duomo, Firenze'],['💶 票價','廣場免費 / 圓頂需購票'],['🕐 最佳時段','08:15 清晨人最少'],['⚠️ 注意','內部嚴禁露肩露膝']],
     map:'https://www.google.com/maps/search/?api=1&query=Cattedrale+di+Santa+Maria+del+Fiore+Firenze'},
   'uffizi':{emoji:'🎨',name:'烏菲茲美術館 (Uffizi Gallery)',day:'Day 3',anchor:'佛羅倫斯市中心',tags:['景點','佛羅倫斯','已預約'],
     desc:'藝術圓夢：預約 09:30 最早批次門票。館內人最少、最舒服，看《維納斯的誕生》與達文西真跡。\n\n頂樓歇腳：11:00 於頂樓景觀咖啡廳坐著喝杯卡布奇諾、遠眺舊宮。\n\n文藝復興藝術最高殿堂，收藏波提切利、達文西、拉斐爾等大師真跡。步行 15 分鐘可從大教堂廣場抵達。',
     meta:[['📍 地址','Piazzale degli Uffizi, Firenze'],['💶 票價','已預約 09:30 門票'],['🕐 時間','09:30 – 12:00'],['☕ 貼士','11:00 頂樓咖啡廳遠眺舊宮']],
     map:'https://www.google.com/maps/search/?api=1&query=Galleria+degli+Uffizi+Firenze'},
-  'piazzale-michelangelo':{emoji:'🌅',name:'米開朗基羅廣場',day:'Day 3',anchor:'佛羅倫斯觀景台',tags:['景點','佛羅倫斯','免費'],
+  'piazzale-michelangelo':{emoji:'🌅',img:'https://notamushroomdiary.com/webfile/webdate/2023%20Italy/10%20Piazzale%20Michelangelo/20240803051034wIzm.jpg',name:'米開朗基羅廣場  Piazzale Michelangelo',day:'Day 3',anchor:'佛羅倫斯觀景台',tags:['景點','佛羅倫斯','免費'],
     desc:'睡醒體力滿格！免爬山、免擠公車，專車直達山頂觀景台，俯瞰整座紅磚古城與阿諾河畔的魔幻日落。\n\n佛羅倫斯全城最佳俯瞰點，可將 Arno 河、百花聖母大教堂圓頂與整個舊城盡收眼底。日落前一小時是最美的時刻。',
     meta:[['📍 地址','Piazzale Michelangelo, Firenze'],['💶 票價','免費'],['🕐 最佳時段','17:30 日落前'],['🚗 交通','專車直達山頂，免爬坡']],
     map:'https://www.google.com/maps/search/?api=1&query=Piazzale+Michelangelo+Firenze'},
-  'ituscani':{emoji:'🥩',name:"I'Tuscani 佛羅倫斯百年傳奇牛排館",day:'Day 3',anchor:'佛羅倫斯新聖母大殿',tags:['餐廳','已預約','牛排'],
-    desc:"厲害在哪：在地人狂推的肉食天堂！最大特色是桌邊展示多款頂級肉品，可依口感與熟成天數自由挑選。\n\n【牛肉品種比較】\n▸ Chianina（奎安尼那牛）：世界上最古老、體型最大的白色巨牛，也是大丁骨牛排的最正宗經典首選。肉質極其細緻、油脂分布均勻。烤好後外酥內軟，軟嫩好咬且肉汁清甜，口感非常優雅。\n▸ Maremmana（馬雷馬牛）：生活在托斯卡尼南部灌木叢的灰色野性牛，成牛有著帥氣的巨大長角，長年自由放養。老饕重口味首選。肉質較為扎實有彈性，牛肉本身的風味極其濃郁、越嚼越香，帶有野性的炭烤香氣。\n\n【今晚推薦搭配哪種紅酒？】\n▸ Chianti Classico（黑公雞）：以 Sangiovese 釀造，帶有紅櫻桃與香料香氣，酸度漂亮，吃一口油亮牛排、喝一口黑公雞，解膩又爽口。\n▸ Brunello di Montalcino：托斯卡尼最頂級的紅酒。酒體極為濃郁厚實，最適合搭配熟成天數長或風味狂野的 Maremmana 牛肉。\n▸ Super Tuscan（超級托斯卡尼）：口感更圓潤、滑順，充滿濃郁果香，長輩平常怕澀感的選這個準沒錯！\n\n【今晚的品嚐小撇步】\n▸ 熟成（Dry-Aged）：可選一塊熟成 30 天以上的肉，肉質更軟嫩，帶有一點起司的迷人堅果香。\n▸ 三分熟（Medium Rare）：正宗佛羅倫斯牛排不做七分或全熟。外皮有一層焦香，裡面雖是粉紅色，但切開絕對不流血水，而是滿滿的肉汁，口感最完美！",
+  'ituscani':{emoji:'🥩',img:'https://www.ituscani.com/utenti/ituscani/cache/_pics/2/6/ituscani-menu5--1_6e7c673f853d942d4752265766fd981c_t.jpg',name:"I'Tuscani 佛羅倫斯百年傳奇牛排館",day:'Day 3',anchor:'佛羅倫斯新聖母大殿',tags:['餐廳','已預約','牛排'],
+    desc:"厲害在哪：在地人狂推的肉食天堂！最大特色是桌邊展示多款頂級肉品，可依口感與熟成天數自由挑選。\n\n【牛肉品種比較】\n▸ Chianina（奎安尼那牛）：世界上最古老、體型最大的白色巨牛，也是大丁骨牛排的最正宗經典首選。肉質極其細緻、油脂分布均勻。烤好後外酥內軟，軟嫩好咬且肉汁清甜，口感非常優雅。\n\n[img:https://live-production.wcms.abc-cdn.net.au/7d9458a49df488eb073bab658a661dba?impolicy=wcms_crop_resize&cropH=3155&cropW=4733&xPos=0&yPos=197&width=862&height=575]\n\n▸ Maremmana（馬雷馬牛）：生活在托斯卡尼南部灌木叢的灰色野性牛，成牛有著帥氣的巨大長角，長年自由放養。老饕重口味首選。肉質較為扎實有彈性，牛肉本身的風味極其濃郁、越嚼越香，帶有野性的炭烤香氣。\n\n[img:https://t3.ftcdn.net/jpg/05/61/74/20/360_F_561742094_c3C19jJfvoc4wOBhk2azxyiJNvWwhrOa.jpg]\n\n【今晚推薦搭配哪種紅酒？】\n▸ Chianti Classico（黑公雞）：以 Sangiovese 釀造，帶有紅櫻桃與香料香氣，酸度漂亮，吃一口油亮牛排、喝一口黑公雞，解膩又爽口。\n▸ Brunello di Montalcino：托斯卡尼最頂級的紅酒。酒體極為濃郁厚實，最適合搭配熟成天數長或風味狂野的 Maremmana 牛肉。\n▸ Super Tuscan（超級托斯卡尼）：口感更圓潤、滑順，充滿濃郁果香，長輩平常怕澀感的選這個準沒錯！\n\n【今晚的品嚐小撇步】\n▸ 熟成（Dry-Aged）：可選一塊熟成 30 天以上的肉，肉質更軟嫩，帶有一點起司的迷人堅果香。\n▸ 三分熟（Medium Rare）：正宗佛羅倫斯牛排不做七分或全熟。外皮有一層焦香，裡面雖是粉紅色，但切開絕對不流血水，而是滿滿的肉汁，口感最完美！",
     meta:[['📍 地址','Via de\' Federighi 5r, Firenze'],['💶 均消','依挑選牛肉與紅酒計價'],['🕐 時間','19:30 預約'],['🥩 建議','點三分熟 Medium Rare 最完美']],
     map:'https://www.google.com/maps/search/?api=1&query=I+Tuscani+Via+Federighi+Firenze'},
   'san-gimignano':{emoji:'🗼',name:'聖吉米雅諾 千塔之城',day:'Day 4',anchor:'托斯卡尼山城',tags:['景點','世界遺產','免費'],
@@ -731,6 +756,19 @@ function rebuildRestLookup(){
   RESTAURANTS_DB.forEach(s=>s.items.forEach(r=>{REST_LOOKUP[r.id]={...r,anchor:s.anchor};}));
 }
 
+// 把介紹文字裡的 [img:網址] 轉成圖片，其餘文字照常顯示（並防止 HTML 注入）
+function renderDesc(text){
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const parts = text.split(/(\[img:[^\]]+\])/g);
+  return parts.map(part => {
+    const m = part.match(/^\[img:([^\]]+)\]$/);
+    if (m) {
+      return `<img src="${m[1].trim()}" style="width:100%;border-radius:var(--radius);margin:10px 0;display:block">`;
+    }
+    return esc(part);
+  }).join('');
+}
+
 function openDetail(id){
   const d=PLACES_DB[id]; if(!d) return;
   prevPage=document.querySelector('.nav-btn.active')?.dataset.page||'places';
@@ -739,7 +777,7 @@ function openDetail(id){
   else{ banner.textContent=d.emoji; }
   document.getElementById('d-name').textContent=d.name;
   document.getElementById('d-pills').innerHTML=d.tags.map(t=>`<span class="detail-pill">${t}</span>`).join('');
-  document.getElementById('d-desc').textContent=d.desc;
+  document.getElementById('d-desc').innerHTML=renderDesc(d.desc);
   document.getElementById('d-meta').innerHTML=d.meta.map(([k,v])=>`<div class="meta-item"><div class="mk">${k}</div><div class="mv">${v}</div></div>`).join('');
   document.getElementById('d-map-btn').href=d.map;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -754,7 +792,7 @@ function openRestDetail(id){
   else{ banner.textContent=r.emoji; }
   document.getElementById('d-name').textContent=r.name;
   document.getElementById('d-pills').innerHTML=r.tags.map(t=>`<span class="detail-pill">${t}</span>`).join('')+`<span class="detail-pill">${r.anchor}</span>`;
-  document.getElementById('d-desc').textContent=r.desc;
+  document.getElementById('d-desc').innerHTML=renderDesc(r.desc);
   document.getElementById('d-meta').innerHTML=r.meta.map(([k,v])=>`<div class="meta-item"><div class="mk">${k}</div><div class="mv">${v}</div></div>`).join('');
   document.getElementById('d-map-btn').href=r.map;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));

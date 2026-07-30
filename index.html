@@ -63,7 +63,9 @@ html,body{height:100%;background:var(--parchment);color:var(--espresso);font-fam
 .tl-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
 .tag{display:inline-block;background:var(--brick-lt);color:var(--brick);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:8px}
 .tag.walk{background:var(--amber-lt);color:var(--amber)}
-.tag.pending{background:#fee2e2;color:#dc2626}
+.tag.pending{background:#dc2626;color:#fff;font-weight:700}
+.tag.suggest{background:#e0f2fe;color:#0284c7}
+.tag.confirmed{background:var(--green-lt);color:var(--green)}
 .tag.link{background:var(--espresso);color:var(--lemon);cursor:pointer}
 
 /* SUB TABS (places page) */
@@ -377,13 +379,13 @@ const DAYS = [
     {time:'15:45–16:30',title:'共和廣場百年咖啡廳 ☕',desc:'專車移防到廣場，全家在戶外座位坐著喝杯茶、吃點心，看著旋轉木馬，強制接受日光定錨作息。',tags:['餐廳']},
     {time:'16:30–17:30',title:'米開朗基羅廣場落日 🌅',desc:'專車直接攻頂，在山頂大平台上站著吹風，捕捉整座古城點燈的魔幻時刻。',tags:['景點'],hi:true,detailId:'piazzale-michelangelo'},
     {time:'17:45',title:'回飯店 Check-in 洗熱水澡 🛁',desc:'正式入住，舒服洗個熱水澡放鬆，稍作休息。',tags:['住宿','已預約'],detailId:'palazzo-montebello'},
-    {time:'19:00',title:'晚餐 🍽️',desc:'出門享用溫暖的義式晚餐。',tags:['餐廳']}
+    {time:'19:00',title:'晚餐 🍽️',desc:'出門享用溫暖的義式晚餐。',tags:['餐廳','待推薦']}
   ]},
 {day:3,date:'9/24 (四)',city:'佛羅倫斯',stamina:'high',staminaIcon:'👟',
    staminaText:'⚠️ 全日精華！清晨包場拍教堂、烏菲茲賞畫、中央市場採買松露、精品街血拼，善用專車接駁避開禁行區與長途步行。動線全程平坦，長輩友善。',
    items:[
     {time:'08:00',title:'專車出發 → 晨光序曲 🚗',desc:'司機在飯店 Palazzo Montebello 大門接大家，直接「空投」到大教堂禁行區（ZTL）步行邊緣（如 Via dei Pucci）。',tags:['交通']},
-    {time:'08:15–09:15',title:'聖母百花大教堂包場拍照 🕌',desc:'趁著觀光大軍尚未湧入，全家在清晨溫和的晨光中拍下最乾淨的大合照。\n\n📸 喬托鐘樓：緊貼大教堂右側、粉綠白三色大理石拼接的高塔，拍全景務必一起入鏡。\n📸 天堂之門：正對面八角形洗禮堂東側大門，刻滿聖經故事的純金浮雕，走過去合影只需 1 分鐘。',tags:['景點'],hi:true,detailId:'duomo'},
+    {time:'08:15–09:15',title:'聖母百花大教堂包場拍照 🕌',desc:'趁著觀光大軍尚未湧入，全家在清晨溫和的晨光中拍下最乾淨的大合照。\n\n📸 喬托鐘樓：緊貼大教堂右側、粉綠白三色大理石拼接的高塔，拍全景務必一起入鏡。\n📸 天堂之門：正對面八角形洗禮堂東側大門，刻滿聖經故事的純金浮雕，走過去合影只需 1 分鐘。',tags:['景點','尚未預約'],hi:true,detailId:'duomo'},
     {time:'09:15–09:30',title:'順向平坦步行至領主廣場 🚶',desc:'全家順著寬敞、完全平坦的商店街（Via dei Calzaiuoli）慢活散步 5–7 分鐘前往領主廣場。',tags:['交通'],walk:true,walkText:'平坦商店街，輕鬆好走'},
     {time:'09:25',title:'Caffè Rivoire 休息組可參考的咖啡廳',desc:'進美術館前，先帶休息組來到廣場核心、名列歷史遺產的百年咖啡廳，挑選視野最好的戶外遮陽傘座位（風大可坐室內沙發區）。',tags:['餐廳']},
     {time:'09:30–11:45',title:'分流：烏菲茲美術館 vs 咖啡放空 🎨',desc:'美術館組：步行 1 分鐘進入烏菲茲，預約 09:30 快速通關，直奔波提切利與達文西三大巨星畫作，看完去頂樓景觀咖啡廳。\n\n 休息組：在 Caffè Rivoire 享用招牌熱巧克力與甜點，冷氣強、有洗手間與 Wi-Fi。\n📸 坐著就能看到舊宮（市政廳城堡）、海神噴泉、大衛像複製品，右手邊還有傭兵涼廊的露天雕刻真跡。',tags:['景點','已預約'],hi:true,detailId:'uffizi'},
@@ -402,7 +404,7 @@ const DAYS = [
     {time:'09:00',title:'商務專車出發 → 駛向艷陽托斯卡尼 🚗',desc:'專車於飯店大門接全員出發。告別歷史古城，車輛駛入鋪滿葡萄園與絲柏樹的托斯卡尼經典丘陵幹道，車程約 30 分鐘。',tags:['交通']},
     {time:'09:30–11:30',title:'Antinori nel Chianti Classico 酒莊 🍷',desc:'建築朝聖：造訪由安東尼世家（傳承 26 代、義大利最偉大的釀酒家族之一）傾資數億、耗時 7 年打造的世界最美酒莊。這座建築完全隱形「嵌入」在整片山坡的葡萄園下方，屋頂即是葡萄田。\n\n奢華體驗：全員沿著極具視覺張力的紅磚螺旋樓梯優雅而上，全程設有平坦的玻璃長廊與冷氣展廳，能以居高臨下的視野遠眺 Chianti Classico 核心產區。品飲經典的「黑公雞」坎蒂紅葡萄酒，不飲酒的家人也可在景觀休憩區享用手作點心與義式咖啡，拍出宛如時尚雜誌封面的家族大片。\n\n已預約早上十點45分鐘的品酒體驗，需於15分鐘前在商店集合。',tags:['景點','已預約'],hi:true,detailId:'antinori'},
     {time:'11:30–12:15',title:'景觀公路巡航 → 前往中世紀曼哈頓 🚗',desc:'全員上車休息。專車繼續南下，穿梭於如詩如畫的麥田與山丘之間，車程約 40 分鐘。當車窗遠方開始浮現石造高塔群的地平線，即抵達世界文化遺產——聖吉米雅諾。',tags:['交通']},
-    {time:'12:15–14:00',title:'聖吉米雅諾 千塔之城 San Gimignano山城饗宴 → 野味午餐與白金葡萄酒 🍝',desc:'專車直接送達城門口。漫步進入充滿中世紀風情的石板街道，午餐安排於山城內極具氛圍的景觀餐廳。\n\n老饕餐桌：大啖慢燉托斯卡尼野豬肉手工寬麵（Pappardelle al Cinghiale），冰鎮搭配全義大利歷史上第一支榮獲最高評等、連詩人但丁都讚不絕口的 Vernaccia di San Gimignano 頂級白葡萄酒。微醺與美食交織，享受最純正的義式正午生活。',tags:['餐廳'],detailId:'san-gimignano'},
+    {time:'12:15–14:00',title:'聖吉米雅諾 千塔之城 San Gimignano山城饗宴 → 野味午餐與白金葡萄酒 🍝',desc:'專車直接送達城門口。漫步進入充滿中世紀風情的石板街道，午餐安排於山城內極具氛圍的景觀餐廳。\n\n老饕餐桌：大啖慢燉托斯卡尼野豬肉手工寬麵（Pappardelle al Cinghiale），冰鎮搭配全義大利歷史上第一支榮獲最高評等、連詩人但丁都讚不絕口的 Vernaccia di San Gimignano 頂級白葡萄酒。微醺與美食交織，享受最純正的義式正午生活。',tags:['餐廳','待推薦'],detailId:'san-gimignano'},
     {time:'14:00–16:30',title:'冠軍冰淇淋與古井廣場漫活 🍦',desc:'📸 經典地標【水井廣場】與【主教座堂廣場】：午餐後散步至三角形的水井廣場，圍繞 13 世紀的古老八角水井合影，仰望四周由中世紀貴族炫富大賽留下的宏偉高塔雙子星。\n\n🍦 舌尖巔峰【Gelateria Dondoli】：朝聖連續多年榮獲世界冰淇淋大賽冠軍的殿堂，必點傳奇的番紅花松子（Crema di Santa Fina）與帶氣泡酸甜感的粉紅葡萄柚香檳（Champelmo），強制激活多巴胺。\n\n優雅購物：廣場周邊集結販售在地番紅花、頂級皮革、手作陶瓷與松露土產的精緻小店，可一邊吃冰淇淋一邊尋寶。',tags:['景點'],walk:true,walkText:'石板路平坦，慢活散步',detailId:'san-gimignano'},
     {time:'16:30–17:30',title:'黃金落日巡航 → 返程接駁 🌅',desc:'回到城門口上車。專車在傍晚溫柔的金色陽光中啟程返航，此時車窗外正值托斯卡尼最美的「魔幻時刻」，起伏的丘陵被染成一片金黃，大家可在車艙內吹著冷氣、聽著音樂，舒適地欣賞窗外如詩如畫的田園風光。',tags:['交通']},
     {time:'17:30–19:00',title:'莊園優閒時光 → 專屬更衣梳洗 🛁',desc:'順暢抵達並返回 Borgo Scopeto 莊園。晚間安排極其寬鬆從容的自由時段，大家可各自回房、洗臉、放鬆休息。',tags:['住宿','已預約'],detailId:'borgo-scopeto'},
@@ -413,7 +415,7 @@ const DAYS = [
    items:[
     {time:'09:30',title:'駛入明信片風景',desc:'出發駛入世界遺產奧爾恰谷（Val d\'Orcia），沿途欣賞金黃丘陵與絲柏樹大道。',tags:['交通']},
     {time:'10:45–12:45',title:'文藝復興理想城 皮恩扎 Pienza',desc:'漫步浪漫的「戀愛巷」與「接吻巷」，於古城牆遠眺無邊際山谷，品嚐在地著名的佩克里諾羊乳乾酪。',tags:['景點'],detailId:'pienza'},
-    {time:'13:15–14:45',title:'全景午餐 → 蒙特普齊亞諾 Montepulciano',desc:'專車空投山頂大廣場免爬坡！於景觀餐廳一邊俯瞰托斯卡尼大自然，一邊享用手工粗麵（Pici）佐慢燉山豬肉醬。',tags:['餐廳'],detailId:'montepulciano'},
+    {time:'13:15–14:45',title:'全景午餐 → 蒙特普齊亞諾 Montepulciano',desc:'專車空投山頂大廣場免爬坡！於景觀餐廳一邊俯瞰托斯卡尼大自然，一邊享用手工粗麵（Pici）佐慢燉山豬肉醬。',tags:['餐廳','待推薦'],detailId:'montepulciano'},
     {time:'14:45–17:00',title:'暮光古堡 → 地下貴族酒窖探險',desc:'深入如地底大教堂般宏偉的古老酒窖，看數層樓高的巨型橡木桶，品飲歷史名酒「Vino Nobile 貴族紅酒」。',tags:['景點'],walk:true,walkText:'地下酒窖步行，注意高度',detailId:'montepulciano'},
     {time:'17:00–18:30',title:'落日巡航 捕捉金黃絲柏樹',desc:'踏上歸途。回程正值黃金夕陽，於車窗內優雅欣賞被染成蜜糖色的丘陵風光，輕鬆回血。',tags:['交通']},
     {time:'18:30–20:30',title:'在地溫馨晚宴 Ristorante della Fornace 🍷',desc:'晚餐餐廳位於 Corsignano，距離錫耶納約 8 公里，主打道地奇揚地與托斯卡尼傳統料理，義大利麵、披薩、甜點皆現點現做。備有室內小包廂與能俯瞰奇揚地丘陵美景的露台座位，氣氛溫馨、服務親切，是在地人與旅人都推薦的隱藏版好餐廳。不需訂位，直接前往即可。',tags:['餐廳'],detailId:'fornace'},
@@ -424,35 +426,35 @@ const DAYS = [
    items:[
     {time:'09:00',title:'專車退房出發 → 南下溫布利亞大區',desc:'Borgo Scopeto 莊園 Check-out。行李上車，優雅駛向火山岩壁之城。',tags:['交通']},
     {time:'10:45–12:00',title:'凝灰岩上的奇蹟 → 奧爾維耶托 Orvieto',desc:'專車直達山頂老城。朝聖義大利最美哥德式大教堂（Duomo），欣賞陽光下閃耀的金箔馬賽克。',tags:['景點'],detailId:'orvieto'},
-    {time:'12:00–13:30',title:'岩洞午宴 → 享用白葡萄酒之鄉',desc:'品嚐在地手工粗麵（Umbrichelli），搭配風靡全球的 Orvieto Classico 經典白葡萄酒，口感清爽。',tags:['餐廳']},
+    {time:'12:00–13:30',title:'岩洞午宴 → 享用白葡萄酒之鄉',desc:'品嚐在地手工粗麵（Umbrichelli），搭配風靡全球的 Orvieto Classico 經典白葡萄酒，口感清爽。',tags:['餐廳','待推薦']},
     {time:'14:00–16:15',title:'宮崎駿的靈感 → 天空之城 Civita di Bagnoregio',desc:'於高處觀景台捕捉整座古城懸浮山谷的震撼全景。漫步高空天橋進城，在鮮花石巷間喝咖啡、吃冰淇淋。',tags:['景點'],hi:true,walk:true,walkText:'⚠️ 300公尺高空天橋，注意長輩步伐',detailId:'civita'},
     {time:'16:15–18:30',title:'巡航永恆之城 → 車上補眠回血',desc:'啟程奔向羅馬。長輩可在寬敞專車內舒服補眠回血。',tags:['交通']},
     {time:'18:30',title:'羅馬 Marriott Check-in → 包車圓滿結束',desc:'抵達 Courtyard by Marriott Rome Central Park。',tags:['住宿','已預約'],hi:true,detailId:'marriott-rome'},
-    {time:'19:15',title:'羅馬初夜 → 景觀晚餐放鬆',desc:'飯店 Check-in、洗熱水澡。附近在地小館享用溫暖的羅馬第一餐。',tags:['餐廳']}
+    {time:'19:15',title:'羅馬初夜 → 景觀晚餐放鬆',desc:'飯店 Check-in、洗熱水澡。附近在地小館享用溫暖的羅馬第一餐。',tags:['餐廳','待推薦']}
   ]},
   {day:7,date:'9/28 (一)',city:'羅馬市中心',stamina:'medium',staminaIcon:'🏛️',
    staminaText:'09:30 專車出發繞行羅馬古城外環。飯店門口優雅上車，行駛非禁行區合法幹道直奔古羅馬景區。善用包車與地鐵電梯省力，Spagna 站內電梯直升，長輩免爬山。',
    items:[
     {time:'10:00–11:00',title:'帝國奇蹟 → 羅馬競技場 & 馬克西穆斯競技場',desc:'專車停靠寬敞平坦的綠蔭步道（非 ZTL 區），輕鬆合影【羅馬競技場】與【君士坦丁凱旋門】(考慮到競技場內樓梯偏多，未安排入內參觀)，車窗內欣賞古羅馬賽馬場遺址。',tags:['景點'],walk:true,walkText:'平坦綠蔭步道，長輩友善',detailId:'colosseum'},
-    {time:'11:15–14:15',title:'核心巴洛克漫步 台伯河畔 + 慢活午餐',desc:'河岸下車：專車於 ZTL 邊緣的翁貝托一世橋放客。\n平坦散步：步行 5 分鐘抵達浪漫的【納沃納廣場】，再走 5 分鐘開箱兩千年奇蹟【萬神殿】(尚須購買參觀門票)。\n饗宴補血：歷史老店享用正宗羅馬培根蛋麵與牛肉捲（放鬆 2 小時），朝聖【金杯咖啡】招牌冰沙。',tags:['景點','餐廳','待購票'],detailId:'pantheon'},
+    {time:'11:15–14:15',title:'核心巴洛克漫步 台伯河畔 + 慢活午餐',desc:'河岸下車：專車於 ZTL 邊緣的翁貝托一世橋放客。\n平坦散步：步行 5 分鐘抵達浪漫的【納沃納廣場】，再走 5 分鐘開箱兩千年奇蹟【萬神殿】(尚須購買參觀門票)。\n饗宴補血：歷史老店享用正宗羅馬培根蛋麵與牛肉捲（放鬆 2 小時），朝聖【金杯咖啡】招牌冰沙。',tags:['景點','餐廳','尚未預約'],detailId:'pantheon'},
     {time:'14:30–16:45',title:'赫本經典重現 → 聰明順向坡與地下秘道',desc:'下車點：專車送達非 ZTL 的巴貝里尼廣場。\n順向漫步：順著下坡平路走 6 分鐘抵達【許願池】拋硬幣，再平走 8 分鐘到【西班牙階梯】與精品街。\n免爬山密技：16:30 利用 Spagna 站內公共電梯直升階梯頂端，走進「博爾蓋塞地下冷氣自動步道」直達公園出口。',tags:['景點'],detailId:'trevi'},
-    {time:'16:45',title:'公園邊緣迎接 → 17:30 輕鬆回巢',desc:'專車於公園出口（非 ZTL 區）迎接，戰利品放車上，17:30 順暢回到飯店休息。',tags:['交通']},
-    {time:'晚間',title:'晚餐附近找東西吃吃',desc:'晚餐附近找東西吃吃。或是看司機有無推薦晚餐前景點。',tags:['餐廳']}
+    {time:'16:45',title:'公園邊緣迎接 → 看司機有無推薦景點',desc:'專車於公園出口（非 ZTL 區）迎接，戰利品放車上，依照大家剩餘的電力看一下司機有無推薦其他景點',tags:['交通','待推薦']},
+    {time:'晚間',title:'晚餐附近找東西吃吃',desc:'晚餐附近找東西吃吃。或是看司機有無推薦晚餐前景點。',tags:['餐廳','待推薦']}
   ]},
   {day:8,date:'9/29 (二)',city:'梵蒂岡 → 羅馬高級區',stamina:'high',staminaIcon:'🎨',
    staminaText:'⚠️ 08:00 出發到 Giuly\'s cafe 與梵蒂岡導遊集合。上午深度朝聖梵蒂岡，午後轉往在地生活氣息濃厚的台伯河南岸，登高俯瞰羅馬，傍晚享用經典羅馬家常料理。',
    items:[
     {time:'08:00',title:'🚗 出發 → Giuly\'s cafe',desc:'專車出發，前往 Giuly\'s cafe 與梵蒂岡導遊集合，準備開始今日的博物館深度導覽。',tags:['交通']},
     {time:'08:30–約11:30/12:00',title:'🇻🇦 梵蒂岡博物館 & 西斯汀禮拜堂 & 聖彼得大教堂',desc:'專車至博物館正門口下車，省去排隊與外圍步行。入館後沿平坦廊道朝聖地圖室與織錦畫。高潮抵達【西斯汀禮拜堂】，可坐在長椅上高仰米開朗基羅震世神作《創世紀》與《最後的審判》。',tags:['景點','已預約'],hi:true,walk:true,walkText:'⚠️ 步行時間長，可隨時坐椅子休息',detailId:'vatican'},
-    {time:'12:00–14:00',title:'普拉蒂高級區午餐 → 在地老饕海鮮小館',desc:'深入非 ZTL 的高級白領住宅區普拉蒂（Prati），完美避開觀光地雷、就近用餐不繞路。大啖清爽鮮甜的「羅馬風情海鮮義大利麵」與「酥炸綜合海鮮拼盤」，配上冰鎮白葡萄酒，吃七分飽為晚上的 Flavio 留點空間。',tags:['餐廳']},
+    {time:'12:00–14:00',title:'普拉蒂高級區午餐 → 在地老饕海鮮小館',desc:'深入非 ZTL 的高級白領住宅區普拉蒂（Prati），完美避開觀光地雷、就近用餐不繞路。推薦吃七分飽為晚上的 Flavio 留點空間。',tags:['餐廳','待推薦']},
     {time:'14:00-14:15',title:'🚐 專車接駁 → 天使堡',desc:'午餐後專車接送前往台伯河畔的聖天使堡。',tags:['交通']},
     {time:'15:00—15:30',title:'🏰 天使堡外觀 ＋ 聖天使橋',desc:'全家在平坦的河岸與橋頭漫步，近距離欣賞貝尼尼大師雕刻的 10 尊護衛天使石雕，捕捉梵蒂岡大圓頂的剪影。',tags:['景點'],detailId:'castel-sant-angelo'},
     {time:'15:30—17:00',title:'🍊 Aventino 橘園',desc:'登上羅馬七丘之一的阿文提諾山，著名的「橘子花園（Giardino degli Aranci）」可俯瞰整座羅馬城與台伯河，是在地人推薦、遊客較少的隱藏版觀景點。',tags:['景點'],detailId:'aventino'},
     {time:'17:00–17:30',title:'Aventino 結束',desc:'在橘園欣賞完夕陽美景後準備下山，結束今日的登高行程。',tags:['景點']},
     {time:'17:30左右',title:'🚐 專車接駁 → Testaccio',desc:'專車接送返回 Testaccio 區域，準備前往晚餐地點。',tags:['交通']},
     {time:'17:45–18:00',title:'🚗 抵達 Flavio 附近下車',desc:'司機把大家送到 Flavio 附近方便下車的位置。',tags:['交通']},
-    {time:'18:00–19:20',title:'☕ 自由時光 · Testaccio 慢活',desc:'找咖啡廳坐著休息，在 Testaccio 附近慢慢逛。如果長輩累了就直接找地方坐，不需要再安排景點，純粹放鬆等待晚餐時間。',tags:['自由活動']},
-    {time:'19:30',title:'🍝 Flavio al Velavevodetto 晚餐',desc:'羅馬經典老字號餐廳，主打最道地的羅馬四大天王義大利麵（卡邦拉、Cacio e Pepe、Amatriciana、Gricia），餐廳建於古羅馬陶片山遺址上，用餐環境本身就是一段歷史。',tags:['餐廳','已預約'],hi:true,detailId:'flavio'}
+    {time:'18:00–19:20',title:'☕ 自由時光 · Testaccio 慢活',desc:'找咖啡廳坐著休息，在 Testaccio 附近慢慢逛。如果長輩累了就直接找地方坐，不需要再安排景點，純粹放鬆等待晚餐時間。',tags:['自由活動','待推薦']},
+    {time:'19:30',title:'🍝 Flavio al Velavevodetto 晚餐',desc:'羅馬經典老字號餐廳，主打最道地的羅馬四大天王義大利麵（卡邦拉、Cacio e Pepe、Amatriciana、Gricia），餐廳建於古羅馬陶片山遺址上，用餐環境本身就是一段歷史。',tags:['餐廳','尚未預約'],hi:true,detailId:'flavio'}
   ]},  
   {day:9,date:'9/30 (三)',city:'羅馬 FCO → 蒙特婁 YUL',stamina:'low',staminaIcon:'✈️',
    staminaText:'羅馬出境，家庭假期劃下最幸福的句點。帶著滿滿回憶與伴手禮平安返加！',
@@ -683,7 +685,7 @@ function renderDays(){
       const hiC=it.hi?' hi':'', dotH=it.hi?' hi':'';
       const walkTag=it.walk?`<span class="tag walk">🚶 ${it.walkText||'步行路段'}</span>`:'';
       const detailTag=it.detailId?`<span class="tag link" onclick="openDetail('${it.detailId}')">查看介紹 →</span>`:'';
-      const mainTags=(it.tags||[]).map(t=>`<span class="tag${t==='待購票'?' pending':''}">${t}</span>`).join('');
+      const mainTags=(it.tags||[]).map(t=>`<span class="tag${t==='尚未預約'?' pending':t==='待推薦'?' suggest':t==='已預約'?' confirmed':''}">${t}</span>`).join('');
       return `<div class="tl-item"><div class="tl-dot${dotH}"></div><div class="tl-time">${it.time}</div><div class="tl-card${hiC}"><h3>${it.title}</h3><p>${it.desc.replace(/\n/g,'<br>')}</p><div class="tl-tags">${mainTags}${walkTag}${detailTag}</div></div></div>`;
     }).join('');
     return `<div class="day-panel" data-day="${d.day}" style="display:${i===0?'block':'none'}">

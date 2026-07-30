@@ -63,6 +63,7 @@ html,body{height:100%;background:var(--parchment);color:var(--espresso);font-fam
 .tl-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
 .tag{display:inline-block;background:var(--brick-lt);color:var(--brick);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:8px}
 .tag.walk{background:var(--amber-lt);color:var(--amber)}
+.tag.pending{background:#fee2e2;color:#dc2626}
 .tag.link{background:var(--espresso);color:var(--lemon);cursor:pointer}
 
 /* SUB TABS (places page) */
@@ -399,14 +400,15 @@ const DAYS = [
    staminaText:'告別城市進入浪漫田野。上午朝聖世界最美的 Antinori 酒莊，中午在聖吉米雅諾山城享用野味午餐，傍晚回莊園度假。動線輕鬆，多為專車接駁。',
    items:[
     {time:'09:00',title:'商務專車出發 → 駛向艷陽托斯卡尼 🚗',desc:'專車於飯店大門接全員出發。告別歷史古城，車輛駛入鋪滿葡萄園與絲柏樹的托斯卡尼經典丘陵幹道，車程約 30 分鐘。',tags:['交通']},
-    {time:'09:30–11:30',title:'Antinori nel Chianti Classico 酒莊 🍷',desc:'建築朝聖：造訪由安東尼世家（傳承 26 代、義大利最偉大的釀酒家族之一）傾資數億、耗時 7 年打造的世界最美酒莊。這座建築完全隱形「嵌入」在整片山坡的葡萄園下方，屋頂即是葡萄田。\n\n奢華體驗：全員沿著極具視覺張力的紅磚螺旋樓梯優雅而上，全程設有平坦的玻璃長廊與冷氣展廳，能以居高臨下的視野遠眺 Chianti Classico 核心產區。品飲經典的「黑公雞」坎蒂紅葡萄酒，不飲酒的家人也可在景觀休憩區享用手作點心與義式咖啡，拍出宛如時尚雜誌封面的家族大片。',tags:['景點','已預約'],hi:true,detailId:'antinori'},
+    {time:'09:30–11:30',title:'Antinori nel Chianti Classico 酒莊 🍷',desc:'建築朝聖：造訪由安東尼世家（傳承 26 代、義大利最偉大的釀酒家族之一）傾資數億、耗時 7 年打造的世界最美酒莊。這座建築完全隱形「嵌入」在整片山坡的葡萄園下方，屋頂即是葡萄田。\n\n奢華體驗：全員沿著極具視覺張力的紅磚螺旋樓梯優雅而上，全程設有平坦的玻璃長廊與冷氣展廳，能以居高臨下的視野遠眺 Chianti Classico 核心產區。品飲經典的「黑公雞」坎蒂紅葡萄酒，不飲酒的家人也可在景觀休憩區享用手作點心與義式咖啡，拍出宛如時尚雜誌封面的家族大片。\n\n已預約早上十點45分鐘的品酒體驗，需於15分鐘前在商店集合。',tags:['景點','已預約'],hi:true,detailId:'antinori'},
     {time:'11:30–12:15',title:'景觀公路巡航 → 前往中世紀曼哈頓 🚗',desc:'全員上車休息。專車繼續南下，穿梭於如詩如畫的麥田與山丘之間，車程約 40 分鐘。當車窗遠方開始浮現石造高塔群的地平線，即抵達世界文化遺產——聖吉米雅諾。',tags:['交通']},
     {time:'12:15–14:00',title:'聖吉米雅諾 千塔之城 San Gimignano山城饗宴 → 野味午餐與白金葡萄酒 🍝',desc:'專車直接送達城門口。漫步進入充滿中世紀風情的石板街道，午餐安排於山城內極具氛圍的景觀餐廳。\n\n老饕餐桌：大啖慢燉托斯卡尼野豬肉手工寬麵（Pappardelle al Cinghiale），冰鎮搭配全義大利歷史上第一支榮獲最高評等、連詩人但丁都讚不絕口的 Vernaccia di San Gimignano 頂級白葡萄酒。微醺與美食交織，享受最純正的義式正午生活。',tags:['餐廳'],detailId:'san-gimignano'},
     {time:'14:00–16:30',title:'冠軍冰淇淋與古井廣場漫活 🍦',desc:'📸 經典地標【水井廣場】與【主教座堂廣場】：午餐後散步至三角形的水井廣場，圍繞 13 世紀的古老八角水井合影，仰望四周由中世紀貴族炫富大賽留下的宏偉高塔雙子星。\n\n🍦 舌尖巔峰【Gelateria Dondoli】：朝聖連續多年榮獲世界冰淇淋大賽冠軍的殿堂，必點傳奇的番紅花松子（Crema di Santa Fina）與帶氣泡酸甜感的粉紅葡萄柚香檳（Champelmo），強制激活多巴胺。\n\n優雅購物：廣場周邊集結販售在地番紅花、頂級皮革、手作陶瓷與松露土產的精緻小店，可一邊吃冰淇淋一邊尋寶。',tags:['景點'],walk:true,walkText:'石板路平坦，慢活散步',detailId:'san-gimignano'},
     {time:'16:30–17:30',title:'黃金落日巡航 → 返程接駁 🌅',desc:'回到城門口上車。專車在傍晚溫柔的金色陽光中啟程返航，此時車窗外正值托斯卡尼最美的「魔幻時刻」，起伏的丘陵被染成一片金黃，大家可在車艙內吹著冷氣、聽著音樂，舒適地欣賞窗外如詩如畫的田園風光。',tags:['交通']},
     {time:'17:30–19:00',title:'莊園優閒時光 → 專屬更衣梳洗 🛁',desc:'順暢抵達並返回 Borgo Scopeto 莊園。晚間安排極其寬鬆從容的自由時段，大家可各自回房、洗臉、放鬆休息。',tags:['住宿','已預約'],detailId:'borgo-scopeto'},
-    {time:'19:00',title:'莊園名廚晚宴 → La Tinaia 莊園餐廳 🍽️',desc:'全員於預訂好的莊園頂級餐廳 La Tinaia 優雅入座。\n\n饗宴亮點：在極具歷史托斯卡尼風情與優雅私密的空間中，享用由主廚團隊精選在地當季時令、手工自製的新鮮義大利麵與當代工藝舒食料理，每一道精緻餐點皆可完美佐以經典的坎蒂 Classico 酒莊特藏紅酒。',tags:['餐廳','已預約']}
-  ]},  {day:5,date:'9/26 (六)',city:'皮恩扎 & 蒙特普齊亞諾（奧爾恰谷）',stamina:'medium',staminaIcon:'🌄',
+    {time:'19:30',title:'莊園名廚晚宴 → La Tinaia 莊園餐廳 🍽️',desc:'全員於預訂好的莊園頂級餐廳 La Tinaia 優雅入座。\n\n饗宴亮點：在極具歷史托斯卡尼風情與優雅私密的空間中，享用由主廚團隊精選在地當季時令、手工自製的新鮮義大利麵與當代工藝舒食料理，每一道精緻餐點皆可完美佐以經典的坎蒂 Classico 酒莊特藏紅酒。',tags:['餐廳','已預約']}
+  ]},  
+{day:5,date:'9/26 (六)',city:'皮恩扎 & 蒙特普齊亞諾（奧爾恰谷）',stamina:'medium',staminaIcon:'🌄',
    staminaText:'09:30 出發駛入世界遺產奧爾恰谷（Val d\'Orcia），沿途欣賞金黃丘陵與絲柏樹大道。專車空投山頂大廣場，免去辛苦爬坡。',
    items:[
     {time:'09:30',title:'駛入明信片風景',desc:'出發駛入世界遺產奧爾恰谷（Val d\'Orcia），沿途欣賞金黃丘陵與絲柏樹大道。',tags:['交通']},
@@ -414,7 +416,7 @@ const DAYS = [
     {time:'13:15–14:45',title:'全景午餐 → 蒙特普齊亞諾 Montepulciano',desc:'專車空投山頂大廣場免爬坡！於景觀餐廳一邊俯瞰托斯卡尼大自然，一邊享用手工粗麵（Pici）佐慢燉山豬肉醬。',tags:['餐廳'],detailId:'montepulciano'},
     {time:'14:45–17:00',title:'暮光古堡 → 地下貴族酒窖探險',desc:'深入如地底大教堂般宏偉的古老酒窖，看數層樓高的巨型橡木桶，品飲歷史名酒「Vino Nobile 貴族紅酒」。',tags:['景點'],walk:true,walkText:'地下酒窖步行，注意高度',detailId:'montepulciano'},
     {time:'17:00–18:30',title:'落日巡航 捕捉金黃絲柏樹',desc:'踏上歸途。回程正值黃金夕陽，於車窗內優雅欣賞被染成蜜糖色的丘陵風光，輕鬆回血。',tags:['交通']},
-    {time:'18:30–20:30',title:'在地溫馨晚宴 莊園旁古老小鎮',desc:'專車送達 Vagliagli 小鎮。品嚐阿嬤手作的家常野菇燉飯與慢燉牛肚，享受最道地的義式溫暖。',tags:['餐廳']},
+    {time:'18:30–20:30',title:'在地溫馨晚宴 Ristorante della Fornace 🍷',desc:'晚餐餐廳位於 Corsignano，距離錫耶納約 8 公里，主打道地奇揚地與托斯卡尼傳統料理，義大利麵、披薩、甜點皆現點現做。備有室內小包廂與能俯瞰奇揚地丘陵美景的露台座位，氣氛溫馨、服務親切，是在地人與旅人都推薦的隱藏版好餐廳。不需訂位，直接前往即可。',tags:['餐廳'],detailId:'fornace'},
     {time:'20:30',title:'莊園舒服補眠',desc:'餐後搭乘莊園預約接駁車或計程車，回到飯店。',tags:['交通']}
   ]},
   {day:6,date:'9/27 (日)',city:'奧爾維耶托 & 天空之城 → 羅馬',stamina:'high',staminaIcon:'🥾',
@@ -431,23 +433,28 @@ const DAYS = [
   {day:7,date:'9/28 (一)',city:'羅馬市中心',stamina:'medium',staminaIcon:'🏛️',
    staminaText:'09:30 專車出發繞行羅馬古城外環。飯店門口優雅上車，行駛非禁行區合法幹道直奔古羅馬景區。善用包車與地鐵電梯省力，Spagna 站內電梯直升，長輩免爬山。',
    items:[
-    {time:'10:00–11:00',title:'帝國奇蹟 → 羅馬競技場 & 馬克西穆斯競技場',desc:'專車停靠寬敞平坦的綠蔭步道（非 ZTL 區），輕鬆合影【羅馬競技場】與【君士坦丁凱旋門】，車窗內欣賞古羅馬賽馬場遺址。',tags:['景點'],walk:true,walkText:'平坦綠蔭步道，長輩友善',detailId:'colosseum'},
-    {time:'11:15–14:15',title:'核心巴洛克漫步 台伯河畔 + 慢活午餐',desc:'河岸下車：專車於 ZTL 邊緣的翁貝托一世橋放客。\n平坦散步：步行 5 分鐘抵達浪漫的【納沃納廣場】，再走 5 分鐘開箱兩千年奇蹟【萬神殿】。\n饗宴補血：歷史老店享用正宗羅馬培根蛋麵與牛肉捲（放鬆 2 小時），朝聖【金杯咖啡】招牌冰沙。',tags:['景點','餐廳'],detailId:'pantheon'},
+    {time:'10:00–11:00',title:'帝國奇蹟 → 羅馬競技場 & 馬克西穆斯競技場',desc:'專車停靠寬敞平坦的綠蔭步道（非 ZTL 區），輕鬆合影【羅馬競技場】與【君士坦丁凱旋門】(考慮到競技場內樓梯偏多，未安排入內參觀)，車窗內欣賞古羅馬賽馬場遺址。',tags:['景點'],walk:true,walkText:'平坦綠蔭步道，長輩友善',detailId:'colosseum'},
+    {time:'11:15–14:15',title:'核心巴洛克漫步 台伯河畔 + 慢活午餐',desc:'河岸下車：專車於 ZTL 邊緣的翁貝托一世橋放客。\n平坦散步：步行 5 分鐘抵達浪漫的【納沃納廣場】，再走 5 分鐘開箱兩千年奇蹟【萬神殿】(尚須購買參觀門票)。\n饗宴補血：歷史老店享用正宗羅馬培根蛋麵與牛肉捲（放鬆 2 小時），朝聖【金杯咖啡】招牌冰沙。',tags:['景點','餐廳','待購票'],detailId:'pantheon'},
     {time:'14:30–16:45',title:'赫本經典重現 → 聰明順向坡與地下秘道',desc:'下車點：專車送達非 ZTL 的巴貝里尼廣場。\n順向漫步：順著下坡平路走 6 分鐘抵達【許願池】拋硬幣，再平走 8 分鐘到【西班牙階梯】與精品街。\n免爬山密技：16:30 利用 Spagna 站內公共電梯直升階梯頂端，走進「博爾蓋塞地下冷氣自動步道」直達公園出口。',tags:['景點'],detailId:'trevi'},
     {time:'16:45',title:'公園邊緣迎接 → 17:30 輕鬆回巢',desc:'專車於公園出口（非 ZTL 區）迎接，戰利品放車上，17:30 順暢回到飯店休息。',tags:['交通']},
-    {time:'晚間',title:'晚餐附近找東西吃吃',desc:'晚餐附近找東西吃吃。',tags:['餐廳']}
+    {time:'晚間',title:'晚餐附近找東西吃吃',desc:'晚餐附近找東西吃吃。或是看司機有無推薦晚餐前景點。',tags:['餐廳']}
   ]},
   {day:8,date:'9/29 (二)',city:'梵蒂岡 → 羅馬高級區',stamina:'high',staminaIcon:'🎨',
-   staminaText:'⚠️ 08:00 專車出發，本日路線完全避開羅馬市中心 ZTL 禁行區，沿台伯河西岸流暢前往。梵蒂岡博物館步行較多，中午包車在出口等候，下午聖天使橋夕陽完美謝幕。',
+   staminaText:'⚠️ 08:00 出發到 Giuly\'s cafe 與梵蒂岡導遊集合。上午深度朝聖梵蒂岡，午後轉往在地生活氣息濃厚的台伯河南岸，登高俯瞰羅馬，傍晚享用經典羅馬家常料理。',
    items:[
-    {time:'08:30–11:40',title:'世紀藝術殿堂 → 梵蒂岡博物館 & 西斯汀禮拜堂',desc:'專車至博物館正門口下車，省去排隊與外圍步行。入館後沿平坦廊道朝聖地圖室與織錦畫。高潮抵達【西斯汀禮拜堂】，可坐在長椅上高仰米開朗基羅震世神作《創世紀》與《最後的審判》。',tags:['景點','已預約'],hi:true,walk:true,walkText:'⚠️ 步行時間長，可隨時坐椅子休息',detailId:'vatican'},
-    {time:'11:45',title:'接駁專車門口迎接',desc:'參觀完博物館長輩雙腿最疲勞之際，專車在博物館出口街角等待大家，直接載往午餐餐館。',tags:['交通']},
-    {time:'12:00–14:00',title:'普拉蒂高級區午餐 → 在地老饕海鮮小館',desc:'深入非 ZTL 的高級白領住宅區普拉蒂（Prati），完美避開觀光地雷。大啖清爽鮮甜的「羅馬風情海鮮義大利麵」與「酥炸綜合海鮮拼盤」，配上冰鎮白葡萄酒。',tags:['餐廳']},
-    {time:'14:15–16:30',title:'上帝的建築 聖彼得大教堂 & 聖彼得廣場',desc:'下車步行達磅礴的聖彼得廣場，與 284 根環形巨石列柱合影。大教堂內部空間極大且地面百分之百完全平坦，免辛苦爬坡，親眼欣賞米開朗基羅《聖母慟子像》與貝尼尼七層樓高的《青銅聖體傘》。',tags:['景點'],hi:true,detailId:'st-peters'},
-    {time:'16:30–17:15',title:'加碼著名景點 聖天使堡 & 聖天使橋夕陽紅',desc:'離開大教堂後專車接駁 2 分鐘直達緊鄰的台伯河畔。全家下車在平坦的河岸與橋頭漫步 10 分鐘，近距離欣賞貝尼尼大師雕刻的 10 尊護衛天使石雕，完美捕捉梵蒂岡大圓頂在落日餘暉下的蜜糖色剪影。',tags:['景點'],detailId:'castel-sant-angelo'},
-    {time:'17:15',title:'滿載而歸 → 專車送回飯店，輕鬆打包',desc:'專車於河岸迎接，一路順暢送回 Courtyard Marriott。約 17:45 前抵達。回房洗熱水澡，悠閒打包大行李箱。',tags:['交通']},
-    {time:'19:30',title:'完美終章 → 義大利假期慶功晚宴',desc:'安排晚餐，在羅馬的金黃夜色與滿滿珍貴的回憶中，為這趟家庭度假劃下最幸福的句點。',tags:['餐廳','已預約'],hi:true}
-  ]},
+    {time:'08:00',title:'🚗 出發 → Giuly\'s cafe',desc:'專車出發，前往 Giuly\'s cafe 與梵蒂岡導遊集合，準備開始今日的博物館深度導覽。',tags:['交通']},
+    {time:'08:30–約11:30/12:00',title:'🇻🇦 梵蒂岡博物館 & 西斯汀禮拜堂 & 聖彼得大教堂',desc:'專車至博物館正門口下車，省去排隊與外圍步行。入館後沿平坦廊道朝聖地圖室與織錦畫。高潮抵達【西斯汀禮拜堂】，可坐在長椅上高仰米開朗基羅震世神作《創世紀》與《最後的審判》。',tags:['景點','已預約'],hi:true,walk:true,walkText:'⚠️ 步行時間長，可隨時坐椅子休息',detailId:'vatican'},
+    {time:'約30分鐘車程',title:'🚐 專車接駁 → Testaccio',desc:'離開梵蒂岡，前往台伯河對岸的 Testaccio 區，車程約 30 分鐘。',tags:['交通']},
+    {time:'12:00–14:00',title:'普拉蒂高級區午餐 → 在地老饕海鮮小館',desc:'深入非 ZTL 的高級白領住宅區普拉蒂（Prati），完美避開觀光地雷、就近用餐不繞路。大啖清爽鮮甜的「羅馬風情海鮮義大利麵」與「酥炸綜合海鮮拼盤」，配上冰鎮白葡萄酒，吃七分飽為晚上的 Flavio 留點空間。',tags:['餐廳']},
+    {time:'14:00-14:15',title:'🚐 專車接駁 → 天使堡',desc:'午餐後專車接送前往台伯河畔的聖天使堡。',tags:['交通']},
+    {time:'15:00—15:30',title:'🏰 天使堡外觀 ＋ 聖天使橋',desc:'全家在平坦的河岸與橋頭漫步，近距離欣賞貝尼尼大師雕刻的 10 尊護衛天使石雕，捕捉梵蒂岡大圓頂的剪影。',tags:['景點'],detailId:'castel-sant-angelo'},
+    {time:'15:30—17:00',title:'🍊 Aventino 橘園',desc:'登上羅馬七丘之一的阿文提諾山，著名的「橘子花園（Giardino degli Aranci）」可俯瞰整座羅馬城與台伯河，是在地人推薦、遊客較少的隱藏版觀景點。',tags:['景點'],detailId:'aventino'},
+    {time:'17:00–17:30',title:'Aventino 結束',desc:'在橘園欣賞完夕陽美景後準備下山，結束今日的登高行程。',tags:['景點']},
+    {time:'17:30左右',title:'🚐 專車接駁 → Testaccio',desc:'專車接送返回 Testaccio 區域，準備前往晚餐地點。',tags:['交通']},
+    {time:'17:45–18:00',title:'🚗 抵達 Flavio 附近下車',desc:'司機把大家送到 Flavio 附近方便下車的位置。',tags:['交通']},
+    {time:'18:00–19:20',title:'☕ 自由時光 · Testaccio 慢活',desc:'找咖啡廳坐著休息，在 Testaccio 附近慢慢逛。如果長輩累了就直接找地方坐，不需要再安排景點，純粹放鬆等待晚餐時間。',tags:['自由活動']},
+    {time:'19:30',title:'🍝 Flavio al Velavevodetto 晚餐',desc:'羅馬經典老字號餐廳，主打最道地的羅馬四大天王義大利麵（卡邦拉、Cacio e Pepe、Amatriciana、Gricia），餐廳建於古羅馬陶片山遺址上，用餐環境本身就是一段歷史。',tags:['餐廳','已預約'],hi:true,detailId:'flavio'}
+  ]},  
   {day:9,date:'9/30 (三)',city:'羅馬 FCO → 蒙特婁 YUL',stamina:'low',staminaIcon:'✈️',
    staminaText:'羅馬出境，家庭假期劃下最幸福的句點。帶著滿滿回憶與伴手禮平安返加！',
    items:[
@@ -456,6 +463,18 @@ const DAYS = [
 ];
 
 const PLACES_DB = {
+  'aventino':{emoji:'🍊',img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdrfo7YnBMMCIWN0ezntNaqHgudTlzmd9CBRc7OBW7WdAccfo1W-d5YOc&s=10',name:'Aventino 橘園',day:'Day 8',anchor:'阿文提諾山丘',tags:['景點','羅馬','免費',],
+    desc:'羅馬最浪漫的隱藏觀景台：Giardino degli Aranci\n\n阿文提諾山是羅馬七丘之一，山頂的「橘子花園」（Giardino degli Aranci，正式名稱 Parco Savello）建於 1932 年，因種滿苦橙樹而得名。這裡遊客遠比許願池、西班牙階梯少得多，卻擁有全羅馬數一數二壯闊的城市全景，可以將台伯河、越台伯河區（Trastevere）與遠方的聖彼得大教堂圓頂盡收眼底。\n\n花園中央的林蔭大道通往一座對稱式的觀景平台，日落前一小時抵達最美，夕陽會把整座古城染成金黃色，氣氛靜謐浪漫，是在地人心中「羅馬最浪漫的地方」。\n\n[img:https://turismoroma.it/sites/default/files/Villa%20Magistrale%20del%20Sovrano%20Ordine%20di%20Malta%20%28Villa%20del%20Priorato%20di%20Malta%29_800%40Pixabay.jpg]\n\n💡 順遊小秘密：花園旁的馬爾他騎士團教堂（Chiesa di Santa Maria del Priorato）大門上有一個不起眼的鑰匙孔，貼近一看，會透過修剪整齊的絲柏樹籬完美框住遠方聖彼得大教堂的圓頂，是全羅馬最著名也最夢幻的「鑰匙孔奇景」，時間允許的話非常值得順道一探。',
+    meta:[['📍 地址','Piazza Pietro D\'Illiria, Aventino'],['💶 票價','免費入園'],['🕐 最佳時段','日落前一小時'],['🔑 順遊','馬爾他騎士團鑰匙孔景觀']],
+    map:'https://www.google.com/maps/search/?api=1&query=Giardino+degli+Aranci+Rome'},
+  'flavio':{emoji:'🍝',img:'https://anamericaninrome.com/wp-content/uploads/2015/03/Flavio-al-velavevodetto.jpg',name:'Flavio al Velavevodetto',day:'Day 8',anchor:'Monte Testaccio',tags:['餐廳','已預約','羅馬經典'],
+    desc:'蓋在古羅馬陶片山上的家常好味道\n\n餐廳名字「Velavevodetto」在羅馬方言中意思是「我早就跟你說過了」，老闆 Flavio De Maio 曾在 Testaccio 的知名老店 Felice 磨練手藝，2009 年自立門戶，把招牌的 Cacio e Pepe 配方也一起帶了過來，開業以來就是在地饕客與美食作家心中的羅馬料理代表。\n\n[img:https://img.atlasobscura.com/D88bAuiAueHScohvalpGgasZk7wJpKiulAq_9gPKJBA/rt:fit/w:1200/q:80/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS9h/cHBfdXBsb2Fkcy9w/bGFjZV9pbWFnZXMv/dXNlcl8yNDM4NzU5/X2M1ZGQxNGFmLTEw/MzUtNDI3Ni04M2Mz/LWM1MmRlNGE0N2Qz/ZQ.jpg]\n\n最特別的是餐廳建築本身——直接依偎著「Monte Testaccio」而建，這座人工小山完全由兩千年前古羅馬時期丟棄的陶罐碎片堆積而成，餐廳室內用餐區還能直接透過玻璃看見牆面嵌著的古老陶片，用餐環境本身就是一段活生生的羅馬歷史。\n\n[img:https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEaN_xZSKIgYOYlF7Z51lVJW_GFDibC7d8WlYcxI7arrnY0tsemsn4llL9&s=10]\n\n招牌必點：羅馬經典四大天王義大利麵（Cacio e Pepe、Carbonara、Amatriciana、Gricia）都被認為是全羅馬數一數二的版本；此外燉牛尾（Coda alla Vaccinara）與炸朝鮮薊（Carciofi alla Giudia，僅冬春季供應）也是老饕必點。夏夜坐在戶外庭院用餐，微風徐徐，是最道地的羅馬式夜晚。',
+    meta:[['📍 地址','Via di Monte Testaccio 97, Roma'],['💶 均消','約 €35–50/人'],['🕐 時間','12:30–15:00 / 19:30–23:00'],['🍝 必點','Cacio e Pepe・燉牛尾']],
+    map:'https://www.google.com/maps/search/?api=1&query=Flavio+al+Velavevodetto+Rome'},
+  'fornace':{emoji:'🍷',img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/28/58/a8/img-20190905-201133-largejpg.jpg?w=700&h=700&s=1',name:'Ristorante della Fornace',day:'Day 5',anchor:'Vagliagli 奇揚地小鎮',tags:['餐廳','奇揚地','不需訂位'],
+    desc:'A due passi da Siena：近在咫尺的奇揚地道地滋味\n\n這間餐廳位於 Corsignano，沿著通往 Vagliagli 的路上，距離錫耶納僅 8 公里車程。自 2011 年開業以來，一直是當地人心中的口袋名單，主打托斯卡尼傳統料理，並在經典菜色中加入一點原創巧思。\n\n菜單會依季節經常更換，義大利麵、披薩與甜點皆為現點現做。餐廳備有溫馨的室內小包廂，也有寬敞的戶外用餐空間，特別受歡迎的是能俯瞰奇揚地丘陵美景的露台座位，傍晚在此用餐氣氛格外浪漫。\n\n招牌菜色包括奇揚地肉品拼盤與起司、手工義大利麵、炭烤肉類與經典佛羅倫斯牛排。服務親切、氣氛輕鬆，不需訂位即可前往，是結束一天行程後享用溫暖晚餐的好去處。',
+    meta:[['📍 地址','Località Corsignano 6/7, Vagliagli (SI)'],['💶 均消','約 €25–45'],['🕐 時間','每日 11:00–凌晨01:30'],['✅ 貼心','不需訂位，直接前往即可']],
+    map:'https://www.google.com/maps/search/?api=1&query=Ristorante+della+Fornace+Vagliagli'},
   'antinori':{emoji:'🍷',img:'https://blog.architizer.com/wp-content/uploads/1713885511759BARGINO_01_26-2048x1367.jpeg',name:'Antinori nel Chianti Classico 酒莊',day:'Day 4',anchor:'Bargino 奇揚地核心',tags:['景點','奇揚地','已預約'],
     desc:'大地與建築的現代奇蹟：Antinori nel Chianti Classico\n\n這是由安東尼世家（Marchesi Antinori）傾資打造的世界級酒莊。安東尼家族的釀酒歷史可追溯至 1385 年，傳承已達 26 代、超過六百年，是全世界最古老也最富盛名的釀酒世家之一，旗下名酒 Tignanello、Solaia 更是義大利「超級托斯卡尼」的傳奇代表。\n\n🏛️ 隱形於大地的建築傑作\n\n這座酒莊於 2012 年落成，由 Piero Antinori 侯爵與三位女兒 Albiera、Allegra、Alessia 共同參與、耗時 7 年打造。最驚人之處在於整座建築幾乎「隱形」——從馬路上望去，你只會看到連綿的葡萄園山坡，酒莊完全嵌入山丘之中，屋頂就是一整片葡萄田，僅露出兩道優雅的水平切口。\n\n建材全部使用在地的赤陶土（terracotta）、木材、耐候鋼與玻璃，呼應托斯卡尼大地的紅棕色澤。2022 年被評選為「世界最佳酒莊（World‘s Best Vineyards）」第一名。\n\n🌀 招牌螺旋梯與品飲體驗\n\n酒莊最具視覺張力的亮點，是連接三個樓層的巨大紅磚螺旋樓梯，本身就是一件藝術品。全程設有平坦的玻璃長廊與冷氣展廳，能以居高臨下的視野遠眺 Chianti Classico 核心產區。\n\n這裡也設有「Antinori 藝術計畫（Antinori Art Project）」，在未來感的建築空間中展出當代藝術。品飲安排能嚐到最能代表安東尼各莊園的經典酒款；不飲酒的家人也可在景觀休憩區享用手作點心與義式咖啡，拍出宛如時尚雜誌封面的家族大片。',
     meta:[['📍 地址','Via Cassia per Siena 133, Bargino'],['💶 導覽','品酒導覽約 €45 起/人'],['🕐 時間','每日 10:00–18:30（夏季）'],['🍷 必嚐','黑公雞 Chianti Classico']],
@@ -523,29 +542,25 @@ const PLACES_DB = {
     desc:'文化與氛圍｜懸浮於白堊谷中的「瀕死之城」：天空之城建立於 2,500 年前伊特拉斯坎時期，坐落在一個由火山凝灰岩組成的巨大孤島山頭上。由於四周的地質不斷受到風雨侵蝕與土石崩塌，導致古城邊緣持續崩落，僅靠一條 300 公尺長的高空行人天橋與世界相連，因此被感傷地稱為「瀕死之城（La città che muore）」。\n\n這裡也是日本動畫大師宮崎駿經典電影《天空之城》的靈感發源地，每當清晨山谷起霧時，整座石造古城就如同懸浮在雲海中的虛幻孤島，充滿了魔幻與不真實的童話色彩。\n\n地理奇蹟｜震撼視覺的白堊惡地山谷（Calanchi）：站在高空天橋或古城邊緣往下看，四周是令人震懾的「Calanchi」惡地景觀——白色與灰色深邃峽谷，光禿禿的岩脊與古城內盛開的鮮花形成強烈對比。\n\n[img:https://www.lazionascosto.it/wp-content/uploads/2021/07/valle-dei-calanchi-med.jpg]\n\n在地風味：\n▸ 岩洞熟成佩克里諾起司：當地人將綿羊起司放進火山岩洞中熟成，風味比一般起司更加深邃扎實。\n▸ 野菇烤麵包片（Crostini ai Funghi Porcini）：烤得焦香的麵包片抹上大蒜、淋上橄欖油，再鋪滿炒得香氣四溢的在地野生牛肝菌菇。\n▸ 傳統托切蒂脆餅（Tozzetti）：在小廣場旁的咖啡廳坐下，點一杯義式濃縮咖啡，搭配揉入榛果與巧克力豆的當地脆餅，一邊咬著脆餅，一邊看著古城牆外的壯麗山谷。',
     meta:[['📍 地址','Civita di Bagnoregio'],['💶 票價','進城過橋門票'],['🕐 時間','14:00 – 16:15'],['⚠️ 注意','300公尺高空天橋，注意長輩步伐']],
     map:'https://www.google.com/maps/search/?api=1&query=Civita+di+Bagnoregio'},
-  'colosseum':{emoji:'🏟️',name:'羅馬競技場 & 君士坦丁凱旋門',day:'Day 7',anchor:'古羅馬景區',tags:['景點','羅馬','帝國遺跡'],
-    desc:'帝國的殘酷溫床與工程奇蹟：建立於西元 80 年，是古羅馬帝國最偉大的地標。這座龐大的圓形劇場當初可容納五萬名觀眾，地底下隱藏著極為複雜的機關、獸欄與水道，是當年上演人獸搏鬥與海戰的殘酷舞台。它是古羅馬混凝土建築的巔峰，歷經兩千年的地震與戰火依然傲然屹立。\n\n君士坦丁凱旋門：緊鄰競技場旁，建立於西元 315 年。它是全羅馬現存三座凱旋門中最大、保存最完整的一座，是為了慶祝君士坦丁大帝統一帝國、並將基督教合法化而建。\n\n冷知識｜歷史上的大採石場：中世紀到文藝復興時期，羅馬競技場曾被當成「免費的採石場」！原本外牆鋪滿了高貴的白色大理石，後來都被拆去建造教宗的宮殿與梵蒂岡的聖彼得大教堂，才變成今天我們看到粗獷外露的磚石模樣。\n\n車輛停靠寬敞平坦的綠蔭步道（非 ZTL 區），長輩免辛苦奔波，輕鬆合影留念。',
+  'colosseum':{emoji:'🏟️',img:'https://dejectedblue.wordpress.com/wp-content/uploads/2020/04/img_8579_edited.jpg?w=1920&h=768&crop=1',name:'羅馬競技場 & 君士坦丁凱旋門',day:'Day 7',anchor:'古羅馬景區',tags:['景點','羅馬','帝國遺跡'],
+    desc:'帝國的殘酷溫床與工程奇蹟：建立於西元 80 年，是古羅馬帝國最偉大的地標。這座龐大的圓形劇場當初可容納五萬名觀眾，地底下隱藏著極為複雜的機關、獸欄與水道，是當年上演人獸搏鬥與海戰的殘酷舞台。它是古羅馬混凝土建築的巔峰，歷經兩千年的地震與戰火依然傲然屹立。\n\n[img:https://travel-tw.line-scdn.net/r/travel/content/2f81ef63-e48c-406a-bc63-fa4c05ea93cat0e6315ef]\n\n君士坦丁凱旋門：緊鄰競技場旁，建立於西元 315 年。它是全羅馬現存三座凱旋門中最大、保存最完整的一座，是為了慶祝君士坦丁大帝統一帝國、並將基督教合法化而建。\n\n冷知識｜歷史上的大採石場：中世紀到文藝復興時期，羅馬競技場曾被當成「免費的採石場」！原本外牆鋪滿了高貴的白色大理石，後來都被拆去建造教宗的宮殿與梵蒂岡的聖彼得大教堂，才變成今天我們看到粗獷外露的磚石模樣。',
     meta:[['📍 地址','Piazza del Colosseo, Roma'],['💶 票價','外圍步道免費合影'],['🕐 時間','10:00 – 11:00'],['🚗 貼心','停靠平坦綠蔭步道，長輩友善']],
     map:'https://www.google.com/maps/search/?api=1&query=Colosseum+Rome'},
-  'pantheon':{emoji:'⛩️',name:'萬神殿 & 納沃納廣場',day:'Day 7',anchor:'台伯河畔巴洛克區',tags:['景點','羅馬','兩千年建築'],
-    desc:'納沃納廣場（Piazza Navona）｜戰車競技場演變而來的巴洛克客廳：這裡是羅馬最美麗、也最熱鬧的巴洛克廣場。它的形狀呈獨特的長橢圓形，因為它的前身是古羅馬時期的「圖密善戰車競技場」。廣場中央是貝尼尼設計的【四河噴泉】，分別代表多瑙河、尼羅河、恆河與拉普拉塔河。\n\n冷知識｜大師們的靈魂互嗆：傳說貝尼尼故意將噴泉中代表尼羅河的神像用布蒙住眼睛，暗示他「不屑看到對手波洛米尼設計的奇醜教堂」，這段大師間的明爭暗鬥至今仍是旅人津津樂道的趣聞。\n\n萬神殿（Pantheon）｜兩千年間從未倒塌的奇蹟神殿：由羅馬皇帝哈德良於西元 126 年重建，是古羅馬保存最完美的建築。最震撼之處在於它的無鋼筋混凝土大圓頂，直徑高達 43.3 公尺，兩千年來一直是世界之最。圓頂正中央有一個 9 公尺寬的圓形穹眼（Oculus），是整座神殿唯一的光源，象徵與天神對話的眼睛。\n\n文藝復興大師「拉斐爾」長眠之處。\n\n冷知識｜下雨天萬神殿會漏水嗎？答案是：會！但地上設計了 22 個隱蔽的排水孔，加上室內熱氣上升產生的氣流，會將毛毛細雨吹散，因此裡面從不積水。\n\n名店品嚐｜金杯咖啡（Tazza d\'Oro）：萬神殿旁的傳奇咖啡館，據說是全羅馬生意最好的店。必吃：咖啡冰沙佐鮮奶油（Granita di Caffè），碎冰中帶有濃郁的義式濃縮咖啡香，搭配現打極致綿密的冰涼鮮奶油，苦甜交織，消暑回血的最高傑作！',
-    meta:[['📍 地址','Piazza della Rotonda, Roma'],['💶 票價','免費 / 名店品嚐自理'],['☕ 必去','金杯咖啡 Tazza d\'Oro 咖啡冰沙'],['🌧️ 冷知識','22個排水孔，下雨不積水']],
+  'pantheon':{emoji:'⛩️',img:'https://res.klook.com/image/upload/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/ge8wb6uc7j9zoxzpvgwa.jpg',name:'萬神殿 & 納沃納廣場',day:'Day 7',anchor:'台伯河畔巴洛克區',tags:['景點','羅馬','兩千年建築'],
+    desc:'納沃納廣場（Piazza Navona）｜戰車競技場演變而來的巴洛克客廳：這裡是羅馬最美麗、也最熱鬧的巴洛克廣場。它的形狀呈獨特的長橢圓形，因為它的前身是古羅馬時期的「圖密善戰車競技場」。\n\n[img:https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCy2okw5e8GXLdLb31zsRRg0lfFP32sd0ARwPKUxcuhc436D8ZWLGb-mQ&s=10]\n\n廣場中央是貝尼尼設計的【四河噴泉】，分別代表多瑙河、尼羅河、恆河與拉普拉塔河。\n\n冷知識｜大師們的靈魂互嗆：傳說貝尼尼故意將噴泉中代表尼羅河的神像用布蒙住眼睛，暗示他「不屑看到對手波洛米尼設計的奇醜教堂」，這段大師間的明爭暗鬥至今仍是旅人津津樂道的趣聞。\n\n[img:https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQvvAkOX_zHZkYzbOtRYiYTWTB5rJS3nqUsjberisFacdxudZG9ABvhENe&s=10]\n\n萬神殿（Pantheon）｜兩千年間從未倒塌的奇蹟神殿：由羅馬皇帝哈德良於西元 126 年重建，是古羅馬保存最完美的建築。最震撼之處在於它的無鋼筋混凝土大圓頂，直徑高達 43.3 公尺，兩千年來一直是世界之最。圓頂正中央有一個 9 公尺寬的圓形穹眼（Oculus），是整座神殿唯一的光源，象徵與天神對話的眼睛。\n\n文藝復興大師「拉斐爾」長眠之處。\n\n冷知識｜下雨天萬神殿會漏水嗎？答案是：會！但地上設計了 22 個隱蔽的排水孔，加上室內熱氣上升產生的氣流，會將毛毛細雨吹散，因此裡面從不積水。\n\n[img:https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/ca/97/16/the-appearance.jpg?w=1200&h=1200&s=1]\n\n名店品嚐｜金杯咖啡（Tazza d\'Oro）：萬神殿旁的傳奇咖啡館，據說是全羅馬生意最好的店。必吃：咖啡冰沙佐鮮奶油（Granita di Caffè），碎冰中帶有濃郁的義式濃縮咖啡香，搭配現打極致綿密的冰涼鮮奶油，苦甜交織，消暑回血的最高傑作！',
+    meta:[['📍 地址','Piazza della Rotonda, Roma'],['💶 票價','萬神殿約 7 ~ 8 歐元'],['☕ 必去','金杯咖啡 Tazza d\'Oro 咖啡冰沙'],['🌧️ 冷知識','萬神殿： 每年五旬節，消防員會爬上 43 公尺高的穹頂大洞，向教堂內傾倒數萬片鮮紅玫瑰，下起全羅馬最夢幻的「玫瑰花雨」。']],
     map:'https://www.google.com/maps/search/?api=1&query=Pantheon+Rome'},
-  'trevi':{emoji:'⛲',name:'許願池 & 西班牙階梯',day:'Day 7',anchor:'羅馬市中心',tags:['景點','羅馬','巴洛克'],
-    desc:'特萊維噴泉（Trevi Fountain）｜全球最美的巴洛克許願聖地：羅馬最大也最著名的巴洛克式噴泉。設計師沙爾維以波利宮為背景，雕刻出海神尼普頓乘著海馬戰車出巡、馴服桀驁不馴海水的壯麗場景。\n\n浪漫的拋硬幣儀式：傳說背對許願池，右手拿硬幣越過左肩拋入水中：\n▸ 丟一枚：這輩子一定會再度重返羅馬。\n▸ 丟兩枚：會與喜愛的人在羅馬相戀或開花結果。\n\n冷知識：許願池每天能撈出價值高達 3,000 至 4,000 歐元的硬幣！這些錢全數捐給天主教慈善機構（Caritas）幫助窮人。人潮擁擠，請照顧好長輩與隨身財物。\n\n西班牙階梯（Piazza di Spagna）｜奧黛麗·赫本的《羅馬假期》經典重現：這座共有 135 階的宏偉階梯，因為電影《羅馬假期》中奧黛麗·赫本坐在這裡吃著冰淇淋、邂逅男主角而名揚全球。階梯底部的【破船噴泉】是貝尼尼父親的傑作。\n\n康多堤大道（Via dei Condotti）精品朝聖：西班牙階梯正對面，是全羅馬最奢華的頂級精品街。著名的百年老店【古希臘咖啡館（Caffè Greco）】也坐落於此，歌德、拜倫都曾是座上賓。\n\n⚠️ 免爬山密技：16:30 利用 Spagna 站內公共電梯直升階梯頂端，走進「博爾蓋塞地下冷氣自動步道」直達公園出口，長輩完全免辛苦爬坡！\n\n★ 嚴格禁止在西班牙階梯上「坐下休息」或「飲食」，違者警察吹哨罰 250 至 400 歐元！',
+  'trevi':{emoji:'⛲',img:'https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_863/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/glkytjstssie4bstqtas/%E7%BE%85%E9%A6%AC%E7%89%B9%E9%9B%B7%E7%B6%AD%E5%99%B4%E6%B3%89%E5%8F%8A%E5%9C%B0%E4%B8%8B%E4%B9%8B%E6%97%85.jpg',name:'許願池 & 西班牙階梯',day:'Day 7',anchor:'羅馬市中心',tags:['景點','羅馬','巴洛克'],
+    desc:'特萊維噴泉（Trevi Fountain）｜全球最美的巴洛克許願聖地：羅馬最大也最著名的巴洛克式噴泉。設計師沙爾維以波利宮為背景，雕刻出海神尼普頓乘著海馬戰車出巡、馴服桀驁不馴海水的壯麗場景。\n\n浪漫的拋硬幣儀式：傳說背對許願池，右手拿硬幣越過左肩拋入水中：\n▸ 丟一枚：這輩子一定會再度重返羅馬。\n▸ 丟兩枚：會與喜愛的人在羅馬相戀或開花結果。\n\n冷知識：許願池每天能撈出價值高達 3,000 至 4,000 歐元的硬幣！這些錢全數捐給天主教慈善機構（Caritas）幫助窮人。人潮擁擠，請照顧好長輩與隨身財物。\n\n[img:https://seethebigworld.com/wp-content/uploads/2025/01/68939369_940859059588589_2097318361263243264_n.jpg]\n\n西班牙階梯（Piazza di Spagna）｜奧黛麗·赫本的《羅馬假期》經典重現：這座共有 135 階的宏偉階梯，因為電影《羅馬假期》中奧黛麗·赫本坐在這裡吃著冰淇淋、邂逅男主角而名揚全球。階梯底部的【破船噴泉】是貝尼尼父親的傑作。\n\n[img:https://rome-cabs.net/wp-content/uploads/2024/11/via-dei-condotti-romes-luxury-shopping-avenue-romecabs.jpg]\n\n康多堤大道（Via dei Condotti）精品朝聖：西班牙階梯正對面，是全羅馬最奢華的頂級精品街。\n\n[img:https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-143519530.jpg?c=original]\n\n著名的百年老店【古希臘咖啡館（Caffè Greco）】也坐落於此，歌德、拜倫都曾是座上賓。\n\n⚠️ 免爬山密技：16:30 利用 Spagna 站內公共電梯直升階梯頂端，走進「博爾蓋塞地下冷氣自動步道」直達公園出口，免辛苦爬坡！\n\n★ 嚴格禁止在西班牙階梯上「坐下休息」或「飲食」，違者警察吹哨罰 250 至 400 歐元！',
     meta:[['📍 地址','Piazza di Trevi & Piazza di Spagna, Roma'],['💶 票價','免費許願 / 精品街消費自理'],['🪙 傳說','背對噴泉右手越左肩拋硬幣'],['⚠️ 重要','西班牙階梯嚴禁坐下或飲食！']],
     map:'https://www.google.com/maps/search/?api=1&query=Trevi+Fountain+Rome'},
-  'vatican':{emoji:'🖼️',name:'梵蒂岡博物館 & 西斯汀禮拜堂',day:'Day 8',anchor:'梵蒂岡核心',tags:['景點','梵蒂岡','已預約'],
-    desc:'教宗世紀累積的瘋狂藝術帝國：名列世界三大博物館之一，這裡收藏了羅馬天主教會幾個世紀以來收集的無價之寶。走在裡面就像穿越一條長達數公里的「藝術時光隧道」，從古埃及木乃伊、古希臘雕刻，到文藝復興大師的壁畫，精美程度令人目不暇給。\n\n最著名的【地圖室】兩側畫滿了 16 世紀義大利各地的地圖，天花板全是由純金裝飾的巴洛克浮雕，在燈光下金碧輝煌，氣勢驚人。\n\n梵蒂岡秘密冷知識｜教宗是怎麼選出來的？當現任教宗逝世或退位，全世界的樞機主教就會被關在【西斯汀禮拜堂】內進行秘密投票（Conclave），這期間與外界完全斷絕聯絡。\n▸ 冒出黑煙：代表投票未過半，要繼續投。\n▸ 冒出白煙：代表新教宗已經順利選出！全場鐘聲大作。\n\n鎮館神作｜西斯汀禮拜堂的「天頂奇蹟」：\n▸ 天頂畫《創世紀》：米開朗基羅當年拒絕教宗提供的助手，獨自一人仰著頭、吊在十幾公尺高的鷹架上，長達四年不分晝夜地創作。其中最著名的「上帝與亞當指尖相觸」那一幕，象徵上帝賦予人類靈魂的瞬間，線條充滿力量。\n▸ 祭壇畫《最後的審判》：描繪世界末日之時耶穌下凡審判世人善惡的壯烈場景。米開朗基羅甚至把當時投訴他畫太多全裸神像的教宗禮儀官，畫成地獄裡長著驢耳朵、被毒蛇纏身的判官，用藝術展現了大師的幽默與任性。\n\n⚠️ 西斯汀禮拜堂全場嚴格禁止交談與拍照，請肅靜仰望。',
-    meta:[['📍 地址','Vatican Museums, Città del Vaticano'],['💶 票價','已預約 09:00 最早門票'],['🕐 時間','09:00 – 11:40'],['🤫 注意','西斯汀禮拜堂嚴禁交談拍照']],
+  'vatican':{emoji:'🖼️',img:'https://seethebigworld.com/wp-content/uploads/2024/11/%E6%A2%B5%E8%92%82%E5%B2%A1%E5%8D%9A%E7%89%A9%E9%A4%A8.jpg',name:'梵蒂岡博物館 · 西斯汀禮拜堂 · 聖彼得大教堂',day:'Day 8',anchor:'梵蒂岡核心',tags:['景點','梵蒂岡','已預約','套票行程'],
+    desc:'教宗世紀累積的瘋狂藝術帝國：梵蒂岡博物館\n\n名列世界三大博物館之一，這裡收藏了羅馬天主教會幾個世紀以來收集的無價之寶。走在裡面就像穿越一條長達數公里的「藝術時光隧道」，從古埃及木乃伊、古希臘雕刻，到文藝復興大師的壁畫，精美程度令人目不暇給。\n\n[img:https://travelwithmiya.com/wp-content/uploads/2021/04/%E6%A2%B5%E8%92%82%E5%B2%A1%E5%8D%9A%E7%89%A9%E9%A4%A8-16-1024x768.jpg]\n\n最著名的【地圖室】兩側畫滿了 16 世紀義大利各地的地圖，天花板全是由純金裝飾的巴洛克浮雕，在燈光下金碧輝煌，氣勢驚人。\n\n梵蒂岡秘密冷知識｜教宗是怎麼選出來的？當現任教宗逝世或退位，全世界的樞機主教就會被關在【西斯汀禮拜堂】內進行秘密投票（Conclave），這期間與外界完全斷絕聯絡。\n▸ 冒出黑煙：代表投票未過半，要繼續投。\n▸ 冒出白煙：代表新教宗已經順利選出！全場鐘聲大作。\n\n[img:https://www.roomie.tw/wp-content/uploads/2025/08/3129d0a8-eacd-42d4-944c-632dd59134ae-768x461.jpg]\n\n鎮館神作｜西斯汀禮拜堂的「天頂奇蹟」\n\n這裡是全人類藝術史上的最高聖殿。走進禮拜堂，全場嚴格禁止交談與拍照，所有人只能靜靜仰望米開朗基羅隻身一人創造的兩大奇蹟：\n\n▸ 天頂畫《創世紀》：米開朗基羅當年拒絕教宗提供的助手，獨自一人仰著頭、吊在十幾公尺高的鷹架上，長達四年不分晝夜地創作。其中最著名的「上帝與亞當指尖相觸」那一幕，象徵上帝賦予人類靈魂的瞬間，線條充滿力量。\n\n[img:https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ9XDwIc3W6YXJatZbUi4hxCuikiER8p35QTVJ1QUQ1WuGV-5DYk9crCI&s=10]\n▸ 祭壇畫《最後的審判》：描繪世界末日之時耶穌下凡審判世人善惡的壯烈場景。米開朗基羅甚至把當時投訴他畫太多全裸神像的教宗禮儀官，畫成地獄裡長著驢耳朵、被毒蛇纏身的判官，用藝術展現了大師的幽默與任性。\n\n⚠️ 西斯汀禮拜堂全場嚴格禁止交談與拍照，請肅靜仰望。\n\n[img:https://media.ct.org.tw/upload/news_article/2021/07/08/60e7172cd7a2f.jpg?wm=LB]\n\n上帝的至高聖殿：聖彼得大教堂 & 聖彼得廣場\n\n參觀完博物館與西斯汀禮拜堂後，套票行程會直接銜接到世界第一大教堂——聖彼得大教堂。這裡是全球天主教的信仰核心。當您站在【聖彼得廣場】上，兩側由巴洛克大師貝尼尼設計的 284 根巨大石柱排成環形長廊，就像上帝張開雙臂溫柔擁抱世人。\n\n大教堂內部空間巨大無比、地面百分之百完全平坦無障礙，長輩走起來輕鬆悠閒。\n\n必看三大傳奇藝術大作：\n\n[img:https://upload.wikimedia.org/wikipedia/commons/6/65/Pieta_de_Michelangelo_-_Vaticano.jpg]\n▸ 米開朗基羅《聖母慟子像》(Pietà)：大師 24 歲時的成名神作。聖母懷抱著受難後的耶穌，用堅硬的大理石雕刻出聖母衣服如絲綢般流暢的衣褶，以及聖母臉上那種超脫、平靜的悲傷。這是米開朗基羅一生中唯一留下親筆簽名的雕刻作品。\n\n[img:https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Baldaquin_Bernin_Saint-Pierre_Vatican.jpg/960px-Baldaquin_Bernin_Saint-Pierre_Vatican.jpg]\n▸ 貝尼尼《青銅聖體傘》(Baldacchino)：位於大教堂的正中央祭壇下方，高達 29 公尺（約七層樓高）。由四根巨大的螺旋狀青銅柱支撐，氣勢磅礴，大教堂的金色大圓頂就在其正上方。\n\n[img:https://thumbs.dreamstime.com/b/%E5%9C%A3%E5%BD%BC%E5%BE%97%E4%B8%BB%E5%B8%AD%EF%BC%8C%E5%9C%A3%E5%BD%BC%E5%BE%97%E4%BC%AF%E5%B0%BC%E5%B0%BC%E7%9A%84%E7%8E%8B%E5%BA%A7-184375081.jpg]\n▸ 聖彼得寶座：位於教堂最深處，同樣由貝尼尼設計，椅背上方一扇金黃色、由天然雲母片製成的「聖靈鴿子」彩色玻璃窗，在陽光穿透下散發出天堂般的金色光芒。',
+    meta:[['📍 地址','Vatican Museums & Piazza San Pietro'],['💶 票價','套票已預約'],['🕐 時間','08:30 起，全程約3小時'],['♿ 貼心','聖彼得大教堂內部100%平坦，長輩友善']],
     map:'https://www.google.com/maps/search/?api=1&query=Vatican+Museums+Rome'},
-  'st-peters':{emoji:'⛪',name:'聖彼得大教堂 & 聖彼得廣場',day:'Day 8',anchor:'世界第一大教堂',tags:['景點','梵蒂岡','免費'],
-    desc:'上帝的至高聖殿與台伯河的天使羽翼：這裡是全球天主教的信仰核心，也是世界第一大教堂。當您站在【聖彼得廣場】上，兩側由巴洛克大師貝尼尼設計的 284 根巨大石柱排成環形長廊，就像上帝張開雙臂溫柔擁抱世人。\n\n大教堂內部空間巨大無比、地面百分之百完全平坦無障礙，長輩走起來輕鬆悠閒。\n\n必看三大傳奇藝術大作：\n▸ 米開朗基羅《聖母慟子像》（Pietà）：大師 24 歲時的成名神作。聖母懷抱著受難後的耶穌，用堅硬的大理石雕刻出聖母衣服如絲綢般流暢的衣褶，以及聖母臉上那種超脫、平靜的悲傷。這是米開朗基羅一生中唯一留下親筆簽名的雕刻作品。\n▸ 貝尼尼《青銅聖體傘》（Baldacchino）：位於大教堂的正中央祭壇下方，高達 29 公尺（約七層樓高）。由四根巨大的螺旋狀青銅柱支撐，氣勢磅礴，大教堂的金色大圓頂就在其正上方。\n▸ 聖彼得寶座：位於教堂最深處，同樣由貝尼尼設計，椅背上方一扇金黃色、由天然雲母片製成的「聖靈鴿子」彩色玻璃窗，在陽光穿透下散發出天堂般的金色光芒。',
-    meta:[['📍 地址','Piazza San Pietro, Città del Vaticano'],['💶 票價','教堂免費參觀'],['♿ 無障礙','內部100%平坦，長輩友善'],['🕐 時間','14:15 – 16:30']],
-    map:'https://www.google.com/maps/search/?api=1&query=St+Peters+Basilica+Vatican'},
-  'castel-sant-angelo':{emoji:'🏰',name:'聖天使堡 & 聖天使橋',day:'Day 8',anchor:'台伯河畔',tags:['景點','羅馬','羅馬假期'],
-    desc:'羅馬皇帝的陵墓與教宗避難所：緊鄰梵蒂岡不遠、聳立在台伯河畔的巨大圓形古堡。它最初由羅馬皇帝哈德良於西元 139 年建造，作為自己的皇家陵墓。到了中世紀，因為防禦功能極佳，被改建為教宗的軍事城堡。\n\n古堡與梵蒂岡之間甚至隱藏著一條高牆內的秘密通道——「博爾戈密道（Passetto di Borgo）」，歷史上當羅馬遭到外敵入侵時，教宗們就是順著這條密道一路狂奔逃進聖天使堡避難。\n\n羅馬最美的日落橋梁｜聖天使橋與十尊天使：這座橫跨台伯河、正對著城堡的拱橋，被譽為羅馬歷史上最美的一座橋梁。橋兩側佇立著 10 尊姿態各異、栩栩如生的守護天使石雕，每尊天使手裡都拿著一項耶穌受難時的刑具，全部由貝尼尼大師與他的徒弟親手雕刻。\n\n落日餘暉下的完美謝幕：傍晚時分，專車貼心地停在河岸，大家不需要辛苦爬城堡。在平坦的河岸與橋頭散步，吹著台伯河的微風，看著夕陽將天空染成蜜糖色，遠處梵蒂岡的聖彼得大圓頂在晚霞中留下一道金黃色的剪影。\n\n🎬 這裡也是電影《羅馬假期》中最精彩的場景！奧黛麗·赫本飾演的安妮公主，當晚就是偷偷跑到聖天使橋下的河畔船上參加平民舞會，最後為了躲避便衣特務的追捕，與男主角一起勇敢跳進台伯河中游泳逃走。',
-    meta:[['📍 地址','Lungotevere Castello, Roma'],['💶 票價','河岸與橋頭漫步免費'],['🕐 時間','16:30 – 17:15 絕美日落'],['🎬 電影','《羅馬假期》安妮公主跳河處']],
+  'castel-sant-angelo':{emoji:'🏰',img:'https://image.cdn-eztravel.com.tw/RUrP7Z4Q-QADqMztN3_2_PXbSM_WLvzvPuqhbru3IYE/g:ce/aHR0cHM6Ly92YWNhdGlvbi5jZG4tZXp0cmF2ZWwuY29tLnR3L3BvaS9JVC9Sb21lL3NodXR0ZXJzdG9ja18yOTQ1Mjc2NDUuanBn.jpg',name:'聖天使堡 & 聖天使橋',day:'Day 8',anchor:'台伯河畔',tags:['景點','羅馬','羅馬假期'],
+    desc:'羅馬皇帝的陵墓與教宗避難所：緊鄰梵蒂岡不遠、聳立在台伯河畔的巨大圓形古堡。它最初由羅馬皇帝哈德良於西元 139 年建造，作為自己的皇家陵墓。到了中世紀，因為防禦功能極佳，被改建為教宗的軍事城堡。\n\n[img:https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwb5qXgCOrWXgBC4djz6OKa7D1cNiyfS8HbVNJPW_IlaVOLOmfCHD8Fa_1&s=10]\n\n古堡與梵蒂岡之間甚至隱藏著一條高牆內的秘密通道——「博爾戈密道（Passetto di Borgo）」，歷史上當羅馬遭到外敵入侵時，教宗們就是順著這條密道一路狂奔逃進聖天使堡避難。\n\n羅馬最美的日落橋梁｜聖天使橋與十尊天使：這座橫跨台伯河、正對著城堡的拱橋，被譽為羅馬歷史上最美的一座橋梁。橋兩側佇立著 10 尊姿態各異、栩栩如生的守護天使石雕，每尊天使手裡都拿著一項耶穌受難時的刑具，全部由貝尼尼大師與他的徒弟親手雕刻。\n\n🎬 這裡也是電影《羅馬假期》中最精彩的場景！奧黛麗·赫本飾演的安妮公主，當晚就是偷偷跑到聖天使橋下的河畔船上參加平民舞會，最後為了躲避便衣特務的追捕，與男主角一起勇敢跳進台伯河中游泳逃走。',
+    meta:[['📍 地址','Lungotevere Castello, Roma'],['💶 票價','河岸與橋頭漫步免費'],['🕐 時間','午後順遊，河岸悠閒漫步'],['🎬 電影','《羅馬假期》安妮公主跳河處']],
     map:'https://www.google.com/maps/search/?api=1&query=Castel+Sant+Angelo+Rome'}
 };
 
@@ -669,7 +684,7 @@ function renderDays(){
       const hiC=it.hi?' hi':'', dotH=it.hi?' hi':'';
       const walkTag=it.walk?`<span class="tag walk">🚶 ${it.walkText||'步行路段'}</span>`:'';
       const detailTag=it.detailId?`<span class="tag link" onclick="openDetail('${it.detailId}')">查看介紹 →</span>`:'';
-      const mainTags=(it.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+      const mainTags=(it.tags||[]).map(t=>`<span class="tag${t==='待購票'?' pending':''}">${t}</span>`).join('');
       return `<div class="tl-item"><div class="tl-dot${dotH}"></div><div class="tl-time">${it.time}</div><div class="tl-card${hiC}"><h3>${it.title}</h3><p>${it.desc.replace(/\n/g,'<br>')}</p><div class="tl-tags">${mainTags}${walkTag}${detailTag}</div></div></div>`;
     }).join('');
     return `<div class="day-panel" data-day="${d.day}" style="display:${i===0?'block':'none'}">

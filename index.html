@@ -809,31 +809,23 @@ function closeDetail(){
   document.getElementById('page-'+prevPage).classList.add('active');
 }
 
-// ═══════════════ 左緣滑動返回手勢（Android + iOS 通用）═══════════════
+// ═══════════════ 滑動返回手勢（Android + iOS 通用）═══════════════
 (function(){
   const detailPage = document.getElementById('page-detail');
-  let startX = 0, startY = 0, tracking = false;
+  let startX = 0, startY = 0;
 
   detailPage.addEventListener('touchstart', e => {
-    // 只有從螢幕左緣 30px 內開始的觸控才算「返回手勢」
     const t = e.touches[0];
-    if (t.clientX <= 30) {
-      startX = t.clientX;
-      startY = t.clientY;
-      tracking = true;
-    } else {
-      tracking = false;
-    }
+    startX = t.clientX;
+    startY = t.clientY;
   }, {passive:true});
 
   detailPage.addEventListener('touchend', e => {
-    if (!tracking) return;
-    tracking = false;
     const t = e.changedTouches[0];
-    const dx = t.clientX - startX;   // 水平位移（往右為正）
-    const dy = Math.abs(t.clientY - startY); // 垂直位移
-    // 往右滑超過 60px、且不是明顯的上下滑動 → 觸發返回
-    if (dx > 60 && dy < 80 && detailPage.classList.contains('active')) {
+    const dx = t.clientX - startX;
+    const dy = Math.abs(t.clientY - startY);
+    // 往右滑超過 100px、且橫向位移遠大於縱向位移 → 判定為返回手勢
+    if (dx > 100 && dy < dx * 0.5 && detailPage.classList.contains('active')) {
       closeDetail();
     }
   }, {passive:true});
